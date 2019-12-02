@@ -1,0 +1,100 @@
+{
+    "extends": [
+        "standard",
+        "plugin:vue/strongly-recommended"
+    ],
+    "root": true,
+    "parserOptions": {
+        "parser": "babel-eslint",
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "plugins": [
+        "vue"
+    ],
+    "globals": {},
+    "rules": {
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1 // 对switch语句中的case子句强制执行缩进级别
+            }
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "off",
+            "always"
+        ], // vue中不想要, js文件中想保留..
+        // "no-console": 0,
+        "no-empty": 2,
+        "no-eq-null": 2, // 使用 === 判断null
+        "no-new": 2,
+        "no-var": 2,
+        "eol-last": 0, // 不检查文末换行
+        "brace-style": [
+            "error",
+            "1tbs",
+            {
+                "allowSingleLine": true // 允许'{','}'同行
+            }
+        ],
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "ignore", // function() {}
+                "named": "never", // function name() {}
+                "asyncArrow": "always" // async () => {}
+            }
+        ],
+        "no-multiple-empty-lines": [ // 最多2行连续空行, 文头文末0空行
+            "error",
+            {
+                "max": 2,
+                "maxEOF": 0,
+                "maxBOF": 0
+            }
+        ],
+        "vue/no-parsing-error": [
+            2,
+            {
+                "x-invalid-end-tag": false
+            }
+        ],
+        "vue/max-attributes-per-line": [ // 单行最多属性数量, 换行每行只允许设置一个属性
+            "error",
+            {
+                "singleline": 10,
+                "multiline": {
+                    "max": 1,
+                    "allowFirstLine": true
+                }
+            }
+        ],
+        "vue/singleline-html-element-content-newline": 0, // 关闭不能写单行元素
+        "vue/html-self-closing": [
+            2,
+            {
+                "html": {
+                    "void": "always", // 默认是never, 与pretter保持一致
+                    "normal": "any", // 默认是always
+                    "component": "any" // 默认是always, iview <Col></Col> fix后变成 <Col /> </Col>
+                },
+                "svg": "always",
+                "math": "always"
+            }
+        ],
+        "vue/html-indent": 0, // 默认是1, 若开启 <Col>内的元素不能缩进
+        "vue/multiline-html-element-content-newline": 0 // 为了让代码简洁些, 还是关闭了
+    }
+}

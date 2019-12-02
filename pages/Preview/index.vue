@@ -13,8 +13,10 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.pre-view {
-  flex: 1;
-  border: 1px solid red;
-}
+  .pre-view {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>

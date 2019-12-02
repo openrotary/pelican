@@ -1,0 +1,42 @@
+{
+    "vetur.format.options.tabSize": 4,
+    "vetur.format.defaultFormatter.js": "prettier",
+    "vetur.format.defaultFormatter.html": "prettyhtml",
+    "vetur.format.defaultFormatterOptions": {
+        "prettyhtml": {
+            "tabWidth": 2,
+            "printWidth": 150,
+            "sortAttributes": true
+        }
+    },
+    "vetur.validation.template": false, // 关闭 Vetur 的 Linter 功能，改用 ESLint + Prettier
+    "editor.detectIndentation": false, // 关闭自动检测缩进
+    "editor.autoIndent": true, // 自动调整缩进
+    "eslint.validate": [ // 设定 eslint 检查哪些语言
+        {
+            "language": "vue",
+            "autoFix": true
+        },
+        "javascript",
+        "html"
+    ],
+    "eslint.alwaysShowStatus": true,
+    "eslint.autoFixOnSave": true,
+    "css.lint.propertyIgnoredDueToDisplay": "error",
+    "less.lint.duplicateProperties": "warning",
+    /* 以下非vetur，eslint，prettier 设置*/
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "html.format.wrapAttributes": "aligned-multiple",
+    "html.format.wrapLineLength": 150,
+    "[less]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    }
+}

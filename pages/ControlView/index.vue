@@ -6,14 +6,14 @@
 <script>
 import LayoutModel from './LayoutModel'
 export default {
-  name: 'ControlView',
-  components: {
-    LayoutModel
-  }
+    name: 'ControlView',
+    components: {
+        LayoutModel
+    }
 }
 </script>
-<style lang="stylus" scoped>
-.control-view {
-  background: rgba(85, 41, 91, 0.3);
-}
+<style lang="stylus">
+    .control-view {
+        background: rgba(85, 41, 91, 0.2);
+    }
 </style>
