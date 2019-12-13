@@ -1,5 +1,9 @@
 <template>
   <section class="set-el-view">
+    <nav>Name 设置</nav>
+    <div class="set-el">
+      <vs-input class="inputx" placeholder="名字不需要加后缀" v-model="nameValue" />
+    </div>
     <nav>布局设置</nav>
     <div class="set-el">
       <VsButton color="primary" type="border">Flex模型</VsButton>
@@ -54,6 +58,7 @@ export default {
         selectModel,
         inputModel,
         inputData: [],
+        nameValue: '',
         oftenLayoutStatus: false,
         isSetNumShow: false,
         setValue: '',
