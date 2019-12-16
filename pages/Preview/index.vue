@@ -1,6 +1,6 @@
 <template lang="tea">
     section.pre-view {
-        IconMenuLeft
+        <!-- IconMenuLeft -->
         h1 {
             <!-- ~~Preview -->
         }
@@ -8,20 +8,20 @@
 </template>
 
 <script>
-import IconMenuLeft from '@/components/icon/IconMenuLeft'
+// import IconMenuLeft from '@/components/icon/IconMenuLeft'
 export default {
     name: 'Preview',
     components: {
-        IconMenuLeft
+        // IconMenuLeft
     }
 }
 </script>
 
 <style lang="stylus" scoped>
-.pre-view {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+    .pre-view {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 </style>

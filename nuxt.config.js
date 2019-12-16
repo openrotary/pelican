@@ -45,6 +45,10 @@ module.exports = {
      ** Nuxt.js modules
      */
     modules: [],
+    server: {
+        port: 3022,
+        host: '0.0.0.0' // default: localhost
+    },
     /*
      ** Build configuration
      */

@@ -2,7 +2,8 @@
 div.container {
   Header
   section.main {
-    Preview
+    ElementCard
+    CanvasAround
     ControlView
   }
 }
@@ -10,15 +11,33 @@ div.container {
 
 <script>
 import Header from '~/components/Header.vue'
-import Preview from './Preview'
+import ElementCard from './ElementCard'
+import CanvasAround from './CanvasAround'
 import ControlView from './ControlView'
+
+import bus from '@/utils/eventBus'
+// import { distinctUntilChanged } from 'rxjs/operators'
 
 export default {
     components: {
         Header,
-        Preview,
+        ElementCard,
+        CanvasAround,
         ControlView
-    }
+    },
+    data: () => ({}),
+    mounted() {}
+    // domStreams: ['mousemove$'],
+    // subscriptions() {
+    //     this.mousemove$.pipe(distinctUntilChanged()).subscribe(({ event }) => {
+    //         if (!event || !this.isSelectElement) {
+    //             // 如果当前未选中元素，则不广播鼠标移动的坐标
+    //             return
+    //         }
+    //         const { clientX: x, clientY: y } = event
+    //         bus.$emit('mouse-coord', { x, y })
+    //     })
+    // }
 }
 </script>
 
