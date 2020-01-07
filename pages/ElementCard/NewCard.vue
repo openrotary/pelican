@@ -2,7 +2,8 @@
   section.new-card {
       div.ele-card&ele-card {
         draggable: true
-        @mousedown.left: handleMousedown
+        @dragstart: handleDargStart
+        @dragend: handleDragEnd
         i.material-icons.code {
             ~~code
         }
@@ -30,7 +31,14 @@ export default {
         })
     },
     methods: {
-        handleMousedown(e) {}
+        handleDargStart(e) {
+            this.$store.commit('changeDragStatus', true)
+            console.log('开始拖拽')
+        },
+        handleDragEnd() {
+            this.$store.commit('changeDragStatus', false)
+            console.log('结束拖拽')
+        }
     }
 }
 </script>
