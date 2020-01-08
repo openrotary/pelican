@@ -63,20 +63,20 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .canvas {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid red;
+.canvas {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid red;
 
-        .inside-around {
-            padding: 50px;
-            min-width: 100%;
-            min-height: 100%;
-            background-color: #f1f1f1;
-            background-image: url('../../assets/web-point.png');
-            background-size: 40px;
-        }
+    .inside-around {
+        padding: 50px;
+        min-width: 100%;
+        min-height: 100%;
+        background-color: #f1f1f1;
+        background-image: url('../../assets/web-point.png');
+        background-size: 40px;
     }
+}
 </style>
