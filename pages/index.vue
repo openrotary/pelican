@@ -4,7 +4,7 @@ div.container {
   section.main {
     ElementCard
     CanvasAround
-    ControlView
+    <!-- ControlView -->
   }
 }
 </template>

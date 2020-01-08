@@ -1,15 +1,16 @@
 <template lang="tea">
   section.new-card {
-      div.ele-card&ele-card {
+      div.ele-card {
+        %: cardList
         draggable: true
-        @dragstart: handleDargStart
+        @dragstart: handleDargStart($event, $it)
         @dragend: handleDragEnd
         i.material-icons.code {
             ~~code
         }
         div.ele {
             span.title {
-                ~~Element
+                ~~{{$it.tagName}}
             }
         }
       }
@@ -21,23 +22,50 @@ import bus from '@/utils/eventBus'
 export default {
     name: 'NewCard',
     data: () => ({
-        x: 0,
-        y: 0
+        cardList: [
+            {
+                tagName: 'section',
+                isSingle: false,
+                type: 2
+            },
+            {
+                tagName: 'div',
+                isSingle: false,
+                type: 2
+            },
+            {
+                tagName: 'span',
+                isSingle: false,
+                type: 2
+            },
+            {
+                tagName: 'i',
+                isSingle: false,
+                type: 2
+            },
+            {
+                tagName: 'input',
+                isSingle: true,
+                type: 2
+            }
+        ]
     }),
     mounted() {
-        bus.$on('mouse-coord', ({ x, y }) => {
-            this.x = x
-            this.y = y
-        })
+        // bus.$on('mouse-coord', ({ x, y }) => {
+        //     this.x = x
+        //     this.y = y
+        // })
     },
     methods: {
-        handleDargStart(e) {
+        handleDargStart(e, data) {
             this.$store.commit('changeDragStatus', true)
             console.log('开始拖拽')
+            this.$store.commit('setCacheElement', data)
         },
         handleDragEnd() {
             this.$store.commit('changeDragStatus', false)
             console.log('结束拖拽')
+            this.$store.commit('setCacheElement', null)
         }
     }
 }
@@ -53,6 +81,7 @@ export default {
             cursor: move;
             display: flex;
             padding: 0 20px;
+            margin: 10px 0;
 
             .code {
                 display: flex;
@@ -69,6 +98,7 @@ export default {
                     display: flex;
                     padding: 0 20px;
                     height: 40px;
+                    font-size: 22px;
                     align-items: center;
                 }
             }

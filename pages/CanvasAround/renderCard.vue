@@ -14,19 +14,19 @@ section {
         b {
             @dragover: showMyAround(1)
             @dragleave: showMyAround(0)
-            @drop: handleDrop(1)
+            @drop.stop: handleDrop(1)
             :class: ['top-light', {'add-light': isDrag}, {'show': showAroundIndex === 1}]
         } 
         b {
             @dragover: showMyAround(2)
             @dragleave: showMyAround(0)
-            @drop: handleDrop(2)
+            @drop.stop: handleDrop(2)
             :class: ['behind-light', {'add-light': isDrag}, {'show': showAroundIndex === 2}]
         }
         b {
             @dragover: showMyAround(3)
             @dragleave: showMyAround(0)
-            @drop: handleDrop(3)
+            @drop.stop: handleDrop(3)
             :class: ['bottom-light', {'add-light': isDrag}, {'show': showAroundIndex === 3}]
         }
         div.el-content {
@@ -46,6 +46,7 @@ section {
 }
 </template>
 <script>
+import bus from '@/utils/eventBus'
 export default {
     name: 'RenderCard',
     props: {
@@ -79,6 +80,8 @@ export default {
         },
         handleDrop(n) {
             console.log(`你在${this.treeData._mid}元素的${n}号点上释放了`)
+            this.showMyAround(0)
+            bus.$emit('append-node', this.treeData._mid, n)
         }
     }
 }
