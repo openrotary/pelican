@@ -40,6 +40,20 @@ export default {
             this.$store.commit('changeDragStatus', false)
             // console.log('拖拽状态', this.$store.state.isDrag)
         })
+        bus.$on('delete-node', mid => {
+            const mode = this.$store.state.modeCode
+            if (mode === 1) {
+                // 仅删除单个节点
+                this.elementList = leaf.deleteNode(mid)
+                this.renderTreeData = Leaf.data2tree(this.elementList)
+            }
+        })
+        leaf.on('warn', msg => {
+            this.$vs.notify({ title: '警告', text: msg, color: 'warning' })
+        })
+        leaf.on('success', msg => {
+            this.$vs.notify({ title: '成功', text: msg, color: '#55295b' })
+        })
     },
     methods: {
         handleDragover(e) {
@@ -63,20 +77,22 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.canvas {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid red;
+    .canvas {
+        flex: 1;
+        width: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #55295b;
 
-    .inside-around {
-        padding: 50px;
-        min-width: 100%;
-        min-height: 100%;
-        background-color: #f1f1f1;
-        background-image: url('../../assets/web-point.png');
-        background-size: 40px;
+        .inside-around {
+            padding: 40px;
+            height: 100%;
+            flex: 1;
+            overflow: auto;
+            background-color: #f1f1f1;
+            background-image: url('../../assets/web-point.png');
+            background-size: 40px;
+        }
     }
-}
 </style>

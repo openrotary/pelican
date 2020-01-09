@@ -43,13 +43,15 @@ export default {
 
 <style lang="stylus" scoped>
     .container {
-        min-height: 100vh;
+        height: 100vh;
         display: flex;
         flex-direction: column;
+        flex: 1;
 
         .main {
             display: flex;
-            height: 100%;
+            height: 1px;
+            width: 100%;
             flex: 1;
         }
     }
