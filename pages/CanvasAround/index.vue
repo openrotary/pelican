@@ -49,16 +49,19 @@ export default {
             }
         })
         leaf.on('warn', msg => {
-            this.$vs.notify({ title: '警告', text: msg, color: 'warning' })
+            this.$vs.notify({ title: '操作警告', text: msg, color: '#fabf14' })
+        })
+        leaf.on('error', msg => {
+            this.$vs.notify({ title: '操作错误', text: msg, color: '#bb5548' })
         })
         leaf.on('success', msg => {
-            this.$vs.notify({ title: '成功', text: msg, color: '#55295b' })
+            this.$vs.notify({ title: '操作成功', text: msg, color: '#82ae46' })
         })
     },
     methods: {
         handleDragover(e) {
+            // console.log('kkk')
             e.preventDefault()
-            // console.log(e.clientX, e.clientY)
         },
         handleDrop(e) {
             // console.log('松手', e.clientX, e.clientY)

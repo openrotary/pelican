@@ -12,19 +12,19 @@ section {
             ?: !!treeData._pid
         }
         b {
-            @dragover: showMyAround(1)
+            @dragenter: showMyAround(1)
             @dragleave: showMyAround(0)
             @drop.stop: handleDrop(1)
             :class: ['top-light', {'add-light': isDrag}, {'show': showAroundIndex === 1}]
         } 
         b {
-            @dragover: showMyAround(2)
+            @dragenter: showMyAround(2)
             @dragleave: showMyAround(0)
             @drop.stop: handleDrop(2)
             :class: ['behind-light', {'add-light': isDrag}, {'show': showAroundIndex === 2}]
         }
         b {
-            @dragover: showMyAround(3)
+            @dragenter: showMyAround(3)
             @dragleave: showMyAround(0)
             @drop.stop: handleDrop(3)
             :class: ['bottom-light', {'add-light': isDrag}, {'show': showAroundIndex === 3}]
@@ -34,7 +34,7 @@ section {
             @dragstart: handleDargStart($event, treeData)
             div.top {
                 span.tag {
-                    ~~{{ treeData.tagName }}
+                    ~~{{ treeData.tagName }} - {{ treeData._index }}
                 }
                 span.icon {
                     i.copy {
@@ -97,8 +97,8 @@ export default {
             bus.$emit('append-node', this.treeData._mid, n)
         },
         handleDargStart(e, data) {
-            this.$store.commit('changeDragStatus', true)
             this.$store.commit('setCacheElement', data)
+            this.$store.commit('changeDragStatus', true)
         },
         handleDelete(mid) {
             bus.$emit('delete-node', mid)
@@ -181,6 +181,7 @@ export default {
 
                         &:hover {
                             color: #55295b;
+                            text-shadow: 0 0 3px rgba(85, 41, 91, 0.1);
                         }
                     }
 
@@ -204,12 +205,13 @@ export default {
             .add-light {
                 position: absolute;
                 display: flex;
-                z-index: 3;
-                width: 80px;
-                height: 80px;
+                z-index: -1;
+                width: 75px;
+                height: 75px;
                 align-items: center;
                 justify-content: center;
 
+                // background: rgba(0, 164, 151, 0.1);
                 &:before {
                     content: '';
                     display: none;
@@ -222,6 +224,8 @@ export default {
                 }
 
                 &.show {
+                    z-index: 10;
+
                     &:before {
                         display: block;
                     }
