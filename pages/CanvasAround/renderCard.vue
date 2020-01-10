@@ -108,205 +108,205 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .card {
+.card {
+    display: flex;
+    align-items: center;
+    user-select: none;
+
+    &.top-line {
+        position: relative;
+        z-index: 1;
+
+        &:before {
+            z-index: -1;
+            content: '';
+            width: 2px;
+            top: 0;
+            bottom: 50%;
+            background: #9d5b8b;
+            position: absolute;
+            left: 40px;
+        }
+    }
+
+    &.bottom-line {
+        position: relative;
+        z-index: 1;
+
+        &:after {
+            z-index: -1;
+            content: '';
+            width: 2px;
+            top: 50%;
+            bottom: 0;
+            background: #9d5b8b;
+            position: absolute;
+            left: 40px;
+        }
+    }
+
+    > .el-card {
+        height: 80px;
+        min-width: 250px;
+        background: #fff;
         display: flex;
         align-items: center;
-        user-select: none;
+        justify-content: center;
+        margin: 30px 0 30px 0;
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(85, 41, 91, 0.3);
+        position: relative;
+        z-index: 1;
 
-        &.top-line {
-            position: relative;
-            z-index: 1;
+        .el-content {
+            background: rgba(255, 255, 255, 0.7);
+            display: flex;
+            flex-direction: column;
+            // align-items: center;
+            // justify-content: center;
+            height: 100%;
+            width: 100%;
+
+            .top {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 36px;
+                width: 100%;
+                padding: 0 15px;
+
+                .tag {
+                    cursor: pointer;
+                    color: rgba(85, 41, 91, 0.8);
+
+                    &:hover {
+                        color: #55295b;
+                        text-shadow: 0 0 3px rgba(85, 41, 91, 0.1);
+                    }
+                }
+
+                .icon {
+                    i {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        background-repeat: no-repeat;
+                        background-size: auto 100%;
+                        cursor: pointer;
+
+                        &.delete {
+                            background-image: url('../../assets/icon-delete.svg');
+                        }
+                    }
+                }
+            }
+        }
+
+        .add-light {
+            position: absolute;
+            display: flex;
+            z-index: -1;
+            width: 75px;
+            height: 75px;
+            align-items: center;
+            justify-content: center;
+
+            // background: rgba(0, 164, 151, 0.1);
+            &:before {
+                content: '';
+                display: none;
+                width: 15px;
+                height: 15px;
+                border: 1px solid #00a497;
+                border-radius: 50%;
+                background: #00a497;
+                box-shadow: 0 0 10px rgba(0, 164, 151, 0.5);
+            }
+
+            &.show {
+                z-index: 10;
+
+                &:before {
+                    display: block;
+                }
+            }
+        }
+
+        .behind-light {
+            right: 0;
+            top: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .top-light {
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bottom-light {
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        &.ahead-line {
+            margin-left: 80px;
 
             &:before {
                 z-index: -1;
                 content: '';
-                width: 2px;
-                top: 0;
-                bottom: 50%;
-                background: #9d5b8b;
+                width: 37px;
+                height: 2px;
                 position: absolute;
-                left: 40px;
+                left: -3px;
+                background-color: #9d5b8b;
+                transform: translateX(-100%);
             }
         }
 
-        &.bottom-line {
-            position: relative;
-            z-index: 1;
-
+        &.behind-line {
             &:after {
                 z-index: -1;
                 content: '';
-                width: 2px;
-                top: 50%;
-                bottom: 0;
-                background: #9d5b8b;
+                width: 40px;
+                height: 2px;
+                background-color: #9d5b8b;
                 position: absolute;
-                left: 40px;
-            }
-        }
-
-        > .el-card {
-            height: 80px;
-            min-width: 250px;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px 0 30px 0;
-            border-radius: 4px;
-            box-shadow: 0 0 10px rgba(85, 41, 91, 0.3);
-            position: relative;
-            z-index: 1;
-
-            .el-content {
-                background: rgba(255, 255, 255, 0.7);
-                display: flex;
-                flex-direction: column;
-                // align-items: center;
-                // justify-content: center;
-                height: 100%;
-                width: 100%;
-
-                .top {
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    height: 36px;
-                    width: 100%;
-                    padding: 0 15px;
-
-                    .tag {
-                        cursor: pointer;
-                        color: rgba(85, 41, 91, 0.8);
-
-                        &:hover {
-                            color: #55295b;
-                            text-shadow: 0 0 3px rgba(85, 41, 91, 0.1);
-                        }
-                    }
-
-                    .icon {
-                        i {
-                            display: inline-block;
-                            width: 20px;
-                            height: 20px;
-                            background-repeat: no-repeat;
-                            background-size: auto 100%;
-                            cursor: pointer;
-
-                            &.delete {
-                                background-image: url('../../assets/icon-delete.svg');
-                            }
-                        }
-                    }
-                }
-            }
-
-            .add-light {
-                position: absolute;
-                display: flex;
-                z-index: -1;
-                width: 75px;
-                height: 75px;
-                align-items: center;
-                justify-content: center;
-
-                // background: rgba(0, 164, 151, 0.1);
-                &:before {
-                    content: '';
-                    display: none;
-                    width: 15px;
-                    height: 15px;
-                    border: 1px solid #00a497;
-                    border-radius: 50%;
-                    background: #00a497;
-                    box-shadow: 0 0 10px rgba(0, 164, 151, 0.5);
-                }
-
-                &.show {
-                    z-index: 10;
-
-                    &:before {
-                        display: block;
-                    }
-                }
-            }
-
-            .behind-light {
                 right: 0;
-                top: 50%;
-                transform: translate(50%, -50%);
-            }
-
-            .top-light {
-                top: 0;
-                left: 50%;
-                transform: translate(-50%, -50%);
-            }
-
-            .bottom-light {
-                bottom: 0;
-                left: 50%;
-                transform: translate(-50%, 50%);
-            }
-
-            &.ahead-line {
-                margin-left: 80px;
-
-                &:before {
-                    z-index: -1;
-                    content: '';
-                    width: 37px;
-                    height: 2px;
-                    position: absolute;
-                    left: -3px;
-                    background-color: #9d5b8b;
-                    transform: translateX(-100%);
-                }
-            }
-
-            &.behind-line {
-                &:after {
-                    z-index: -1;
-                    content: '';
-                    width: 40px;
-                    height: 2px;
-                    background-color: #9d5b8b;
-                    position: absolute;
-                    right: 0;
-                    transform: translateX(100%);
-                }
-            }
-
-            .arrow {
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                left: 0;
-                transform: translateX(-100%);
-                background-image: url('../../assets/icon-to-left.svg');
-                background-repeat: no-repeat;
-                background-size: 12px;
-                background-position: right center;
+                transform: translateX(100%);
             }
         }
 
-        > .content {
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            border-radius: 4px;
-            background: #55295b;
-            color: #fff;
-            position: relative;
-            z-index: 1;
-        }
-
-        .render-card {
-            display: flex;
-            flex-direction: column;
+        .arrow {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 0;
+            transform: translateX(-100%);
+            background-image: url('../../assets/icon-to-left.svg');
+            background-repeat: no-repeat;
+            background-size: 12px;
+            background-position: right center;
         }
     }
+
+    > .content {
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 4px;
+        background: #55295b;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+    }
+
+    .render-card {
+        display: flex;
+        flex-direction: column;
+    }
+}
 </style>
