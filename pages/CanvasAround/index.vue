@@ -60,7 +60,7 @@ export default {
     },
     methods: {
         handleDragover(e) {
-            // console.log('kkk')
+            // console.log('不必要的冒泡，有待优化')
             e.preventDefault()
         },
         handleDrop(e) {
@@ -80,22 +80,22 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .canvas {
-        flex: 1;
-        width: 1px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 2px solid #55295b;
+.canvas {
+    flex: 1;
+    width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #55295b;
 
-        .inside-around {
-            padding: 40px;
-            height: 100%;
-            flex: 1;
-            overflow: auto;
-            background-color: #f1f1f1;
-            background-image: url('../../assets/web-point.png');
-            background-size: 40px;
-        }
+    .inside-around {
+        padding: 40px;
+        height: 100%;
+        flex: 1;
+        overflow: auto;
+        background-color: #f1f1f1;
+        background-image: url('../../assets/web-point.png');
+        background-size: 40px;
     }
+}
 </style>

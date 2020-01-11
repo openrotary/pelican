@@ -7,6 +7,7 @@ section {
     }
     div {
         /
+        @drop.stop: handleDropStop()
         :class: ['el-card', { 'ahead-line': !!treeData._pid}, {'behind-line': hasChildren}]
         i.arrow {
             ?: !!treeData._pid
@@ -15,19 +16,19 @@ section {
             @dragenter: showMyAround(1)
             @dragleave: showMyAround(0)
             @drop.stop: handleDrop(1)
-            :class: ['top-light', {'add-light': isDrag}, {'show': showAroundIndex === 1}]
+            :class: ['top-around', {'add-around': isDrag && !isDragMe}, {'show': showAroundIndex === 1}]
         } 
         b {
             @dragenter: showMyAround(2)
             @dragleave: showMyAround(0)
             @drop.stop: handleDrop(2)
-            :class: ['behind-light', {'add-light': isDrag}, {'show': showAroundIndex === 2}]
+            :class: ['behind-around', {'add-around': isDrag && !isDragMe }, {'show': showAroundIndex === 2}]
         }
         b {
             @dragenter: showMyAround(3)
             @dragleave: showMyAround(0)
             @drop.stop: handleDrop(3)
-            :class: ['bottom-light', {'add-light': isDrag}, {'show': showAroundIndex === 3}]
+            :class: ['bottom-around', {'add-around': isDrag && !isDragMe}, {'show': showAroundIndex === 3}]
         }
         div.el-content {
             draggable: true
@@ -80,6 +81,9 @@ export default {
         showAroundIndex: 0
     }),
     computed: {
+        isDragMe() {
+            return this.$store.state.cacheElement && this.treeData._mid === this.$store.state.cacheElement._mid
+        },
         hasChildren() {
             return this.treeData.children && this.treeData.children.length
         },
@@ -102,6 +106,13 @@ export default {
         },
         handleDelete(mid) {
             bus.$emit('delete-node', mid)
+        },
+        handleDragoverStop() {
+            return false
+        },
+        handleDropStop() {
+            this.$store.commit('changeDragStatus', false)
+            return false
         }
     }
 }
@@ -125,7 +136,7 @@ export default {
             bottom: 50%;
             background: #9d5b8b;
             position: absolute;
-            left: 40px;
+            left: 0;
         }
     }
 
@@ -141,7 +152,7 @@ export default {
             bottom: 0;
             background: #9d5b8b;
             position: absolute;
-            left: 40px;
+            left: 0;
         }
     }
 
@@ -202,16 +213,34 @@ export default {
             }
         }
 
-        .add-light {
+        .behind-around {
+            right: 0;
+            top: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .top-around {
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .bottom-around {
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 50%);
+        }
+
+        .add-around {
             position: absolute;
             display: flex;
-            z-index: -1;
+            z-index: 2;
             width: 75px;
             height: 75px;
             align-items: center;
             justify-content: center;
+            background: rgba(0, 164, 151, 0.3);
 
-            // background: rgba(0, 164, 151, 0.1);
             &:before {
                 content: '';
                 display: none;
@@ -224,34 +253,14 @@ export default {
             }
 
             &.show {
-                z-index: 10;
-
                 &:before {
                     display: block;
                 }
             }
         }
 
-        .behind-light {
-            right: 0;
-            top: 50%;
-            transform: translate(50%, -50%);
-        }
-
-        .top-light {
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .bottom-light {
-            bottom: 0;
-            left: 50%;
-            transform: translate(-50%, 50%);
-        }
-
         &.ahead-line {
-            margin-left: 80px;
+            margin-left: 40px;
 
             &:before {
                 z-index: -1;
@@ -266,6 +275,8 @@ export default {
         }
 
         &.behind-line {
+            margin-right: 40px;
+
             &:after {
                 z-index: -1;
                 content: '';
