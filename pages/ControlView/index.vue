@@ -14,6 +14,6 @@ export default {
 </script>
 <style lang="stylus">
     .control-view {
-        background: rgba(85, 41, 91, 0.2);
+        background: #fff;
     }
 </style>

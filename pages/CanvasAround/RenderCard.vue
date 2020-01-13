@@ -33,7 +33,7 @@ section {
         div.el-content {
             draggable: true
             @dragstart: handleDargStart($event, treeData)
-            @click: handleSetActive(treeData)
+            @click.stop: handleSetActive(treeData)
             div.top {
                 span.tag {
                     ~~{{ treeData.tagName }} - {{ treeData._index }}

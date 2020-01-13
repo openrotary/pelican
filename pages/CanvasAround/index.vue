@@ -3,6 +3,7 @@
       div.inside-around {
           @dragover: handleDragover
           @drop: handleDrop
+          @click: handleClickCanvas
           RenderCard {
               %: renderTreeData
               :treeData: $it
@@ -77,6 +78,9 @@ export default {
             // console.log('kkk', this.elementList)
             // console.log('你添加了一个根元素', this.renderTreeData)
             // console.log(this.tree)
+        },
+        handleClickCanvas() {
+            this.$store.commit('setActiveMid', null)
         }
     }
 }
