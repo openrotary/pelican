@@ -38,14 +38,16 @@ export default {
             this.elementList = leaf.appendNode(mid, n, card)
             this.renderTreeData = Leaf.data2tree(this.elementList)
             this.$store.commit('changeDragStatus', false)
+            this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('拖拽状态', this.$store.state.isDrag)
         })
         bus.$on('delete-node', mid => {
-            const mode = this.$store.state.modeCode
-            if (mode === 1) {
-                // 仅删除单个节点
-                this.elementList = leaf.deleteNode(mid)
-                this.renderTreeData = Leaf.data2tree(this.elementList)
+            // 仅删除单个节点
+            this.elementList = leaf.deleteNode(mid)
+            this.renderTreeData = Leaf.data2tree(this.elementList)
+            const activeMid = this.$store.state.activeMid
+            if (activeMid === mid) {
+                this.$store.commit('setActiveMid', null)
             }
         })
         leaf.on('warn', msg => {
@@ -71,6 +73,7 @@ export default {
             // 插入数据
             this.elementList = leaf.appendRootNode(cacheElement)
             this.renderTreeData = Leaf.data2tree(this.elementList)
+            this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('kkk', this.elementList)
             // console.log('你添加了一个根元素', this.renderTreeData)
             // console.log(this.tree)
@@ -80,22 +83,22 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.canvas {
-    flex: 1;
-    width: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #55295b;
-
-    .inside-around {
-        padding: 40px;
-        height: 100%;
+    .canvas {
         flex: 1;
-        overflow: auto;
-        background-color: #f1f1f1;
-        background-image: url('../../assets/web-point.png');
-        background-size: 40px;
+        width: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #55295b;
+
+        .inside-around {
+            padding: 40px;
+            height: 100%;
+            flex: 1;
+            overflow: auto;
+            background-color: #f1f1f1;
+            background-image: url('../../assets/web-point.png');
+            background-size: 40px;
+        }
     }
-}
 </style>

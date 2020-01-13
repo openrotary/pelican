@@ -1,7 +1,8 @@
 export const state = () => ({
     isDrag: false,
-    modeCode: 1,
-    cacheElement: null
+    // modeCode: 1,
+    cacheElement: null,
+    activeMid: null
 })
 
 export const mutations = {
@@ -11,7 +12,10 @@ export const mutations = {
     setCacheElement(state, data) {
         state.cacheElement = data
     },
-    changeModeCode(state, code) {
-        state.modeCode = code
+    setActiveMid(state, data) {
+        state.activeMid = data
     }
+    // changeModeCode(state, code) {
+    //     state.modeCode = code
+    // }
 }

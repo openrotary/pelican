@@ -8,7 +8,7 @@ section {
     div {
         /
         @drop.stop: handleDropStop()
-        :class: ['el-card', { 'ahead-line': !!treeData._pid}, {'behind-line': hasChildren}]
+        :class: ['el-card', { 'ahead-line': !!treeData._pid}, {'behind-line': hasChildren}, {'is-active': isActive}]
         i.arrow {
             ?: !!treeData._pid
         }
@@ -33,6 +33,7 @@ section {
         div.el-content {
             draggable: true
             @dragstart: handleDargStart($event, treeData)
+            @click: handleSetActive(treeData)
             div.top {
                 span.tag {
                     ~~{{ treeData.tagName }} - {{ treeData._index }}
@@ -89,6 +90,9 @@ export default {
         },
         isDrag() {
             return this.$store.state.isDrag
+        },
+        isActive() {
+            return this.$store.state.activeMid && this.$store.state.activeMid === this.treeData._mid
         }
     },
     methods: {
@@ -96,7 +100,6 @@ export default {
             this.showAroundIndex = n
         },
         handleDrop(n) {
-            console.log(`你在${this.treeData._mid}元素的${n}号点上释放了`)
             this.showMyAround(0)
             bus.$emit('append-node', this.treeData._mid, n)
         },
@@ -113,6 +116,9 @@ export default {
         handleDropStop() {
             this.$store.commit('changeDragStatus', false)
             return false
+        },
+        handleSetActive({ _mid }) {
+            this.$store.commit('setActiveMid', _mid)
         }
     }
 }
@@ -164,17 +170,21 @@ export default {
             align-items: center;
             justify-content: center;
             margin: 30px 0 30px 0;
-            border-radius: 4px;
+            border-radius: 5px;
             box-shadow: 0 0 10px rgba(85, 41, 91, 0.3);
             position: relative;
             z-index: 1;
+            transition: 0.3s all ease;
+
+            &.is-active {
+                box-shadow: 0 0 15px rgba(0, 163, 129, 0.5);
+            }
 
             .el-content {
                 background: rgba(255, 255, 255, 0.7);
                 display: flex;
                 flex-direction: column;
-                // align-items: center;
-                // justify-content: center;
+                cursor: pointer;
                 height: 100%;
                 width: 100%;
 

@@ -1,15 +1,12 @@
 <template>
   <section class="set-el-view">
-    <nav>Name 设置</nav>
-    <div class="set-el">
-      <vs-input class="inputx" placeholder="名字不需要加后缀" v-model="nameValue" />
-    </div>
     <nav>布局设置</nav>
     <div class="set-el">
       <VsButton color="primary" type="border">Flex模型</VsButton>
-      <VsButton color="primary" type="border">盒子模型</VsButton>
-      <VsButton color="primary" type="border">定位模型</VsButton>
-      <VsButton @click="oftenLayoutStatus = true" color="primary" type="border">常用布局</VsButton>
+      <VsButton color="primary" type="border">Grid模型</VsButton>
+      <VsButton color="primary" type="border">Box模型</VsButton>
+      <VsButton color="primary" type="border">Position</VsButton>
+      <!-- <VsButton @click="oftenLayoutStatus = true" color="primary" type="border">常用布局</VsButton> -->
     </div>
     <nav>参数设置</nav>
     <VsList>
@@ -58,7 +55,6 @@ export default {
         selectModel,
         inputModel,
         inputData: [],
-        nameValue: '',
         oftenLayoutStatus: false,
         isSetNumShow: false,
         setValue: '',
