@@ -239,8 +239,8 @@ export default {
             height: 75px;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 164, 151, 0.3);
 
+            // background: rgba(0, 164, 151, 0.1);
             &:before {
                 content: '';
                 display: none;
