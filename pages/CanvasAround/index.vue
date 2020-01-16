@@ -1,9 +1,23 @@
 <template lang="tea">
   section.canvas {
+      div {
+          :class: ['search', {'active': isSearch}]
+        i.icon {
+            @click: handleClickSearch
+        }
+        input&search {
+            :class: [{'active': isSearch}]
+            type: text
+            @enter: handleSearch
+            v-model: searchContent
+        }
+      }
+      EditPage
       div.inside-around {
           @dragover: handleDragover
           @drop: handleDrop
           @click: handleClickCanvas
+          
           RenderCard {
               %: renderTreeData
               :treeData: $it
@@ -19,23 +33,27 @@ import mockData from './mock'
 
 import bus from '@/utils/eventBus.js'
 import RenderCard from './RenderCard'
+import EditPage from './EditPage'
 import Leaf from '@/packages/leaf-js'
 const leaf = new Leaf()
 export default {
     name: 'CanvasAround',
     components: {
-        RenderCard
+        RenderCard,
+        EditPage
     },
     data: () => ({
         elementList: [],
-        renderTreeData: []
+        renderTreeData: [],
+        isSearch: false,
+        searchContent: ''
     }),
     mounted() {
         // this.elementList = mockData
         // this.renderTreeData = this.elementList.length ? Leaf.data2tree(this.elementList) : []
         bus.$on('append-node', (mid, n) => {
             // 从缓存中获取元素，插入到由引擎插入到合适的位置
-            const card = this.$store.state.cacheElement
+            const card = this.$store.state.moveElement
             this.elementList = leaf.appendNode(mid, n, card)
             this.renderTreeData = Leaf.data2tree(this.elementList)
             this.$store.commit('changeDragStatus', false)
@@ -50,6 +68,16 @@ export default {
             if (activeMid === mid) {
                 this.$store.commit('setActiveMid', null)
             }
+        })
+        bus.$on('edit-element', mid => {
+            if (!mid) {
+                this.$store.commit('setEditElement', null)
+                return
+            }
+            const [element] = this.elementList
+                .filter(item => item._mid === mid)
+                .map(({ children, ...item }) => ({ ...item }))
+            this.$store.commit('setEditElement', element)
         })
         leaf.on('warn', msg => {
             this.$vs.notify({ title: '操作警告', text: msg, color: '#fabf14' })
@@ -70,9 +98,9 @@ export default {
             // console.log('松手', e.clientX, e.clientY)
             this.$store.commit('changeDragStatus', false)
             // console.log('画布上结束结束拖拽')
-            const cacheElement = this.$store.state.cacheElement
+            const moveElement = this.$store.state.moveElement
             // 插入数据
-            this.elementList = leaf.appendRootNode(cacheElement)
+            this.elementList = leaf.appendRootNode(moveElement)
             this.renderTreeData = Leaf.data2tree(this.elementList)
             this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('kkk', this.elementList)
@@ -80,7 +108,23 @@ export default {
             // console.log(this.tree)
         },
         handleClickCanvas() {
+            this.isSearch = false
             this.$store.commit('setActiveMid', null)
+        },
+        handleSearch() {
+            const mid = leaf.search(this.searchContent)
+            if (!mid) {
+                return
+            }
+            this.$store.commit('setActiveMid', mid)
+        },
+        handleClickSearch() {
+            this.isSearch = !this.isSearch
+            this.$nextTick(() => {
+                if (this.isSearch) {
+                    this.$refs.search.focus()
+                }
+            })
         }
     }
 }
@@ -94,6 +138,53 @@ export default {
         align-items: center;
         justify-content: center;
         border: 2px solid #55295b;
+        position: relative;
+
+        .search {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            display: block;
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+            border-radius: 40px;
+            box-shadow: 0 0 10px #55295b;
+            transition: all 0.3s ease-out;
+
+            &.active {
+                width: 220px;
+            }
+
+            .icon {
+                position: absolute;
+                left: 7px;
+                display: block;
+                width: 26px;
+                height: 26px;
+                background-image: url('../../assets/icon-search.svg');
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                background-position: center center;
+                cursor: pointer;
+            }
+
+            input {
+                height: 90%;
+                font-size: 16px;
+                width: 0;
+                padding: 0 6px;
+                border: none;
+                transition: all 0.3s ease-out;
+
+                &.active {
+                    width: 160px;
+                }
+            }
+        }
 
         .inside-around {
             padding: 40px;

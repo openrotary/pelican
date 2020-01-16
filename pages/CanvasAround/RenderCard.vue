@@ -33,15 +33,16 @@ section {
         div.el-content {
             draggable: true
             @dragstart: handleDargStart($event, treeData)
+            @dblclick: handleEdit(treeData._mid)
             @click.stop: handleSetActive(treeData)
             div.top {
                 span.tag {
-                    ~~{{ treeData.tagName }} - {{ treeData._index }}
+                    ~~{{ treeData.tagName }} - {{ treeData.class }}
                 }
                 span.icon {
-                    i.copy {
+                    <!-- i.copy {
                         @click: handleCopy(treeData)
-                    }
+                    } -->
                     i.delete {
                         @click: handleDelete(treeData._mid)
                     }
@@ -83,7 +84,7 @@ export default {
     }),
     computed: {
         isDragMe() {
-            return this.$store.state.cacheElement && this.treeData._mid === this.$store.state.cacheElement._mid
+            return this.$store.state.moveElement && this.treeData._mid === this.$store.state.moveElement._mid
         },
         hasChildren() {
             return this.treeData.children && this.treeData.children.length
@@ -104,11 +105,15 @@ export default {
             bus.$emit('append-node', this.treeData._mid, n)
         },
         handleDargStart(e, data) {
-            this.$store.commit('setCacheElement', data)
+            bus.$emit('edit-element', null)
+            this.$store.commit('setMoveElement', data)
             this.$store.commit('changeDragStatus', true)
         },
         handleDelete(mid) {
             bus.$emit('delete-node', mid)
+        },
+        handleEdit(mid) {
+            bus.$emit('edit-element', mid)
         },
         handleDragoverStop() {
             return false
@@ -118,6 +123,7 @@ export default {
             return false
         },
         handleSetActive({ _mid }) {
+            bus.$emit('edit-element', null)
             this.$store.commit('setActiveMid', _mid)
         }
     }
@@ -213,6 +219,7 @@ export default {
                             height: 20px;
                             background-repeat: no-repeat;
                             background-size: auto 100%;
+                            background-position: center center;
                             cursor: pointer;
 
                             &.delete {

@@ -60,12 +60,12 @@ export default {
         handleDargStart(e, data) {
             this.$store.commit('changeDragStatus', true)
             // console.log('开始拖拽')
-            this.$store.commit('setCacheElement', data)
+            this.$store.commit('setMoveElement', data)
         },
         handleDragEnd() {
             this.$store.commit('changeDragStatus', false)
             // console.log('结束拖拽')
-            this.$store.commit('setCacheElement', null)
+            this.$store.commit('setMoveElement', null)
         }
     }
 }
