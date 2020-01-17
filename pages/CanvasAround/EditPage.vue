@@ -4,10 +4,16 @@ section {
     i.close {
         @click: handleClose
     }
-    ul {
+    ul.attr {
         li {
-            %: getEditElement
-            ~~{{$_i}} ~ {{$it}}
+            div.title {
+                ~~元素名: {{ getEditElement.tagName }}
+            }
+        }
+        li {
+            div.title {
+                ~~是否为单标签: {{ getEditElement.isSingle }}
+            }
         }
     }
 }
@@ -24,7 +30,12 @@ export default {
     },
     computed: {
         getEditElement() {
-            return this.$store.state.editElement
+            const data = this.$store.state.editElement
+            if (!data) {
+                return null
+            }
+            const { _pid, _mid, _index, type, ..._data } = data
+            return _data
         },
         hasEditElement() {
             return !!this.$store.state.editElement
@@ -43,12 +54,27 @@ export default {
         background: #fff;
         top: 100vh;
         bottom: 0;
-        right: 415px;
+        right: 440px;
+        padding: 40px 0;
+        box-sizing: border-box;
 
         &.show {
             top: 70px;
-            right: 415px;
             bottom: 15px;
+        }
+
+        .attr {
+            li {
+                list-style-type: none;
+
+                .title {
+                    background: rgba(85, 41, 91, 0.1);
+                    height: 30px;
+                    padding: 0 20px;
+                    display: flex;
+                    align-items: center;
+                }
+            }
         }
 
         .close {
