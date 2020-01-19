@@ -37,7 +37,7 @@ section {
             @click.stop: handleSetActive(treeData)
             div.top {
                 span.tag {
-                    ~~{{ treeData.tagName }} - {{ treeData.class }}
+                    ~~{{ treeData.tagName }}
                 }
                 span.icon {
                     <!-- i.copy {

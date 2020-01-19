@@ -6944,9 +6944,9 @@ tar@^4:
     yallist "^3.0.3"
 
 tea-loader@^0.2.14:
-  version "0.2.14"
-  resolved "https://registry.npmjs.org/tea-loader/-/tea-loader-0.2.14.tgz#65cb51ed8e94b152071a3b29e79381c63b683355"
-  integrity sha512-Qwyny7RJxar9xdaeKGnEbBXfcxcX0OkpIdbmN/hWvOpHF0LBaCSceeGr+FeHglRfATAE+s0DvpnZ7HPfk9/iPw==
+  version "0.2.17"
+  resolved "https://registry.npmjs.org/tea-loader/-/tea-loader-0.2.17.tgz#ac6d7b6d063054e04f1b7767252fc09f7fbf0cf3"
+  integrity sha512-Vps02X57fEkppo5zy7MFoyt/FqPRA7tjkIlJWmMeGMLuDm+sDzPOSBNU35u58z+DMDqBUj4Q2CH/liTQWSVQEw==
 
 term-size@^1.2.0:
   version "1.2.0"

@@ -5,9 +5,6 @@
         draggable: true
         @dragstart: handleDargStart($event, $it)
         @dragend: handleDragEnd
-        i.material-icons.code {
-            ~~code
-        }
         div.ele {
             span.title {
                 ~~{{$it.tagName}}
@@ -76,7 +73,7 @@ export default {
         .ele-card {
             background: rgba(255, 255, 255, 0.7);
             width: 250px;
-            min-height: 80px;
+            height: 70px;
             border-radius: 2px;
             cursor: move;
             display: flex;
@@ -106,6 +103,7 @@ export default {
 
         .ele-card {
             transition: 0.3s all ease;
+            box-shadow: 0 0 10px rgba(85, 41, 91, 0.2);
 
             // &.active {
             // background: rgba(85, 41, 91, 0.1);

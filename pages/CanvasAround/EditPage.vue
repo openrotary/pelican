@@ -7,12 +7,12 @@ section {
     ul.attr {
         li {
             div.title {
-                ~~元素名: {{ getEditElement.tagName }}
+                ~~元素名: {{ getEditElement ? getEditElement.tagName : '' }}
             }
         }
         li {
             div.title {
-                ~~是否为单标签: {{ getEditElement.isSingle }}
+                ~~是否为单标签: {{ getEditElement ? getEditElement.isSingle : '' }}
             }
         }
     }
@@ -73,6 +73,11 @@ export default {
                     padding: 0 20px;
                     display: flex;
                     align-items: center;
+                }
+
+                .css-code {
+                    font-size: 12px;
+                    padding: 10px 20px;
                 }
             }
         }

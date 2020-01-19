@@ -1,5 +1,6 @@
 <template lang="tea">
     aside.element-card {
+        
         NewCard
     }
 </template>

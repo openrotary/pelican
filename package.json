@@ -4,6 +4,9 @@
     "description": "My riveting Nuxt.js project",
     "author": "",
     "private": true,
+    "bin": {
+        "pelican": "yarn run start"
+    },
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
         "build": "nuxt build",

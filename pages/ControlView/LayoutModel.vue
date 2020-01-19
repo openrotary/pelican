@@ -2,10 +2,7 @@
   <section class="set-el-view">
     <nav>布局模型</nav>
     <div class="set-el">
-      <VsButton color="primary" type="border">Flex</VsButton>
-      <VsButton color="primary" type="border">Grid</VsButton>
-      <VsButton color="primary" type="border">Box</VsButton>
-      <VsButton color="primary" type="border">Position</VsButton>
+      <VsButton :key="index" @click="handleLayout(index+1)" color="primary" type="border" v-for="(item, index) in layoutModel">{{item}}</VsButton>
     </div>
     <nav>布局方式</nav>
     <div class="set-el">
@@ -16,11 +13,63 @@
   </section>
 </template>
 <script>
+import bus from '@/utils/eventBus.js'
+const setCss = code => {
+    switch (code) {
+        case 1:
+            return {
+                display: 'flex',
+                'align-items': 'center',
+                'justify-content': 'center'
+            }
+        case 2:
+            return {
+                display: 'grid'
+            }
+        case 3:
+            return {
+                display: 'block'
+            }
+        case 4:
+            return {
+                position: 'fixed'
+            }
+    }
+}
+
 export default {
     name: 'LayoutModel',
     components: {},
-    data: () => ({}),
-    methods: {},
+    data: () => ({
+        layoutModel: ['Flex', 'Grid', 'Box', 'Position']
+    }),
+    methods: {
+        handleLayout(code) {
+            const editElement = Object.assign({}, this.$store.state.editElement)
+            if (!editElement) {
+                return
+            }
+            const newElement = Object.assign(editElement, {
+                css: setCss(code)
+            })
+            const mid = newElement._mid
+            bus.$emit('update-element', mid, newElement)
+            // switch (code) {
+            //     case 1:
+            //         // Flex 布局
+            //         break
+            //     case 2:
+            //         // Grid 布局
+            //         break
+            //     case 3:
+            //         // Box 布局
+            //         break
+            //     case 4:
+            //         // Position 布局
+            //         break
+            // }
+        }
+    },
     watch: {}
 }
 </script>

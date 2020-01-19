@@ -79,6 +79,12 @@ export default {
                 .map(({ children, ...item }) => ({ ...item }))
             this.$store.commit('setEditElement', element)
         })
+        bus.$on('update-element', (mid, element) => {
+            this.elementList = leaf.updateElement(mid, element)
+            const [el] = this.elementList.filter(item => item._mid === mid)
+            this.$store.commit('setEditElement', el)
+            this.renderTreeData = Leaf.data2tree(this.elementList)
+        })
         leaf.on('warn', msg => {
             this.$vs.notify({ title: '操作警告', text: msg, color: '#fabf14' })
         })
