@@ -90,10 +90,19 @@ export default {
             width: 25px;
             height: 25px;
             cursor: pointer;
-            background-size: 100% 100%;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            transform: rotate(0deg);
+            background-color: #fff;
+            background-size: 80% 80%;
             background-position: center center;
             background-repeat: no-repeat;
             background-image: url('../../assets/icon-close.svg');
+
+            &:hover {
+                background-color: rgba(85, 41, 91, 0.2);
+                transform: rotate(-90deg);
+            }
         }
     }
 </style>
