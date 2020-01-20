@@ -12,7 +12,7 @@ commander
     .description('检查并获取配置文件')
     .action(async () => {
         console.log('start Pelican UI')
-        server(process.cwd())
+        server()
     })
 
 // 用于解析命令行参数

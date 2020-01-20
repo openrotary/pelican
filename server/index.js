@@ -1,6 +1,7 @@
 const Koa = require('koa')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
+const { readDirSync } = require('./getDir')
 
 const app = new Koa()
 
@@ -8,9 +9,12 @@ const app = new Koa()
 const config = require('../nuxt.config.js')
 config.dev = app.env !== 'production'
 
-async function start() {
+async function start(_path = process.cwd()) {
     // Instantiate nuxt.js
     const nuxt = new Nuxt(config)
+
+    const dir = readDirSync(_path)
+    console.log(dir)
 
     const { host = process.env.HOST || '127.0.0.1', port = process.env.PORT || 3000 } = nuxt.options.server
 
