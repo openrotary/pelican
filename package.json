@@ -3,9 +3,8 @@
     "version": "1.0.0",
     "description": "My riveting Nuxt.js project",
     "author": "",
-    "private": true,
     "bin": {
-        "pelican": "yarn run start"
+        "pelican": "server/start-ui.js"
     },
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
@@ -14,6 +13,7 @@
         "generate": "nuxt generate"
     },
     "dependencies": {
+        "commander": "^4.1.0",
         "cross-env": "^5.2.0",
         "koa": "^2.6.2",
         "material-icons": "^0.3.1",

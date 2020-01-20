@@ -91,7 +91,7 @@ export default {
             height: 25px;
             cursor: pointer;
             border-radius: 50%;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             transform: rotate(0deg);
             background-color: #fff;
             background-size: 80% 80%;
