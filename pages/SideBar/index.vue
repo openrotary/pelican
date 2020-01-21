@@ -35,6 +35,7 @@ export default {
         Direction
     },
     mounted() {
+        // 将两个事件合并
         bus.$on('select-ican', path => {
             // 用户双击选择了 .ican 文件
             this.active = 2
