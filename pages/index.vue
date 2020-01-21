@@ -2,7 +2,7 @@
 div.container {
   Header
   section.main {
-    ElementCard
+    SideBar
     CanvasAround
     ControlView
   }
@@ -11,7 +11,7 @@ div.container {
 
 <script>
 import Header from '~/components/Header.vue'
-import ElementCard from './ElementCard'
+import SideBar from './SideBar'
 import CanvasAround from './CanvasAround'
 import ControlView from './ControlView'
 
@@ -21,7 +21,7 @@ import bus from '@/utils/eventBus'
 export default {
     components: {
         Header,
-        ElementCard,
+        SideBar,
         CanvasAround,
         ControlView
     },
@@ -42,17 +42,17 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .container {
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 
-        .main {
-            display: flex;
-            height: 1px;
-            width: 100%;
-            flex: 1;
-        }
+    .main {
+        display: flex;
+        height: 1px;
+        width: 100%;
+        flex: 1;
     }
+}
 </style>

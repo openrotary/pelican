@@ -39,33 +39,33 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .menu {
-        position: fixed;
-        z-index: 10;
-        width: 180px;
-        background: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+.menu {
+    position: fixed;
+    z-index: 10;
+    width: 180px;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-        li {
-            height: 34px;
-            border-bottom: 1px solid rgba(85, 41, 91, 0.4);
-            list-style: none;
-            padding: 0 10px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            cursor: pointer;
-            user-select: none;
-            color: #555;
+    li {
+        height: 34px;
+        border-bottom: 1px solid rgba(85, 41, 91, 0.4);
+        list-style: none;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        cursor: pointer;
+        user-select: none;
+        color: #555;
 
-            &:hover {
-                color: rgba(85, 41, 91, 1);
-                background: rgba(85, 41, 91, 0.1);
-            }
+        &:hover {
+            color: rgba(85, 41, 91, 1);
+            background: rgba(85, 41, 91, 0.1);
+        }
 
-            &:last-child {
-                border-bottom: none;
-            }
+        &:last-child {
+            border-bottom: none;
         }
     }
+}
 </style>

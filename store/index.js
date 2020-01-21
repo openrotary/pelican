@@ -4,7 +4,8 @@ export const state = () => ({
     moveElement: null,
     editElement: null,
     activeMid: null,
-    fileContent: null
+    fileContent: null,
+    activePath: null
 })
 
 export const mutations = {
@@ -22,6 +23,9 @@ export const mutations = {
     },
     setFileContent(state, data) {
         state.fileContent = data
+    },
+    setActivePath(state, data) {
+        state.activePath = data
     }
     // changeModeCode(state, code) {
     //     state.modeCode = code
