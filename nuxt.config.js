@@ -44,7 +44,10 @@ module.exports = {
     /*
      ** Nuxt.js modules
      */
-    modules: [],
+    modules: ['@nuxtjs/axios'],
+    axios: {
+        baseURL: 'http://127.0.0.1:3022'
+    },
     server: {
         port: 3022,
         host: '0.0.0.0' // default: localhost

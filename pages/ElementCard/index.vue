@@ -63,6 +63,7 @@ export default {
             width: 100%;
             height: 40px;
             display: flex;
+            flex-shrink: 0;
 
             span {
                 flex: 1;

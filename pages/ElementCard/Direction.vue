@@ -3,7 +3,6 @@
       DirTree {
         %: tree
         :data: $it
-        :pkey: $_i
       }
   }
 </template>
@@ -65,26 +64,44 @@ const arr = [
         children: []
     }
 ]
-const paddingLeftCount = key => {
-    return key ? key.toString().split('-').length * 18 : 0
-}
 
 export default {
     name: 'Direction',
     components: {
         DirTree
     },
-    data: () => ({
-        tree: arr
-    }),
+    // data: () => ({
+    //     tree: []
+    // }),
+    data() {
+        return {
+            tree: []
+        }
+    },
+    // asyncData(context) {
+    //     console.log(axios)
+    //     return axios.get('/getFile').then(res => {
+    //         return { tree: res.data.data }
+    //     })
+    // },
+    async asyncData({ $axios }) {
+        console.log('lll')
+        const res = await $axios.get('https://cmb.ygsoft.com/app/v1/version/getVersion/settledown')
+        console.log(res)
+    },
+    // mounted() {
+    //     this.$axios.get('/getFile').then(res => {
+    //         this.tree = res.data.data
+    //     })
+    // },
     methods: {}
 }
 </script>
 
 <style lang="stylus" scoped>
     .tree {
-        border: 5px solid red;
         width: 100%;
+        padding: 10px;
         flex: 1;
     }
 </style>
