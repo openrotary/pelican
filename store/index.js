@@ -3,7 +3,8 @@ export const state = () => ({
     // modeCode: 1,
     moveElement: null,
     editElement: null,
-    activeMid: null
+    activeMid: null,
+    fileContent: null
 })
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
     },
     setActiveMid(state, data) {
         state.activeMid = data
+    },
+    setFileContent(state, data) {
+        state.fileContent = data
     }
     // changeModeCode(state, code) {
     //     state.modeCode = code

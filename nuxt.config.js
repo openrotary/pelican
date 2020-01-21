@@ -46,11 +46,20 @@ module.exports = {
      */
     modules: ['@nuxtjs/axios'],
     axios: {
-        baseURL: 'http://127.0.0.1:3022'
+        prefix: '/api',
+        proxy: true // Can be also an object with default options
     },
     server: {
         port: 3022,
         host: '0.0.0.0' // default: localhost
+    },
+    proxy: {
+        '/api/': {
+            target: 'http://0.0.0.0:3030/',
+            pathRewrite: {
+                '^/api': ''
+            }
+        }
     },
     /*
      ** Build configuration

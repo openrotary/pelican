@@ -20,8 +20,10 @@
         "koa-bodyparser": "^4.2.1",
         "koa-router": "^7.4.0",
         "koa2-cors": "^2.0.6",
+        "koa2-cors-error": "^1.0.0",
         "material-icons": "^0.3.1",
         "nuxt": "^2.0.0",
+        "qs": "^6.9.1",
         "rxjs": "^6.5.3",
         "tea-loader": "^0.2.14",
         "vue-rx": "^6.2.0",
@@ -31,7 +33,7 @@
         "eslint-config-prettier": "^4.1.0",
         "eslint-plugin-prettier": "^3.0.1",
         "nodemon": "^1.18.9",
-        "prettier": "^1.16.4",
+        "prettier": "^1.19.1",
         "stylus": "^0.54.7",
         "stylus-loader": "^3.0.2"
     }

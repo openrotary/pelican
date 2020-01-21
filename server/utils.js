@@ -1,5 +1,6 @@
 // 递归遍历目录下所有文件
 const fs = require('fs')
+// const consola = require('consola')
 
 function readDirSync(path) {
     const arr = []
@@ -7,7 +8,7 @@ function readDirSync(path) {
     _path.forEach(function(ele) {
         const stat = fs.statSync(`${path}/${ele}`)
         if (stat && stat.isDirectory()) {
-            if (ele === 'node_modules') {
+            if (['node_modules', '.git'].includes(ele)) {
                 arr.unshift({
                     value: `${path}/${ele}`,
                     label: ele,
@@ -45,6 +46,25 @@ function readDirSync(path) {
     return [].concat(node, dispear, other)
 }
 
+const getFileContent = path => {
+    const content = fs.readFileSync(path, { encoding: 'utf-8' }, err => {
+        err && console.log('报错：', err)
+    })
+    return content
+}
+
+const createFile = (path, name, type) => {
+    fs.writeFile(`${path}/${name}.${type}`, JSON.stringify([]), 'utf8', err => {
+        err && console.log('创建文件失败：', err)
+    })
+}
+const deleteFile = path => {
+    fs.unlinkSync(path)
+}
+
 module.exports = {
-    readDirSync
+    readDirSync,
+    getFileContent,
+    createFile,
+    deleteFile
 }

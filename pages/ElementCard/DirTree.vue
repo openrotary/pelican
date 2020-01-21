@@ -4,8 +4,9 @@
           ?: data.children.length
           :class: ['dir-li',{'dir-open': isDirOpen}]
           span.dir {
+              @contextmenu.prevent: handleMenu($event, 1, data.value)
               :style: {paddingLeft: countPaddingLeft}
-              @click: handleDir
+              @click.left: handleDir
               ~~{{ data.label }}
           }
           DirTree {
@@ -17,6 +18,7 @@
       li {
           /
           span.node {
+              @contextmenu.prevent: handleMenu($event, 0, data.value)
               :style: {paddingLeft: countPaddingLeft}
               @dblclick: handleDBClick(data.value)
               ~~{{ data.label }}
@@ -26,6 +28,7 @@
 </template>
 
 <script>
+import bus from '@/utils/eventBus'
 const paddingLeftCount = key => {
     return key ? key.toString().split('-').length * 18 + 5 : 5
 }
@@ -53,8 +56,12 @@ export default {
         handleDir() {
             this.isDirOpen = !this.isDirOpen
         },
-        handleDBClick(fileName) {
-            console.log(fileName)
+        handleDBClick(path) {
+            bus.$emit('get-file-content', path)
+        },
+        handleMenu(e, n, path) {
+            // n 为 1 代表文件夹，为 0 代表文件
+            bus.$emit('show-menu', { x: e.clientX, y: e.clientY }, n, path)
         }
     }
 }
@@ -80,7 +87,7 @@ export default {
             display: flex;
             align-items: center;
             cursor: pointer;
-            color: #999;
+            color: #666;
             user-select: none;
 
             &:hover {
@@ -108,6 +115,7 @@ export default {
             height: 30px;
             cursor: pointer;
             user-select: none;
+            color: rgba(85, 41, 91, 0.7);
 
             &:hover {
                 color: #f1f1f1;

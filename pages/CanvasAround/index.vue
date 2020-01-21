@@ -34,7 +34,7 @@ import mockData from './mock'
 import bus from '@/utils/eventBus.js'
 import RenderCard from './RenderCard'
 import EditPage from './EditPage'
-import Leaf from '@/packages/leaf-js'
+import Leaf from '@/packages/leafjs'
 const leaf = new Leaf()
 export default {
     name: 'CanvasAround',
