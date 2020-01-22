@@ -103,10 +103,30 @@ export default {
                 this.$vs.notify({ title: '操作成功', text: msg, color: '#82ae46', position: 'top-center' })
             })
             leaf.on('change', elementList => {
+                const path = this.$store.state.activePath
+                if (!path || path.slice(-5) !== '.ican') {
+                    this.$vs.notify({
+                        title: '操作错误',
+                        text: '当前活动的文件路径不是 .ican 文件',
+                        color: '#bb5548',
+                        position: 'top-center'
+                    })
+                    return
+                }
+
                 this.elementList = elementList
                 this.renderTreeData = Leaf.data2tree(this.elementList)
                 const data = JSON.stringify(this.elementList)
                 // 将数据写入文件中
+                const { code } = this.$axios.$post('/rewriteFile', null, {
+                    params: {
+                        path,
+                        data
+                    }
+                })
+                if (!code) {
+                    console.log('文件写入成功')
+                }
             })
         },
         handleDragover(e) {

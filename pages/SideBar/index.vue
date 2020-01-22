@@ -36,7 +36,6 @@ export default {
     },
     mounted() {
         bus.$on('get-file-content', async path => {
-            this.$store.commit('setActivePath', path)
             const data = await this.getFileContent(path)
             if (!data) {
                 this.$vs.notify({ title: '很遗憾', text: '该文件是空的', color: '#55295b', position: 'top-left' })
@@ -45,6 +44,7 @@ export default {
             if (path.slice(-5) === '.ican') {
                 // 用户选择了 .ican 文件
                 this.active = 2
+                this.$store.commit('setActivePath', path)
                 // 根据返回的 data 初始化画布
                 bus.$emit('init-canvas', data)
             } else {

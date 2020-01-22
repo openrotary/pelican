@@ -1,6 +1,6 @@
 const Router = require('koa-router')
 const router = new Router()
-const { readDirSync, getFileContent, createFile, deleteFile } = require('./utils')
+const { readDirSync, getFileContent, createFile, rewriteFile, deleteFile } = require('./utils')
 
 const _path = process.cwd()
 
@@ -19,6 +19,12 @@ router
         createFile(path, name, type)
         ctx.type = 'json'
         ctx.body = { code: 0, path: `${path}/${name}.${type}` }
+    })
+    .post('/rewriteFile', ctx => {
+        const { path, data } = ctx.query
+        rewriteFile(path, data)
+        ctx.type = 'json'
+        ctx.body = { code: 0 }
     })
     .delete('/deleteFile', (ctx, next) => {
         const { path } = ctx.query

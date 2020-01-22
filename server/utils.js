@@ -1,5 +1,7 @@
 // 递归遍历目录下所有文件
 const fs = require('fs')
+const prettier = require('prettier')
+const Leaf = require('../packages/leafjs/dist/bundle.cjs.js')
 // const consola = require('consola')
 
 function readDirSync(path) {
@@ -76,9 +78,25 @@ const deleteFile = path => {
     // }
 }
 
+const rewriteFile = (path, data) => {
+    fs.writeFile(`${path}`, data, 'utf8', err => {
+        err && console.log('重写.ican文件失败：', err)
+    })
+    // 再写一次.vue文件
+    const vue = path.replace(/\.ican/, '.vue')
+    const treeHTML = Leaf.data2tree(JSON.parse(data))
+    const DOM = Leaf.tree2DOM(treeHTML)
+    const code = `<template> ${DOM} </template>`
+    const formatConfig = { semi: false, tabWidth: 4, parser: 'vue' }
+    fs.writeFile(`${vue}`, prettier.format(code, formatConfig), 'utf8', err => {
+        err && console.log('重写.vue文件失败：', err)
+    })
+}
+
 module.exports = {
     readDirSync,
     getFileContent,
     createFile,
+    rewriteFile,
     deleteFile
 }
