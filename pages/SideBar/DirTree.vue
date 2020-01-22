@@ -57,10 +57,6 @@ export default {
             this.isDirOpen = !this.isDirOpen
         },
         handleDBClick(path) {
-            if (path.slice(-5) === '.ican') {
-                bus.$emit('select-ican', path)
-                return
-            }
             bus.$emit('get-file-content', path)
         },
         handleMenu(e, n, path) {
@@ -72,59 +68,59 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.dir-tree {
-    .dir-li {
-        height: 30px;
-        overflow: hidden;
+    .dir-tree {
+        .dir-li {
+            height: 30px;
+            overflow: hidden;
 
-        &.dir-open {
-            height: auto;
+            &.dir-open {
+                height: auto;
 
-            > .dir:before {
-                transform: rotate(0deg);
+                > .dir:before {
+                    transform: rotate(0deg);
+                }
+            }
+        }
+
+        .dir {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: #666;
+            user-select: none;
+
+            &:hover {
+                background: rgba(85, 41, 91, 0.1);
+            }
+
+            &:before {
+                content: '';
+                display: flex;
+                width: 15px;
+                height: 15px;
+                margin-right: 5px;
+                background-image: url('../../assets/icon-dir.svg');
+                background-repeat: no-repeat;
+                background-size: 9px 9px;
+                background-position: center center;
+                transform: rotate(-90deg);
+                transition: all 0.3s ease;
+            }
+        }
+
+        .node {
+            display: flex;
+            align-items: center;
+            height: 30px;
+            cursor: pointer;
+            user-select: none;
+            color: rgba(85, 41, 91, 0.7);
+
+            &:hover {
+                color: #f1f1f1;
+                background: rgba(85, 41, 91, 0.5);
             }
         }
     }
-
-    .dir {
-        height: 30px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        color: #666;
-        user-select: none;
-
-        &:hover {
-            background: rgba(85, 41, 91, 0.1);
-        }
-
-        &:before {
-            content: '';
-            display: flex;
-            width: 15px;
-            height: 15px;
-            margin-right: 5px;
-            background-image: url('../../assets/icon-dir.svg');
-            background-repeat: no-repeat;
-            background-size: 9px 9px;
-            background-position: center center;
-            transform: rotate(-90deg);
-            transition: all 0.3s ease;
-        }
-    }
-
-    .node {
-        display: flex;
-        align-items: center;
-        height: 30px;
-        cursor: pointer;
-        user-select: none;
-        color: rgba(85, 41, 91, 0.7);
-
-        &:hover {
-            color: #f1f1f1;
-            background: rgba(85, 41, 91, 0.5);
-        }
-    }
-}
 </style>

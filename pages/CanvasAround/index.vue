@@ -35,7 +35,7 @@ import bus from '@/utils/eventBus.js'
 import RenderCard from './RenderCard'
 import EditPage from './EditPage'
 import Leaf from '@/packages/leafjs'
-const leaf = new Leaf()
+let leaf = new Leaf()
 export default {
     name: 'CanvasAround',
     components: {
@@ -49,21 +49,17 @@ export default {
         searchContent: ''
     }),
     mounted() {
-        // this.elementList = mockData
-        // this.renderTreeData = this.elementList.length ? Leaf.data2tree(this.elementList) : []
         bus.$on('append-node', (mid, n) => {
             // 从缓存中获取元素，插入到由引擎插入到合适的位置
             const card = this.$store.state.moveElement
-            this.elementList = leaf.appendNode(mid, n, card)
-            this.renderTreeData = Leaf.data2tree(this.elementList)
+            leaf.appendNode(mid, n, card)
             this.$store.commit('changeDragStatus', false)
             this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('拖拽状态', this.$store.state.isDrag)
         })
         bus.$on('delete-node', mid => {
             // 仅删除单个节点
-            this.elementList = leaf.deleteNode(mid)
-            this.renderTreeData = Leaf.data2tree(this.elementList)
+            leaf.deleteNode(mid)
             const activeMid = this.$store.state.activeMid
             if (activeMid === mid) {
                 this.$store.commit('setActiveMid', null)
@@ -80,22 +76,39 @@ export default {
             this.$store.commit('setEditElement', element)
         })
         bus.$on('update-element', (mid, element) => {
-            this.elementList = leaf.updateElement(mid, element)
+            leaf.updateElement(mid, element)
             const [el] = this.elementList.filter(item => item._mid === mid)
             this.$store.commit('setEditElement', el)
+        })
+        bus.$on('init-canvas', data => {
+            // 接收到画布的数据
+            console.log('canvasData', data)
+            leaf = new Leaf(JSON.parse(data))
+            this.elementList = leaf.getElementList()
             this.renderTreeData = Leaf.data2tree(this.elementList)
+            // 初始化的时候需要重新设置监听
+            this.leafListener()
         })
-        leaf.on('warn', msg => {
-            this.$vs.notify({ title: '操作警告', text: msg, color: '#fabf14' })
-        })
-        leaf.on('error', msg => {
-            this.$vs.notify({ title: '操作错误', text: msg, color: '#bb5548' })
-        })
-        leaf.on('success', msg => {
-            this.$vs.notify({ title: '操作成功', text: msg, color: '#82ae46' })
-        })
+        this.leafListener()
     },
     methods: {
+        leafListener() {
+            leaf.on('warn', msg => {
+                this.$vs.notify({ title: '操作警告', text: msg, color: '#fabf14', position: 'top-center' })
+            })
+            leaf.on('error', msg => {
+                this.$vs.notify({ title: '操作错误', text: msg, color: '#bb5548', position: 'top-center' })
+            })
+            leaf.on('success', msg => {
+                this.$vs.notify({ title: '操作成功', text: msg, color: '#82ae46', position: 'top-center' })
+            })
+            leaf.on('change', elementList => {
+                this.elementList = elementList
+                this.renderTreeData = Leaf.data2tree(this.elementList)
+                const data = JSON.stringify(this.elementList)
+                // 将数据写入文件中
+            })
+        },
         handleDragover(e) {
             // console.log('不必要的冒泡，有待优化')
             e.preventDefault()
@@ -106,8 +119,7 @@ export default {
             // console.log('画布上结束结束拖拽')
             const moveElement = this.$store.state.moveElement
             // 插入数据
-            this.elementList = leaf.appendRootNode(moveElement)
-            this.renderTreeData = Leaf.data2tree(this.elementList)
+            leaf.appendRootNode(moveElement)
             this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('kkk', this.elementList)
             // console.log('你添加了一个根元素', this.renderTreeData)

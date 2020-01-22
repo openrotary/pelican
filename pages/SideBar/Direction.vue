@@ -116,8 +116,7 @@ export default {
             if (code) {
                 return
             }
-            this.$store.commit('setActivePath', newPath)
-            bus.$emit('select-file', true)
+            bus.$emit('get-file-content', newPath)
             this.tree = await this.getFile()
         }
     }
@@ -125,16 +124,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.tree {
-    width: 100%;
-    padding: 10px;
-    flex: 1;
-    overflow: auto;
-}
+    .tree {
+        width: 100%;
+        padding: 10px;
+        flex: 1;
+        overflow: auto;
+    }
 
-.code {
-    padding: 15px;
-    flex: 1;
-    overflow: auto;
-}
+    .code {
+        padding: 15px;
+        flex: 1;
+        overflow: auto;
+    }
 </style>
