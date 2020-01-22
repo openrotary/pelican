@@ -70,34 +70,34 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .element-card {
-        width: 300px;
+.element-card {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgba(85, 41, 91, 0.2);
+
+    .select {
+        width: 100%;
+        height: 40px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-right: 1px solid rgba(85, 41, 91, 0.2);
+        flex-shrink: 0;
 
-        .select {
-            width: 100%;
-            height: 40px;
+        span {
+            flex: 1;
             display: flex;
-            flex-shrink: 0;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.4s all ease;
 
-            span {
-                flex: 1;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                transition: 0.4s all ease;
-
-                &.active {
-                    background: rgba(85, 41, 91, 0.6);
-                    box-shadow: 0 0 10px rgba(85, 41, 91, 0.2);
-                    border-radius: 4px;
-                    color: #f1f1f1;
-                }
+            &.active {
+                background: rgba(85, 41, 91, 0.6);
+                box-shadow: 0 0 10px rgba(85, 41, 91, 0.2);
+                border-radius: 4px;
+                color: #f1f1f1;
             }
         }
     }
+}
 </style>

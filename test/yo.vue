@@ -1,6 +1,8 @@
 <template>
-    <section :class="['a4di']">
-        <div :class="['e0xq']"></div>
-        <input :class="['9erj']" />
+    <section :class="['riy6']">
+        <div :class="['tamy']"></div>
+        <div :class="['qz9v']"></div>
+        <section :class="['cor1']"></section>
+        <div :class="['p059']"></div>
     </section>
 </template>
