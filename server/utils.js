@@ -61,21 +61,25 @@ const createFile = (path, name, type) => {
     })
 }
 const deleteFile = path => {
-    fs.unlinkSync(path)
-    // 删除文件夹或文件
-    // let files = []
-    // if (fs.existsSync(path)) {
-    //     files = fs.readdirSync(path)
-    //     files.forEach(file => {
-    //         let curPath = path + '/' + file
-    //         if (fs.statSync(curPath).isDirectory()) {
-    //             delDir(curPath) //递归删除文件夹
-    //         } else {
-    //             fs.unlinkSync(curPath) //删除文件
-    //         }
-    //     })
-    //     fs.rmdirSync(path)
-    // }
+    if (!fs.statSync(path).isDirectory()) {
+        // 删除单个文件
+        fs.unlinkSync(path)
+        return
+    }
+    // 删除文件夹以其以下的文件
+    let files = []
+    if (fs.existsSync(path)) {
+        files = fs.readdirSync(path)
+        files.forEach(file => {
+            let curPath = path + '/' + file
+            if (fs.statSync(curPath).isDirectory()) {
+                delDir(curPath) //递归删除文件夹
+            } else {
+                fs.unlinkSync(curPath) //删除文件
+            }
+        })
+        fs.rmdirSync(path)
+    }
 }
 
 const rewriteFile = (path, data) => {
@@ -84,8 +88,11 @@ const rewriteFile = (path, data) => {
     })
     // 再写一次.vue文件
     const vue = path.replace(/\.ican/, '.vue')
-    const treeHTML = Leaf.data2tree(JSON.parse(data))
-    const DOM = Leaf.tree2DOM(treeHTML)
+    const treeData = Leaf.data2tree(JSON.parse(data))
+    // 生成html
+    const DOM = Leaf.tree2DOM(treeData)
+    // 生成css
+    // const CSS = Leaf.tree2CSS(treeData)
     const code = `<template> ${DOM} </template>`
     const formatConfig = { semi: false, tabWidth: 4, parser: 'vue' }
     fs.writeFile(`${vue}`, prettier.format(code, formatConfig), 'utf8', err => {

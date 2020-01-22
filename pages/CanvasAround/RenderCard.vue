@@ -1,12 +1,12 @@
 <template lang="tea">
 section {
     :class: ['card', { 'top-line': !!treeData._pid && !isFirst}, {'bottom-line': !!treeData._pid && !isLast}]
-    span.content {
-        v-if: treeData.type === 1
+    <!-- span.content {
+        v-if: treeData.type === 0
         ~~{{ treeData.content }}
-    }
+    } -->
     div {
-        /
+        <!-- / -->
         @drop.stop: handleDropStop()
         :class: ['el-card', { 'ahead-line': !!treeData._pid}, {'behind-line': hasChildren}, {'is-active': isActive}]
         i.arrow {
@@ -46,6 +46,11 @@ section {
                     i.delete {
                         @click: handleDelete(treeData._mid)
                     }
+                }
+            }
+            div.bottom {
+                span.content {
+                    ~~{{treeData.content}}
                 }
             }
         }
@@ -190,6 +195,7 @@ export default {
                 background: rgba(255, 255, 255, 0.7);
                 display: flex;
                 flex-direction: column;
+                justify-content: space-between;
                 cursor: pointer;
                 height: 100%;
                 width: 100%;
@@ -226,6 +232,18 @@ export default {
                                 background-image: url('../../assets/icon-delete.svg');
                             }
                         }
+                    }
+                }
+
+                .bottom {
+                    height: 22px;
+                    border-top: 1px solid rgba(85, 41, 91, 0.2);
+                    display: flex;
+                    align-items: center;
+
+                    .content {
+                        font-size: 12px;
+                        color: rgba(85, 41, 91, 0.6);
                     }
                 }
             }

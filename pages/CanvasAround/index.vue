@@ -82,7 +82,6 @@ export default {
         })
         bus.$on('init-canvas', data => {
             // 接收到画布的数据
-            console.log('canvasData', data)
             leaf = new Leaf(JSON.parse(data))
             this.elementList = leaf.getElementList()
             this.renderTreeData = Leaf.data2tree(this.elementList)
@@ -113,7 +112,6 @@ export default {
                     })
                     return
                 }
-
                 this.elementList = elementList
                 this.renderTreeData = Leaf.data2tree(this.elementList)
                 const data = JSON.stringify(this.elementList)

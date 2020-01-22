@@ -22,28 +22,23 @@ export default {
         cardList: [
             {
                 tagName: 'section',
-                isSingle: false,
-                type: 2
+                isSingle: false
             },
             {
                 tagName: 'div',
-                isSingle: false,
-                type: 2
+                isSingle: false
             },
             {
                 tagName: 'span',
-                isSingle: false,
-                type: 2
+                isSingle: false
             },
             {
                 tagName: 'i',
-                isSingle: false,
-                type: 2
+                isSingle: false
             },
             {
                 tagName: 'input',
-                isSingle: true,
-                type: 2
+                isSingle: true
             }
         ]
     }),

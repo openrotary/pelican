@@ -5,14 +5,60 @@ section {
         @click: handleClose
     }
     ul.attr {
-        li {
-            div.title {
-                ~~元素名: {{ getEditElement ? getEditElement.tagName : '' }}
+        ?: hasEditElement
+        li.inline {
+            span.title {
+                ~~元素名
+            }
+            input {
+                v-model: dataModel.tagName
+            } 
+        }
+        li.inline {
+            span.title {
+                ~~双 / 单标签
+            }
+            span.radio {
+                VsRadio {
+                    v-model: dataModel.isSingle
+                    :vs-value: false
+                    ~~双标签
+                }
+                VsRadio {
+                    v-model: dataModel.isSingle
+                    :vs-value: true
+                    ~~单标签
+                }
+            }
+        }
+        li.inline {
+            ?: !dataModel.isSingle
+            span.title {
+                ~~文本内容
+            }
+            input {
+                v-model: dataModel.content
+            } 
+        }
+        li.block {
+            span.title {
+                ~~class
+            }
+            EditStack {
+                :list: dataModel.class
+            }            
+        }
+        li.block {
+            span.title {
+                ~~属性
+            }
+            input {
+
             }
         }
         li {
-            div.title {
-                ~~是否为单标签: {{ getEditElement ? getEditElement.isSingle : '' }}
+            span.title {
+                ~~css树
             }
         }
     }
@@ -20,25 +66,36 @@ section {
 </template>
 <script>
 import bus from '@/utils/eventBus'
+import EditStack from '@/components/EditStack'
 export default {
     name: 'EditPage',
+    components: {
+        EditStack
+    },
+    data: () => ({
+        dataModel: {}
+    }),
     methods: {
         handleClose() {
             // 清空缓存中的信息
+            // 将信息保存到对应的位置
             this.$store.commit('setEditElement', null)
         }
     },
     computed: {
-        getEditElement() {
-            const data = this.$store.state.editElement
-            if (!data) {
-                return null
-            }
-            const { _pid, _mid, _index, type, ..._data } = data
-            return _data
-        },
         hasEditElement() {
             return !!this.$store.state.editElement
+        }
+    },
+    watch: {
+        '$store.state.editElement': {
+            handler(data) {
+                if (!data) {
+                    return
+                }
+                const { _pid, _mid, _index, type, ..._data } = data
+                this.dataModel = _data
+            }
         }
     }
 }
@@ -67,12 +124,38 @@ export default {
             li {
                 list-style-type: none;
 
-                .title {
-                    background: rgba(85, 41, 91, 0.1);
-                    height: 30px;
-                    padding: 0 20px;
+                &.inline {
                     display: flex;
                     align-items: center;
+                    height: 30px;
+                    margin-bottom: 10px;
+                }
+
+                >input {
+                    display: block;
+                    width: 240px;
+                    height: 100%;
+                    border: none;
+                    padding: 0 10px;
+                    border-bottom: 1px solid rgba(85, 41, 91, 0.5);
+                    font-size: 16px;
+                }
+
+                .radio {
+                    width: 200px;
+                    display: flex;
+                    justify-content: space-around;
+                }
+
+                .title {
+                    color: rgba(85, 41, 91, 0.8);
+                    width: 120px;
+                    height: 30px;
+                    padding-left: 20px;
+                    display: flex;
+                    align-items: center;
+                    font-size: 14px;
+                    user-select: none;
                 }
 
                 .css-code {
