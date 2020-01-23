@@ -52,7 +52,7 @@ export default {
         bus.$on('append-node', (mid, n) => {
             // 从缓存中获取元素，插入到由引擎插入到合适的位置
             const card = this.$store.state.moveElement
-            leaf.appendNode(mid, n, card)
+            leaf.appendNode(mid, n, card, data => ({ class: [data._mid.slice(-5)], attr: [], css: [], ...data }))
             this.$store.commit('changeDragStatus', false)
             this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('拖拽状态', this.$store.state.isDrag)
@@ -77,8 +77,8 @@ export default {
         })
         bus.$on('update-element', (mid, element) => {
             leaf.updateElement(mid, element)
-            const [el] = this.elementList.filter(item => item._mid === mid)
-            this.$store.commit('setEditElement', el)
+            // const [el] = leaf.getElementList().filter(item => item._mid === mid)
+            this.$store.commit('setEditElement', null)
         })
         bus.$on('init-canvas', data => {
             // 接收到画布的数据
@@ -137,7 +137,15 @@ export default {
             // console.log('画布上结束结束拖拽')
             const moveElement = this.$store.state.moveElement
             // 插入数据
-            leaf.appendRootNode(moveElement)
+            leaf.appendRootNode(moveElement, data => {
+                return {
+                    class: [data._mid.slice(-5)],
+                    attr: [],
+                    css: [],
+                    ...data
+                }
+                // return { class: [data._mid.slice(-5)], attr: [], css: [], ...data }
+            })
             this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('kkk', this.elementList)
             // console.log('你添加了一个根元素', this.renderTreeData)

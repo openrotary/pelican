@@ -2,7 +2,7 @@
     ul.stack {
         li.list {
             %: list
-            span {
+            span.show {
                 ~~{{$it}}
             }
             span.icon {
@@ -17,9 +17,22 @@
                 }
             }
         }
-        li {
+        li.add-li {
             input {
-                v-model: newAttr
+                ?: mode === 1
+                v-model: newValue
+            }
+            span.key-value {
+                /
+                input {
+                    v-model: newKey
+                }
+                b {
+                    ~~:
+                }
+                input {
+                    v-model: newValue
+                }
             }
             button.add {
                 @click: handleAdd
@@ -36,17 +49,34 @@ export default {
         list: {
             type: Array,
             default: () => []
+        },
+        mode: {
+            type: Number,
+            default: 1
         }
     },
     data: () => ({
-        newAttr: ''
+        newKey: '',
+        newValue: ''
     }),
     methods: {
         handleAdd() {
+            let value = ''
+            if (this.mode === 1) {
+                value = this.newValue.trim()
+            } else {
+                value = {
+                    [this.newKey]: this.newValue
+                }
+            }
+            if (!value) {
+                this.newKey = this.newValue = ''
+                return
+            }
             const arr = this.list.concat()
-            arr.push(this.newAttr.trim())
+            arr.push(value)
             this.$emit('change', arr)
-            this.newAttr = ''
+            this.newKey = this.newValue = ''
         },
         handleOrder(i, n) {
             const arr = this.list.concat()
@@ -65,69 +95,111 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.stack {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-
-    li {
-        list-style: none;
-        height: 26px;
+    .stack {
         display: flex;
-        align-items: center;
+        flex-direction: column;
+        flex: 1;
 
-        &.list {
-            cursor: pointer;
-            padding: 0 10px;
+        li {
+            list-style: none;
+            height: 26px;
             display: flex;
-            justify-content: space-between;
+            align-items: center;
 
-            &:hover {
-                background: rgba(85, 41, 91, 0.1);
+            &.add-li {
+                margin-top: 10px;
             }
 
-            .icon {
+            &.list {
+                cursor: pointer;
+                padding: 0 10px;
                 display: flex;
-                align-items: center;
+                justify-content: space-between;
 
-                i {
-                    display: inline-block;
-                    width: 20px;
-                    height: 20px;
-                    background-repeat: no-repeat;
-                    background-position: center center;
-                    background-size: 80% 80%;
+                &:hover {
+                    background: rgba(85, 41, 91, 0.1);
+                }
 
-                    &.up {
-                        background-image: url('../assets/icon-up.svg');
-                    }
+                .show {
+                    color: rgba(85, 41, 91, 0.7);
+                    font-size: 14px;
+                    font-style: italic;
+                }
 
-                    &.down {
-                        background-image: url('../assets/icon-down.svg');
-                    }
+                .icon {
+                    display: flex;
+                    align-items: center;
 
-                    &.delete {
-                        background-image: url('../assets/icon-delete.svg');
+                    i {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        background-repeat: no-repeat;
+                        background-position: center center;
+                        background-size: 80% 80%;
+
+                        &.up {
+                            background-image: url('../assets/icon-up.svg');
+                        }
+
+                        &.down {
+                            background-image: url('../assets/icon-down.svg');
+                        }
+
+                        &.delete {
+                            background-image: url('../assets/icon-delete.svg');
+                        }
                     }
                 }
             }
-        }
 
-        input {
-            flex: 1;
-            height: 28px;
-            padding: 0 10px;
-            font-size: 16px;
-            margin-right: 20px;
-        }
+            >input {
+                flex: 1;
+                height: 28px;
+                padding: 0 10px;
+                font-size: 16px;
+                margin-right: 20px;
+                color: #55295b;
+            }
 
-        .add {
-            width: 60px;
-            height: 28px;
-            background: #55295b;
-            color: #fff;
-            border-radius: 4px;
+            .key-value {
+                display: flex;
+                align-items: center;
+                font-size: 16px;
+                margin-right: 20px;
+                flex: 1;
+                width: 1px;
+
+                input {
+                    height: 28px;
+                    padding: 0 10px;
+                    width: 1px;
+                    font-size: 16px;
+                    color: #55295b;
+
+                    &:first-child {
+                        flex: 1;
+                    }
+
+                    &:last-child {
+                        flex: 2;
+                    }
+                }
+
+                b {
+                    display: inline-block;
+                    margin: 0 4px;
+                }
+            }
+
+            .add {
+                width: 60px;
+                height: 28px;
+                background: #55295b;
+                color: #fff;
+                flex-shrink: 0;
+                border-radius: 4px;
+            }
         }
     }
-}
 </style>

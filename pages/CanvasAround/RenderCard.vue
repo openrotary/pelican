@@ -242,6 +242,7 @@ export default {
                     align-items: center;
 
                     .content {
+                        padding: 0 10px;
                         font-size: 12px;
                         color: rgba(85, 41, 91, 0.6);
                     }
