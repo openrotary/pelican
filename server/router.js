@@ -15,13 +15,13 @@ router
         ctx.body = { code: 0, data: getFileContent(path) }
     })
     .post('/createFile', (ctx, next) => {
-        const { path, name, type } = ctx.query
+        const { path, name, type } = ctx.request.body
         createFile(path, name, type)
         ctx.type = 'json'
         ctx.body = { code: 0, path: `${path}/${name}.${type}` }
     })
     .post('/rewriteFile', ctx => {
-        const { path, data } = ctx.query
+        const { path, data } = ctx.request.body
         rewriteFile(path, data)
         ctx.type = 'json'
         ctx.body = { code: 0 }

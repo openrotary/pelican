@@ -106,12 +106,10 @@ export default {
         async handleFinishInput(name) {
             this.isInputShow = false
             const path = this.$store.state.activePath
-            const { code, path: newPath } = await this.$axios.$post('/createFile', null, {
-                params: {
-                    type: 'ican',
-                    name,
-                    path
-                }
+            const { code, path: newPath } = await this.$axios.$post('/createFile', {
+                type: 'ican',
+                name,
+                path
             })
             if (code) {
                 return

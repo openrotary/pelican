@@ -116,11 +116,9 @@ export default {
                 this.renderTreeData = Leaf.data2tree(this.elementList)
                 const data = JSON.stringify(this.elementList)
                 // 将数据写入文件中
-                const { code } = this.$axios.$post('/rewriteFile', null, {
-                    params: {
-                        path,
-                        data
-                    }
+                const { code } = this.$axios.$post('/rewriteFile', {
+                    path,
+                    data
                 })
                 if (!code) {
                     console.log('文件写入成功')
