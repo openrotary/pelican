@@ -78,7 +78,7 @@ export default {
         bus.$on('update-element', (mid, element) => {
             leaf.updateElement(mid, element)
             // const [el] = leaf.getElementList().filter(item => item._mid === mid)
-            this.$store.commit('setEditElement', null)
+            // this.$store.commit('setEditElement', null)
         })
         bus.$on('init-canvas', data => {
             // 接收到画布的数据
@@ -173,69 +173,69 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .canvas {
-        flex: 1;
-        width: 1px;
+.canvas {
+    flex: 1;
+    width: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #55295b;
+    position: relative;
+
+    .search {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        display: block;
+        height: 40px;
+        width: 40px;
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid #55295b;
-        position: relative;
+        background: #fff;
+        border-radius: 40px;
+        box-shadow: 0 0 10px #55295b;
+        transition: all 0.3s ease-out;
 
-        .search {
+        &.active {
+            width: 220px;
+        }
+
+        .icon {
             position: absolute;
-            right: 20px;
-            top: 20px;
+            left: 7px;
             display: block;
-            height: 40px;
-            width: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-            border-radius: 40px;
-            box-shadow: 0 0 10px #55295b;
+            width: 26px;
+            height: 26px;
+            background-image: url('../../assets/icon-search.svg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-position: center center;
+            cursor: pointer;
+        }
+
+        input {
+            height: 90%;
+            font-size: 16px;
+            width: 0;
+            padding: 0 6px;
+            border: none;
             transition: all 0.3s ease-out;
 
             &.active {
-                width: 220px;
+                width: 160px;
             }
-
-            .icon {
-                position: absolute;
-                left: 7px;
-                display: block;
-                width: 26px;
-                height: 26px;
-                background-image: url('../../assets/icon-search.svg');
-                background-repeat: no-repeat;
-                background-size: 100% 100%;
-                background-position: center center;
-                cursor: pointer;
-            }
-
-            input {
-                height: 90%;
-                font-size: 16px;
-                width: 0;
-                padding: 0 6px;
-                border: none;
-                transition: all 0.3s ease-out;
-
-                &.active {
-                    width: 160px;
-                }
-            }
-        }
-
-        .inside-around {
-            padding: 40px;
-            height: 100%;
-            flex: 1;
-            overflow: auto;
-            background-color: #f1f1f1;
-            background-image: url('../../assets/web-point.png');
-            background-size: 40px;
         }
     }
+
+    .inside-around {
+        padding: 40px;
+        height: 100%;
+        flex: 1;
+        overflow: auto;
+        background-color: #f1f1f1;
+        background-image: url('../../assets/web-point.png');
+        background-size: 40px;
+    }
+}
 </style>

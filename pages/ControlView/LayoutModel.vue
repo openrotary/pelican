@@ -74,31 +74,31 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
-    nav {
-        background: rgba(85, 41, 91, 0.1);
-        color: #233;
-        padding: 0 20px;
-        height: 40px;
+nav {
+    background: rgba(85, 41, 91, 0.1);
+    color: #233;
+    padding: 0 20px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 0 5px #fff;
+}
+
+.set-el-view {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 400px;
+
+    .set-el {
+        padding: 15px 0;
         display: flex;
-        align-items: center;
-        box-shadow: 0 0 5px #fff;
-    }
+        justify-content: space-around;
 
-    .set-el-view {
-        display: flex;
-        flex-direction: column;
-        flex-shrink: 0;
-        width: 400px;
-
-        .set-el {
-            padding: 15px 0;
-            display: flex;
-            justify-content: space-around;
-
-            .vs-button {
-                font-size: 16px;
-                width: 80px;
-            }
+        .vs-button {
+            font-size: 16px;
+            width: 80px;
         }
     }
+}
 </style>
