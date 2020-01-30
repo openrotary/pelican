@@ -94,14 +94,12 @@ export default {
         handleBlur() {
             // 清空缓存中的信息
             const data = this.dataModel
-            if (!data.content.trim()) {
-                data.content = ''
-            }
             if (isSingleTag(data.tagName)) {
                 data.isSingle = true
                 data.content = ''
             } else {
                 data.isSingle = false
+                data.content = data.content.trim()
             }
             // 将信息保存到对应的位置
             bus.$emit('update-element', data._mid, data)

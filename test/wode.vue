@@ -1,5 +1,5 @@
 <template>
-    <div :class="['j2dd']">
+    <div :class="['j2dd']" @super="handleSuper">
         <section :class="['dccz', 'edref', 'wfrefre3']" super="jey">
             dddddd
         </section>
