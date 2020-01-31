@@ -99,7 +99,6 @@ export default {
                 data.content = ''
             } else {
                 data.isSingle = false
-                data.content = data.content.trim()
             }
             // 将信息保存到对应的位置
             bus.$emit('update-element', data._mid, data)
@@ -142,7 +141,7 @@ export default {
     background: #fff;
     top: 100vh;
     bottom: 0;
-    right: 440px;
+    right: 1150px;
     padding: 40px 0;
     box-sizing: border-box;
 

@@ -12,7 +12,6 @@
             v-model: searchContent
         }
       }
-      EditPage
       div.inside-around {
           @dragover: handleDragover
           @drop: handleDrop
@@ -30,17 +29,15 @@
 
 <script>
 import mockData from './mock'
-
 import bus from '@/utils/eventBus.js'
 import RenderCard from './RenderCard'
-import EditPage from './EditPage'
+
 import Leaf from '@/packages/leafjs'
 let leaf = new Leaf()
 export default {
     name: 'CanvasAround',
     components: {
-        RenderCard,
-        EditPage
+        RenderCard
     },
     data: () => ({
         elementList: [],

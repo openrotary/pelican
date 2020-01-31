@@ -103,7 +103,6 @@ export default {
         formatAttr(value) {
             if (typeof value === 'object') {
                 const [data] = Object.entries(value)
-                console.log('kllk', data)
                 return `${data[0]}="${data[1]}"`
             }
             return value
