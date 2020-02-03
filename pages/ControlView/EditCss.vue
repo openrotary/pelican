@@ -1,12 +1,15 @@
-<template>
-  <section :class="['gfys']">
-    <!-- <header :class="['8ef0']">样式结构</header> -->
-    <div :class="['g9rt']">
-      <div :class="['vlw7', 'canvas']">
-        <CssNode :key="index" v-for="(item, index) in cssTree"></CssNode>
-      </div>
-    </div>
-  </section>
+<template lang="tea">
+section.gfys {
+    div.g9rt {
+        div.vlw7.canvas {
+            CssNode {
+                %: cssTree
+                :treeData: $it
+                :isLast: (cssTree.length - 1) === $_i
+            }
+        }
+    }
+}
 </template>
 <script>
 import Leafjs from '../../packages/leafjs'
@@ -26,13 +29,38 @@ export default {
                 _pid: null,
                 _mid: 'fghjk',
                 _index: 0,
-                'font-size': '10px',
-                display: 'flex',
-                'text-align': 'center'
+                select: '.fghjk',
+                cssom: {
+                    'font-size': '10px',
+                    display: 'flex',
+                    'text-align': 'center'
+                }
+            },
+            {
+                _pid: 'fghjk',
+                _mid: 'dfghjuytrdfghj',
+                select: '> div',
+                _index: 0,
+                cssom: {
+                    'font-size': '10px',
+                    display: 'flex',
+                    'text-align': 'center'
+                }
+            },
+            {
+                _pid: 'fghjk',
+                _mid: 'ddddffsdfgh',
+                select: '.canvas',
+                _index: 0,
+                cssom: {
+                    'font-size': '10px',
+                    display: 'flex',
+                    'text-align': 'center'
+                }
             }
         ]
         this.cssTree = Leafjs.data2tree(this.cssList)
-        console.log(this.cssTree)
+        console.log('cssTree', this.cssTree)
     },
     watch: {
         // '$store.state.editElement': {
