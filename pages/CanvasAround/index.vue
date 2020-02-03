@@ -19,6 +19,7 @@
           
           RenderCard {
               %: renderTreeData
+              :treeType: getTreeType
               :treeData: $it
               :isFirst: !$_i
               :isLast: (renderTreeData.length - 1) === $_i
@@ -45,6 +46,11 @@ export default {
         isSearch: false,
         searchContent: ''
     }),
+    computed: {
+        getTreeType() {
+            return this.$store.state.treeType
+        }
+    },
     mounted() {
         bus.$on('append-node', (mid, n) => {
             // 从缓存中获取元素，插入到由引擎插入到合适的位置

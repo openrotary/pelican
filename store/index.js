@@ -1,6 +1,7 @@
 export const state = () => ({
     isDrag: false,
     // modeCode: 1,
+    treeType: 1,
     moveElement: null,
     editElement: null,
     activeMid: null,
@@ -26,6 +27,9 @@ export const mutations = {
     },
     setActivePath(state, data) {
         state.activePath = data
+    },
+    setTreeType(state, value) {
+        state.treeType = value
     }
     // changeModeCode(state, code) {
     //     state.modeCode = code
