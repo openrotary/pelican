@@ -12,8 +12,12 @@ section.gfys {
 }
 </template>
 <script>
-import Leafjs from '../../packages/leafjs'
+import Leaf from '../../packages/leafjs'
 import CssNode from './CssNode'
+import bus from '@/utils/eventBus'
+import { createCssSelect } from '@/utils/comput'
+
+let leaf = new Leaf()
 export default {
     name: 'EditCss',
     data: () => ({
@@ -24,64 +28,68 @@ export default {
         CssNode
     },
     mounted() {
-        this.cssList = [
-            {
-                _pid: null,
-                _mid: 'fghjk',
-                _index: 0,
-                select: '.fghjk',
-                cssom: {
-                    'font-size': '10px',
-                    display: 'flex',
-                    'text-align': 'center'
-                }
-            },
-            {
-                _pid: 'fghjk',
-                _mid: 'dfghjuytrdfghj',
-                select: '> div',
-                _index: 0,
-                cssom: {
-                    'font-size': '10px',
-                    display: 'flex',
-                    'text-align': 'center'
-                }
-            },
-            {
-                _pid: 'fghjk',
-                _mid: 'ddddffsdfgh',
-                select: '.canvas',
-                _index: 0,
-                cssom: {
-                    'font-size': '10px',
-                    display: 'flex',
-                    'text-align': 'center'
-                }
+        bus.$on('append-css-node', (mid, n) => {
+            const data = createCssSelect('.wokao')
+            leaf.appendNode(mid, n, data)
+        })
+        bus.$on('select-css-node', mid => {
+            this.$store.commit('setSelectCssMid', mid)
+        })
+        this.leafListener()
+    },
+    methods: {
+        leafListener() {
+            leaf.on('error', msg => {
+                console.log('Leaf引擎error事件', msg)
+            })
+            leaf.on('success', msg => {
+                console.log('Leaf引擎success事件', msg)
+            })
+            leaf.on('change', cssList => {
+                // 更新画布上的数据
+                this.cssList = cssList
+                this.cssTree = Leaf.data2tree(this.cssList)
+                this.setEditElemet(cssList)
+            })
+        },
+        setEditElemet(css) {
+            const _data = this.$store.state.editElement
+            if (!_data) {
+                console.log('editElement为空')
+                return
             }
-        ]
-        this.cssTree = Leafjs.data2tree(this.cssList)
-        console.log('cssTree', this.cssTree)
+            const data = JSON.parse(JSON.stringify(_data))
+            data.css = css
+            this.$store.commit('setEditElement', data)
+        }
     },
     watch: {
-        // '$store.state.editElement': {
-        //     handler(data) {
-        //         if (!data) {
-        //             return
-        //         }
-        //         const { children, css, ..._data } = data
-        //         this.cssList = JSON.parse(JSON.stringify(css))
-        //         this.cssTree = Leafjs.data2tree(this.cssList)
-        //     }
-        // }
+        '$store.state.editElement': {
+            handler(data) {
+                if (!data) {
+                    return
+                }
+                const { children, css, ..._data } = data
+                const cssList = JSON.parse(JSON.stringify(css))
+                leaf = new Leaf(cssList)
+                this.leafListener()
+                this.cssList = leaf.getElementList()
+                this.cssTree = Leaf.data2tree(this.cssList)
+                console.log(this.cssList)
+            }
+        }
     }
 }
 </script>
 <style lang="stylus" scoped>
 .gfys {
     width: 700px;
-    border: 1px solid red;
+    border-right: 2px solid #55295b;
 
     .g9rt {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
     }
 }
 </style>

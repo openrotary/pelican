@@ -63,7 +63,7 @@ section {
         }
         li {
             span.title {
-                ~~css树
+                ~~功能模板
             }
         }
     }

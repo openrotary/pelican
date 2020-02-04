@@ -29,10 +29,9 @@
 </template>
 
 <script>
-import mockData from './mock'
+import { createCssom } from '@/utils/comput'
 import bus from '@/utils/eventBus.js'
 import RenderCard from './RenderCard'
-
 import Leaf from '@/packages/leafjs'
 let leaf = new Leaf()
 export default {
@@ -55,7 +54,12 @@ export default {
         bus.$on('append-node', (mid, n) => {
             // 从缓存中获取元素，插入到由引擎插入到合适的位置
             const card = this.$store.state.moveElement
-            leaf.appendNode(mid, n, card, data => ({ class: [data._mid.slice(-5)], attr: [], css: [], ...data }))
+            leaf.appendNode(mid, n, card, data => ({
+                class: [data._mid.slice(-5)],
+                attr: [],
+                css: [createCssom(data._mid)],
+                ...data
+            }))
             this.$store.commit('changeDragStatus', false)
             this.$store.commit('setActiveMid', leaf.getActiveMid())
             // console.log('拖拽状态', this.$store.state.isDrag)
@@ -142,7 +146,7 @@ export default {
                 return {
                     class: [data._mid.slice(-5)],
                     attr: [],
-                    css: [],
+                    css: [createCssom(data._mid)],
                     ...data
                 }
                 // return { class: [data._mid.slice(-5)], attr: [], css: [], ...data }

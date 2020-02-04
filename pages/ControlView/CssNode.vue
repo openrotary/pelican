@@ -3,13 +3,18 @@
       :class: ['css-node', {'isRoot': !treeData._pid}]
       li.block {
           div.content {
-            span.select-name {
+            span {
+                :class: ['select-name', {isActive}]
+                @dblclick: handleDBClick
                 ~~{{ treeData.select }}
             }
-            span.add-icon.child
+            span.add-icon.child {
+                @click: handleAddNode(2)
+            }
           }
           span.add-icon.borther {
               ?: isLast
+              @click: handleAddNode(3)
           }
       }
       CssNode {
@@ -21,6 +26,7 @@
   }
 </template>
 <script>
+import bus from '@/utils/eventBus'
 export default {
     name: 'CssNode',
     props: {
@@ -33,9 +39,20 @@ export default {
             default: false
         }
     },
+    methods: {
+        handleAddNode(n) {
+            bus.$emit('append-css-node', this.treeData._mid, n)
+        },
+        handleDBClick() {
+            bus.$emit('select-css-node', this.treeData._mid)
+        }
+    },
     computed: {
         hasChildren() {
             return this.treeData.children && this.treeData.children.length
+        },
+        isActive() {
+            return this.treeData._mid === this.$store.state.selectCssMid
         }
     }
 }
@@ -55,15 +72,15 @@ export default {
         flex-direction: column;
 
         .content {
-            width: 180px;
             height: 40px;
             margin: 10px;
             display: flex;
             align-items: center;
 
             .select-name {
+                padding: 0 7px;
                 border-radius: 6px;
-                width: 100px;
+                min-width: 100px;
                 color: #ffffff;
                 background: #55295b;
                 width: 100%;
@@ -71,6 +88,25 @@ export default {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+                &.isActive {
+                    position: relative;
+                    overflow: hidden;
+
+                    &:after {
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        width: 0;
+                        height: 0;
+                        right: -9px;
+                        top: -2px;
+                        border-left: 13px solid transparent;
+                        border-right: 13px solid transparent;
+                        border-bottom: 13px solid rgba(0, 163, 129, 1);
+                        transform: rotate(45deg);
+                    }
+                }
             }
         }
 
@@ -82,13 +118,13 @@ export default {
             margin-left: 10px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 0 5px #55295b;
+            box-shadow: 0 0 1px #55295b;
             background-size: 80%;
             background-repeat: no-repeat;
             background-position: center center;
 
             &:hover {
-                box-shadow: 0 0 2px #55295b;
+                box-shadow: 0 0 5px #55295b;
             }
 
             &.child {

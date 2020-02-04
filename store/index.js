@@ -5,6 +5,7 @@ export const state = () => ({
     moveElement: null,
     editElement: null,
     activeMid: null,
+    selectCssMid: null,
     fileContent: null,
     activePath: null
 })
@@ -18,6 +19,9 @@ export const mutations = {
     },
     setEditElement(state, data) {
         state.editElement = data
+    },
+    setSelectCssMid(state, data) {
+        state.selectCssMid = data
     },
     setActiveMid(state, data) {
         state.activeMid = data
