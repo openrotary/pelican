@@ -1,13 +1,14 @@
 {
     "name": "@openrotary/pelican",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "My riveting Nuxt.js project",
     "author": "",
     "bin": {
         "pelican": "server/start-ui.js"
     },
     "files": [
-        ".nuxt/dist"
+        ".nuxt/dist",
+        "server"
     ],
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
