@@ -1,6 +1,6 @@
 {
-    "name": "pelican",
-    "version": "1.0.0",
+    "name": "@openrotary/pelican",
+    "version": "1.0.1",
     "description": "My riveting Nuxt.js project",
     "author": "",
     "bin": {
@@ -14,6 +14,7 @@
     },
     "dependencies": {
         "@nuxtjs/axios": "^5.9.3",
+        "@openrotary/leafjs": "^1.0.0",
         "commander": "^4.1.0",
         "cross-env": "^5.2.0",
         "koa": "^2.6.2",
