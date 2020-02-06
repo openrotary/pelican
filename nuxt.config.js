@@ -1,3 +1,6 @@
+const path = require('path')
+const which = require('npm-which')(__dirname)
+const rootPath = path.join(which.sync('nuxt'), '../../../')
 module.exports = {
     mode: 'universal',
     /*
@@ -37,6 +40,7 @@ module.exports = {
             ssr: true
         }
     ],
+    rootDir: rootPath,
     /*
      ** Nuxt.js dev-modules
      */

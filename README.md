@@ -1,22 +1,24 @@
-# pelican
+# 介绍
 
-> My riveting Nuxt.js project
+Pelican 是一款以 Vue 组件为单位、针对性较强的高效代码生成器。其本质和绝大多数代码生成器都不一样，主要有以下特点：
 
-## Build Setup
+-   它追求的并非是“不写代码”，而是“用更快的速度写代码”——用抽象模型的方式代替线性的键盘输入。
+-   它专注于 HTML 和 CSS 部分。
+-   较弱的入侵性确保它能轻易与任何一个 Vue 工程相集成，无论是全新的工程还是开发到一半的工程。
 
-``` bash
-# install dependencies
-$ yarn install
+## 安装
 
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
+```bash
+# install
+$ yarn global add @openrotry/pelican
 ```
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+## 启动
+
+```bash
+$ cd myProject
+$ pelican ui
+```
+
+运行`pelican ui`后，在浏览器打开`localhost:3022`, 即可看到代码生成器的工作界面。
+

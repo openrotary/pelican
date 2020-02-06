@@ -124,6 +124,7 @@ export default {
             justify-content: center;
             align-items: center;
             cursor: pointer;
+            font-size: 16px;
             transition: 0.4s all ease;
 
             &.active {

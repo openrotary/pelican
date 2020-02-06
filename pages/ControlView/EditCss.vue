@@ -12,7 +12,7 @@ section.gfys {
 }
 </template>
 <script>
-import Leaf from '../../packages/leafjs'
+import Leaf from '@openrotary/leafjs'
 import CssNode from './CssNode'
 import bus from '@/utils/eventBus'
 import { createCssSelect } from '@/utils/comput'

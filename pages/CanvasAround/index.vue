@@ -32,7 +32,7 @@
 import { createCssom } from '@/utils/comput'
 import bus from '@/utils/eventBus.js'
 import RenderCard from './RenderCard'
-import Leaf from '@/packages/leafjs'
+import Leaf from '@openrotary/leafjs'
 let leaf = new Leaf()
 export default {
     name: 'CanvasAround',

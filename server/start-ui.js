@@ -1,19 +1,20 @@
 #!/usr/bin/env node
 
-const fs = require('fs')
-const path = require('path')
 const commander = require('commander')
 const start = require('./index')
 const server = require('./server')
+// const spawn = require('cross-spawn')
+// const which = require('npm-which')(__dirname)
 
 commander.version('1.0.0')
 
 commander
-    .command('ui')
+    .command('ui [isDev]')
     .description('检查并获取配置文件')
-    .action(async () => {
+    .action(async (isDev = '') => {
         console.log('start Pelican UI')
-        start()
+        // console.log(which.sync('nuxt'))
+        start(isDev === 'dev')
         server()
     })
 

@@ -6,10 +6,10 @@ const app = new Koa()
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
-config.dev = app.env !== 'production'
 
-async function start() {
+async function start(isDev) {
     // Instantiate nuxt.js
+    config.dev = isDev
     const nuxt = new Nuxt(config)
 
     const { host = process.env.HOST || '127.0.0.1', port = process.env.PORT || 3000 } = nuxt.options.server

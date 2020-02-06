@@ -1,7 +1,7 @@
 // 递归遍历目录下所有文件
 const fs = require('fs')
 const prettier = require('prettier')
-const Leaf = require('../packages/leafjs/dist/bundle.cjs.js')
+const Leaf = require('@openrotary/leafjs')
 // const consola = require('consola')
 
 function readDirSync(path) {
