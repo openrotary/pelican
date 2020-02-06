@@ -1,4 +1,5 @@
 ![image](https://github.com/openrotary/pelican/blob/master/docs/images/logo.png)
+
 # 介绍
 
 Pelican 是一款以 Vue 组件为单位、针对性较强的高效代码生成器。其本质和绝大多数代码生成器都不一样，主要有以下特点：
@@ -11,7 +12,7 @@ Pelican 是一款以 Vue 组件为单位、针对性较强的高效代码生成�
 
 ```bash
 # install
-$ yarn global add @openrotry/pelican
+$ yarn global add @openrotary/pelican
 ```
 
 ## 启动
@@ -22,4 +23,3 @@ $ pelican ui
 ```
 
 运行`pelican ui`后，在浏览器打开`localhost:3022`, 即可看到代码生成器的工作界面。
-
