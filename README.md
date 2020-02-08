@@ -15,6 +15,13 @@ Pelican 是一款以 Vue 组件为单位、针对性较强的高效代码生成�
 $ yarn global add @openrotary/pelican
 ```
 
+## 升级
+
+```bash
+# install
+$ yarn global upgrade @openrotary/pelican
+```
+
 ## 启动
 
 ```bash

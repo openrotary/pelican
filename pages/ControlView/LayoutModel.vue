@@ -8,7 +8,7 @@
     <div class="set-el">
       <VsButton color="primary" type="border">上下居中</VsButton>
       <VsButton color="primary" type="border">左右居中</VsButton>
-      <VsButton color="primary" type="border">左右居中</VsButton>
+      <VsButton color="primary" type="border">完全居中</VsButton>
     </div>
   </section>
 </template>
@@ -30,10 +30,6 @@ const setCss = code => {
             return {
                 display: 'block'
             }
-        case 4:
-            return {
-                position: 'fixed'
-            }
     }
 }
 
@@ -41,7 +37,7 @@ export default {
     name: 'LayoutModel',
     components: {},
     data: () => ({
-        layoutModel: ['Flex', 'Grid', 'Box', 'Position']
+        layoutModel: ['Flex', 'Grid', 'Box']
     }),
     methods: {
         handleLayout(code) {
@@ -54,20 +50,6 @@ export default {
             })
             const mid = newElement._mid
             bus.$emit('update-element', mid, newElement)
-            // switch (code) {
-            //     case 1:
-            //         // Flex 布局
-            //         break
-            //     case 2:
-            //         // Grid 布局
-            //         break
-            //     case 3:
-            //         // Box 布局
-            //         break
-            //     case 4:
-            //         // Position 布局
-            //         break
-            // }
         }
     },
     watch: {}
