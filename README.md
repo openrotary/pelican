@@ -18,7 +18,7 @@ $ yarn global add @openrotary/pelican
 ## 升级
 
 ```bash
-# install
+# upgrade
 $ yarn global upgrade @openrotary/pelican
 ```
 
