@@ -42,6 +42,7 @@ section {
             } 
         }
         li.block {
+            ?: isHTMLElement
             span.title {
                 ~~class
             }
@@ -127,6 +128,9 @@ export default {
     computed: {
         hasEditElement() {
             return !!this.$store.state.editElement
+        },
+        isHTMLElement() {
+            return isHTMLTag(this.dataModel.tagName)
         }
     },
     watch: {
