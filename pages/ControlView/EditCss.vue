@@ -1,11 +1,6 @@
 <template lang="tea">
 section.gfys {
     div.g9rt {
-        MobileInput {
-            ?: coord
-            :coord: coord 
-            @finish: handleFinishInput
-        }
         div.vlw7.canvas {
             CssNode {
                 %: cssTree
@@ -21,19 +16,16 @@ import Leaf from '@openrotary/leafjs'
 import CssNode from './CssNode'
 import bus from '@/utils/eventBus'
 import { createCssSelect } from '@/utils/comput'
-import MobileInput from '@/components/MobileInput'
 
 let leaf = new Leaf()
 export default {
     name: 'EditCss',
     data: () => ({
         cssList: null,
-        cssTree: [],
-        coord: null
+        cssTree: []
     }),
     components: {
-        CssNode,
-        MobileInput
+        CssNode
     },
     mounted() {
         bus.$on('append-css-node', (mid, n) => {

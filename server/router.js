@@ -1,5 +1,6 @@
 const Router = require('koa-router')
 const router = new Router()
+const version = require('../package.json')
 const { readDirSync, getFileContent, createFile, rewriteFile, deleteFile } = require('./utils')
 
 const _path = process.cwd()

@@ -2,6 +2,7 @@
 const fs = require('fs')
 const prettier = require('prettier')
 const Leaf = require('@openrotary/leafjs')
+const stylusFormat = require('stylus-supremacy')
 // const consola = require('consola')
 
 function readDirSync(path) {
@@ -101,10 +102,15 @@ const rewriteFile = (path, data) => {
     // 生成html
     const DOM = Leaf.tree2DOM(treeData)
     // 生成css
-    // const CSS = Leaf.tree2CSS(treeData)
+    // const CSS = Leaf.tree2CSS(treeData).replace(/(\S+)\s{\s+}/gm, '')
+    const CSS = Leaf.tree2CSS(treeData)
     const htmlCode = `<template> ${DOM} </template>`
     const jsCode = jsContent && jsContent.length ? jsContent[0] : `<script></script>`
-    const cssCode = `<style lang="stylus" scoped> </style>`
+    const cssCode = `<style lang="stylus" scoped> ${stylusFormat.format(CSS, {
+        insertColons: true,
+        insertSemicolons: true,
+        insertBraces: true
+    })} </style>`
     const formatConfig = { semi: false, tabWidth: 4, parser: 'vue' }
     fs.writeFile(vuePath, prettier.format(htmlCode + jsCode + cssCode, formatConfig), 'utf8', err => {
         err && console.log('重写.vue文件失败：', err)
