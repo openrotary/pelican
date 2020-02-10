@@ -17,6 +17,8 @@ $ yarn global add @openrotary/pelican
 
 ## 升级
 
+近期 Pelican 需要频繁迭代，因此在这里附上升级方式。
+
 ```bash
 # upgrade
 $ yarn global upgrade @openrotary/pelican

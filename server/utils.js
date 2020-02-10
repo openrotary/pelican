@@ -86,16 +86,22 @@ const rewriteFile = (path, data) => {
     fs.writeFile(`${path}`, data, 'utf8', err => {
         err && console.log('重写.ican文件失败：', err)
     })
+    const vuePath = path.replace(/\.ican/, '.vue')
+    const content = fs.readFileSync(vuePath, { encoding: 'utf-8' }, err => {
+        err && console.log('报错：', err)
+    })
+    const jsContent = content.match(/(?<=<\/template>)[\s\S]+?(?=<style)/)
     // 再写一次.vue文件
-    const vue = path.replace(/\.ican/, '.vue')
     const treeData = Leaf.data2tree(JSON.parse(data))
     // 生成html
     const DOM = Leaf.tree2DOM(treeData)
     // 生成css
     // const CSS = Leaf.tree2CSS(treeData)
-    const code = `<template> ${DOM} </template>`
+    const htmlCode = `<template> ${DOM} </template>`
+    const jsCode = jsContent && jsContent.length ? jsContent[0] : `<script></script>`
+    const cssCode = `<style lang="stylus" scoped> </style>`
     const formatConfig = { semi: false, tabWidth: 4, parser: 'vue' }
-    fs.writeFile(`${vue}`, prettier.format(code, formatConfig), 'utf8', err => {
+    fs.writeFile(`${vuePath}`, prettier.format(htmlCode + jsCode + cssCode, formatConfig), 'utf8', err => {
         err && console.log('重写.vue文件失败：', err)
     })
 }

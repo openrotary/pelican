@@ -78,6 +78,9 @@ const makeMap = string => {
 }
 
 const isSingleTag = makeMap('area,base,br,col,embed,frame,hr,img,input,isindex,keygen,link,meta,param,source,track,wbr')
+const isHTMLTag = makeMap(
+    `html,body,base,head,link,meta,style,title,address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,rtc,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,menuitem,summary,content,element,shadow,template,blockquote,iframe,tfoot`
+)
 export default {
     name: 'EditPage',
     components: {
@@ -99,6 +102,15 @@ export default {
                 data.content = ''
             } else {
                 data.isSingle = false
+            }
+            console.log('data.name', data.name)
+            if (!isHTMLTag(data.tagName)) {
+                // 不是html原生标签，清空class属性
+                data.class = []
+            } else {
+                // 是html原生标签, 如果需要，给默认class
+                !data.class.length && (data.class = [data._mid.slice(-5)])
+                console.log(data.class)
             }
             // 将信息保存到对应的位置
             bus.$emit('update-element', data._mid, data)
