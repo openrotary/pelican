@@ -1,6 +1,6 @@
 {
     "name": "@openrotary/pelican",
-    "version": "1.1.4",
+    "version": "1.1.5",
     "description": "My riveting Nuxt.js project",
     "author": "",
     "bin": {
@@ -36,6 +36,7 @@
         "rxjs": "^6.5.3",
         "stylus": "^0.54.7",
         "stylus-loader": "^3.0.2",
+        "stylus-supremacy": "^2.14.0",
         "tea-loader": "^0.2.14",
         "vue-rx": "^6.2.0",
         "vuesax": "^3.11.1"
