@@ -54,6 +54,7 @@ export default {
     }
 
     button {
+        flex-shrink: 0;
         width: 40px;
         margin-left: 10px;
         color: #fff;

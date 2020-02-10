@@ -59,6 +59,11 @@ const createFile = (path, name, type) => {
     fs.writeFile(`${path}/${name}.${type}`, JSON.stringify([]), 'utf8', err => {
         err && console.log('创建文件失败：', err)
     })
+    if (type === 'ican') {
+        fs.writeFile(`${path}/${name}.vue`, '', 'utf8', err => {
+            err && console.log('创建文件失败：', err)
+        })
+    }
 }
 const deleteFile = path => {
     if (!fs.statSync(path).isDirectory()) {
@@ -83,7 +88,7 @@ const deleteFile = path => {
 }
 
 const rewriteFile = (path, data) => {
-    fs.writeFile(`${path}`, data, 'utf8', err => {
+    fs.writeFile(path, data, 'utf8', err => {
         err && console.log('重写.ican文件失败：', err)
     })
     const vuePath = path.replace(/\.ican/, '.vue')
@@ -101,7 +106,7 @@ const rewriteFile = (path, data) => {
     const jsCode = jsContent && jsContent.length ? jsContent[0] : `<script></script>`
     const cssCode = `<style lang="stylus" scoped> </style>`
     const formatConfig = { semi: false, tabWidth: 4, parser: 'vue' }
-    fs.writeFile(`${vuePath}`, prettier.format(htmlCode + jsCode + cssCode, formatConfig), 'utf8', err => {
+    fs.writeFile(vuePath, prettier.format(htmlCode + jsCode + cssCode, formatConfig), 'utf8', err => {
         err && console.log('重写.vue文件失败：', err)
     })
 }

@@ -1,29 +1,29 @@
 <template lang="tea">
-  ul {
-      :class: ['css-node', {'isRoot': !treeData._pid}]
-      li.block {
-          div.content {
-            span {
-                :class: ['select-name', {isActive}]
-                @dblclick: handleDBClick
-                ~~{{ treeData.select }}
+    ul {
+        :class: ['css-node', {'isRoot': !treeData._pid}]
+        li.block {
+            div.content {
+                span {
+                    :class: ['select-name', {isActive}]
+                    @dblclick: handleDBClick
+                    ~~{{ treeData.select }}
+                }
+                span.add-icon.child {
+                    @click: handleAddNode(2)
+                }
             }
-            span.add-icon.child {
-                @click: handleAddNode(2)
+            span.add-icon.borther {
+                ?: isLast
+                @click: handleAddNode(3)
             }
-          }
-          span.add-icon.borther {
-              ?: isLast
-              @click: handleAddNode(3)
-          }
-      }
-      CssNode {
-          v-if: hasChildren
-          %: treeData.children
-          :isLast: (treeData.children.length - 1) === $_i
-          :treeData: $it
-      }
-  }
+        }
+        CssNode {
+            v-if: hasChildren
+            %: treeData.children
+            :isLast: (treeData.children.length - 1) === $_i
+            :treeData: $it
+        }
+    }
 </template>
 <script>
 import bus from '@/utils/eventBus'

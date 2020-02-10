@@ -104,7 +104,6 @@ export default {
             } else {
                 data.isSingle = false
             }
-            console.log('data.name', data.name)
             if (!isHTMLTag(data.tagName)) {
                 // 不是html原生标签，清空class属性
                 data.class = []
