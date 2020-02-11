@@ -16,31 +16,15 @@
 
 <script>
 import bus from '@/utils/eventBus'
+const DBtag = ['section', 'div', 'header', 'footer', 'button', 'ul', 'li', 'span', 'nav', 'i']
+const singleTag = ['image', 'input']
+const cardList = DBtag.map(tagName => ({ tagName, isSingle: false })).concat(
+    singleTag.map(tagName => ({ tagName, isSingle: true }))
+)
 export default {
     name: 'NewCard',
     data: () => ({
-        cardList: [
-            {
-                tagName: 'section',
-                isSingle: false
-            },
-            {
-                tagName: 'div',
-                isSingle: false
-            },
-            {
-                tagName: 'span',
-                isSingle: false
-            },
-            {
-                tagName: 'i',
-                isSingle: false
-            },
-            {
-                tagName: 'input',
-                isSingle: true
-            }
-        ]
+        cardList
     }),
     mounted() {
         // bus.$on('mouse-coord', ({ x, y }) => {
@@ -64,48 +48,48 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .new-card {
-        .ele-card {
-            background: rgba(255, 255, 255, 0.7);
-            width: 250px;
-            height: 70px;
-            border-radius: 2px;
-            cursor: move;
+.new-card {
+    .ele-card {
+        background: rgba(255, 255, 255, 0.7);
+        width: 250px;
+        height: 70px;
+        border-radius: 2px;
+        cursor: move;
+        display: flex;
+        padding: 0 20px;
+        margin: 10px 0;
+
+        .code {
             display: flex;
-            padding: 0 20px;
-            margin: 10px 0;
-
-            .code {
-                display: flex;
-                align-items: center;
-                font-size: 30px;
-            }
-
-            .ele {
-                flex: 1;
-                display: flex;
-                align-items: center;
-
-                .title {
-                    display: flex;
-                    padding: 0 20px;
-                    height: 40px;
-                    font-size: 22px;
-                    align-items: center;
-                }
-            }
+            align-items: center;
+            font-size: 30px;
         }
 
-        .ele-card {
-            transition: 0.3s all ease;
-            box-shadow: 0 0 10px rgba(85, 41, 91, 0.2);
+        .ele {
+            flex: 1;
+            display: flex;
+            align-items: center;
 
-            // &.active {
-            // background: rgba(85, 41, 91, 0.1);
-            // }
-            &:hover {
-                box-shadow: 0 0 10px rgba(85, 41, 91, 0.4);
+            .title {
+                display: flex;
+                padding: 0 20px;
+                height: 40px;
+                font-size: 22px;
+                align-items: center;
             }
         }
     }
+
+    .ele-card {
+        transition: 0.3s all ease;
+        box-shadow: 0 0 10px rgba(85, 41, 91, 0.2);
+
+        // &.active {
+        // background: rgba(85, 41, 91, 0.1);
+        // }
+        &:hover {
+            box-shadow: 0 0 10px rgba(85, 41, 91, 0.4);
+        }
+    }
+}
 </style>

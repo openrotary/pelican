@@ -24,7 +24,7 @@ export default {
         }
     },
     data: () => ({
-        name: `myIcan-${Date.now()}`
+        name: `myIcan-${String(Date.now()).slice(-4)}`
     }),
     mounted() {
         this.$refs.mobileInput.focus()

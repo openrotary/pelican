@@ -105,6 +105,10 @@ export default {
         },
         async handleFinishInput(name) {
             this.isInputShow = false
+            console.log('关闭')
+            if (!name) {
+                return
+            }
             const path = this.$store.state.activePath
             const { code, path: newPath } = await this.$axios.$post('/createFile', {
                 type: 'ican',
@@ -122,16 +126,16 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-    .tree {
-        width: 100%;
-        padding: 10px;
-        flex: 1;
-        overflow: auto;
-    }
+.tree {
+    width: 100%;
+    padding: 10px;
+    flex: 1;
+    overflow: auto;
+}
 
-    .code {
-        padding: 15px;
-        flex: 1;
-        overflow: auto;
-    }
+.code {
+    padding: 15px;
+    flex: 1;
+    overflow: auto;
+}
 </style>

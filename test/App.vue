@@ -1,8 +1,10 @@
 <template>
-    <section :class="['kcxhr']">
-        <span :class="['aocpw']"></span>
-        <div :class="['m7i84']"></div>
-        <div :class="['uwl5h']"></div>
+    <section :class="['8hveh']">
+        <header :class="['d90dl']">
+            <span :class="['xrjkd']">Title</span>
+        </header>
+        <div :class="['df9a8']"></div>
+        <footer :class="['qdjhw']"></footer>
     </section>
 </template>
 <script>
@@ -11,72 +13,31 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
- .kcxhr {
-	background-image: url();
-	background-position: center center;
-	background-size: 100% 100%;
-	background-repeat: no-repeat;
+ .8hveh {
 	display: flex;
-	position: absolute;
-	height: 1px;
-	background-color: #000;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
 
-	.yyyes {
-		background-image: url();
-		background-position: center center;
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
-		display: block;
-		position: absolute;
-		width: 1px;
-		background-color: #000;
-		height: 1px;
+	.d90dl {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
 
-		.newc {
+		.title {
 			display: flex;
 			align-items: center;
-			justify-content: center;
-
-			.newSelect {
-				display: block;
-
-				.newyo {
-					.newSelect {
-					}
-				}
-			}
+			flex-shrink: 0;
+			height: 100%;
 		}
 	}
 
-	.aocpw {
-		background-image: url();
-		background-position: center center;
-		background-size: 100% 100%;
-		background-repeat: no-repeat;
-
-		.newSelect {
-		}
-	}
-
-	.yoo {
+	.df9a8 {
 		display: flex;
-		justify-content: center;
 	}
 
-	.m7i84 {
-		.fghjklsssss {
-			background-image: url();
-			background-position: center center;
-			background-size: 100% 100%;
-			background-repeat: no-repeat;
-		}
-	}
-
-	.uwl5h {
-		.kitty {
-		}
+	.qdjhw {
 	}
 }
 </style>

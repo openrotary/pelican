@@ -94,6 +94,8 @@ export default {
         handleClose() {
             this.handleBlur()
             this.$store.commit('setEditElement', null)
+            this.$store.commit('setSelectCssMid', null)
+            bus.$emit('change-css', null)
         },
         handleBlur() {
             // 清空缓存中的信息

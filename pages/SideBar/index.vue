@@ -12,19 +12,14 @@
                 ~~元素
             }
         }
-        Direction {
-            |: active === 1
-        }
-        NewCard {
-            |: active === 2
-        }
         ul.radio {
+            |: active === 2
             li {
                 VsRadio {
                     v-model: treeType
                     vs-name: wokao
                     vs-value: 1
-                    ~~葡萄藤
+                    ~~树状
                 }
             }
             li {
@@ -32,9 +27,15 @@
                     v-model: treeType
                     vs-name: wokao
                     vs-value: 2
-                    ~~折鹤兰
+                    ~~瀑布
                 }
             }
+        }
+        Direction {
+            |: active === 1
+        }
+        NewCard {
+            |: active === 2
         }
     }
 </template>
@@ -102,7 +103,7 @@ export default {
     border-right: 1px solid rgba(85, 41, 91, 0.2);
 
     .radio {
-        margin-top: 50px;
+        margin: 25px;
         display: flex;
         justify-content: space-around;
         width: 100%;

@@ -39,6 +39,8 @@ export default {
         bus.$on('append-css-node', (mid, n) => {
             const data = createCssSelect('.newSelect')
             leaf.appendNode(mid, n, data)
+            const cssMid = leaf.getActiveMid()
+            this.$store.commit('setSelectCssMid', cssMid)
         })
         bus.$on('select-css-node', mid => {
             this.$store.commit('setSelectCssMid', mid)

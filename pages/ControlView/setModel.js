@@ -155,7 +155,10 @@ const layoutModel = () => [
     { key: 'color', range: [] },
     { key: 'border', range: [] },
     { key: 'border-radius', range: [] },
-    { key: 'flex-shrink', range: [] }
+    { key: 'box-shadow', range: [] },
+    { key: 'flex-shrink', range: [] },
+    { key: 'flex', range: [] },
+    { key: 'z-index', range: [] }
 ]
 
 export { layoutModel, quickLayout, getCodeByCode }
