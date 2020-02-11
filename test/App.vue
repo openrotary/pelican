@@ -40,6 +40,8 @@ export default {
 			justify-content: center;
 
 			.newSelect {
+				display: block;
+
 				.newyo {
 					.newSelect {
 					}

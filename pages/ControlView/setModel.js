@@ -4,17 +4,20 @@ const getCodeByCode = code => {
             return {
                 display: 'flex',
                 'align-items': 'center',
-                'justify-content': 'center'
+                'justify-content': 'center',
+                'flex-shrink': 0
             }
         case 12:
             return {
                 display: 'flex',
-                'align-items': 'center'
+                'align-items': 'center',
+                'flex-shrink': 0
             }
         case 13:
             return {
                 display: 'flex',
-                'justify-content': 'center'
+                'justify-content': 'center',
+                'flex-shrink': 0
             }
         case 21:
             return {
@@ -117,6 +120,11 @@ const layoutModel = () => [
         key: 'justify-content',
         range: ['center', 'space-around', 'space-between', 'flex-start', 'flex-end']
     },
+    {
+        key: 'overflow',
+        range: ['auto', 'hidden']
+    },
+    { key: 'box-sizing', range: ['border-box'] },
     { key: 'background-repeat', range: ['repeat', 'no-repeat'] },
     { key: 'background-color', range: [] },
     { key: 'background-image', range: [] },
@@ -146,7 +154,8 @@ const layoutModel = () => [
     { key: 'font-size', range: [] },
     { key: 'color', range: [] },
     { key: 'border', range: [] },
-    { key: 'border-radius', range: [] }
+    { key: 'border-radius', range: [] },
+    { key: 'flex-shrink', range: [] }
 ]
 
 export { layoutModel, quickLayout, getCodeByCode }

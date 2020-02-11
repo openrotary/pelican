@@ -29,6 +29,9 @@ section.layout-model {
             %: layoutList
             :key: $_i + 'layout'
             div.key-value {
+                i.delete {
+                    @dblclick: handleDelete($it.key)
+                }
                 span.key {
                     ~~{{ $it.key }}
                 }
@@ -52,20 +55,11 @@ section.layout-model {
             }
         }
     }
-    section.show-code {
-        ?: cssSelect
-        span {
-            ~~css代码
-        }
-        span {
-            %: cssSelect.cssom
-            ~~{{$_i}}: {{$it}}
-        }
-    }
 }
 </template>
 <script>
 import { quickLayout, layoutModel, getCodeByCode } from './setModel'
+import bus from '@/utils/eventBus'
 const quickList = quickLayout()
 const layoutList = layoutModel()
 export default {
@@ -89,7 +83,7 @@ export default {
             const data = this.cssSelect
             // 过滤掉所有css值为null的属性
             for (const key in data.cssom) {
-                if (!data.cssom[key]) {
+                if (data.cssom[key] == null) {
                     console.log(`Delete ${key}`)
                     delete data.cssom[key]
                 }
@@ -97,6 +91,7 @@ export default {
             const css = element.css.map(item => (item._mid === data._mid ? data : item))
             element.css = css
             this.$store.commit('setEditElement', JSON.parse(JSON.stringify(element)))
+            bus.$emit('change-css', data)
         },
         handleClick(key, value) {
             const data = Object.assign({}, this.cssSelect)
@@ -113,6 +108,10 @@ export default {
             }
             this.cssSelect = data
             this.handleEditFinish()
+        },
+        handleDelete(key) {
+            this.cssSelect.cssom[key] = null
+            this.handleEditFinish()
         }
     },
     watch: {
@@ -127,6 +126,7 @@ export default {
                 }
                 const [cssSelect] = element.css.filter(item => item._mid === value)
                 this.cssSelect = cssSelect
+                bus.$emit('change-css', cssSelect)
             }
         }
     }
@@ -143,6 +143,7 @@ export default {
         height: 30px;
         width: 100%;
         margin-bottom: 10px;
+        font-size: 14px;
 
         span {
             width: 100px;
@@ -165,6 +166,10 @@ export default {
 
         .quick-layout {
             margin-bottom: 10px;
+
+            nav {
+                font-size: 14px;
+            }
         }
 
         .normal {
@@ -177,6 +182,18 @@ export default {
             height: 25px;
             user-select: none;
 
+            .delete {
+                cursor: pointer;
+                display: flex;
+                width: 20px;
+                height: 20px;
+                background-image: url('../../assets/icon-delete.svg');
+                background-position: center center;
+                background-size: 90% 90%;
+                background-repeat: no-repeat;
+                transform: translateX(-6px);
+            }
+
             .key {
                 color: rgba(85, 41, 91, 1);
                 flex: 1;
@@ -188,9 +205,8 @@ export default {
                 padding: 0 8px;
                 height: 20px;
                 align-items: center;
-                border-radius: 4px;
-                background: rgba(85, 41, 91, 1);
-                color: #fff;
+                border-bottom: 1px solid rgba(85, 41, 91, 0.5);
+                color: rgba(85, 41, 91, 1);
                 box-sizing: border-box;
             }
 
@@ -199,9 +215,8 @@ export default {
                 height: 20px;
                 padding: 0 8px;
                 font-size: 15px;
-                background: rgba(85, 41, 91, 0.15);
                 border: none;
-                border-bottom: 1px solid rgba(85, 41, 91, 1);
+                border-bottom: 1px solid rgba(85, 41, 91, 0.5);
             }
         }
 

@@ -8,6 +8,13 @@ section.gfys {
                 :isLast: (cssTree.length - 1) === $_i
             }
         }
+        section.show-code {
+            ?: cssSelect
+            span {
+                %: cssSelect.cssom
+                ~~{{$_i}}: {{$it}}
+            }
+        }
     }
 }
 </template>
@@ -22,7 +29,8 @@ export default {
     name: 'EditCss',
     data: () => ({
         cssList: null,
-        cssTree: []
+        cssTree: [],
+        cssSelect: null
     }),
     components: {
         CssNode
@@ -34,6 +42,9 @@ export default {
         })
         bus.$on('select-css-node', mid => {
             this.$store.commit('setSelectCssMid', mid)
+        })
+        bus.$on('change-css', data => {
+            this.cssSelect = data
         })
         this.leafListener()
     },
@@ -91,6 +102,22 @@ export default {
         width: 100%;
         height: 100%;
         overflow: auto;
+        position: relative;
+
+        .show-code {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            background: rgba(85, 41, 91, 0.7);
+            color: #fff;
+            line-height: 1.2;
+            padding: 15px;
+            width: 400px;
+            height: 600px;
+            border-radius: 4px;
+        }
     }
 }
 </style>
