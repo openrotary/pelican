@@ -48,6 +48,13 @@
 </template>
 
 <script>
+const ins = new Map()
+    .set('%', 'v-for')
+    .set('?', 'v-if')
+    .set('/', 'v-else')
+    .set('/?', 'v-else-if')
+    .set('|', 'v-show')
+const replaceKey = value => ins.get(value) || value
 export default {
     name: 'EditStack',
     props: {
@@ -67,23 +74,39 @@ export default {
     methods: {
         handleAdd() {
             let value = ''
-            if (!this.newValue.trim()) {
-                return
-            }
+            const arr = this.list.concat()
             if (this.mode === 1) {
-                value = this.newValue.trim()
-            } else {
-                value = {
-                    [this.newKey ? this.newKey : '@click']: this.newValue
+                if (!this.newValue.trim()) {
+                    return
                 }
-            }
-            if (!value) {
+                value = this.newValue.trim()
+                arr.push(value)
+                this.$emit('change', arr)
                 this.newKey = this.newValue = ''
                 return
             }
-            const arr = this.list.concat()
-            arr.push(value)
-            this.$emit('change', arr)
+            const attrObj = {}
+            arr.forEach(item => {
+                const [key] = Object.keys(item)
+                const [value] = Object.values(item)
+                attrObj[key] = value
+            })
+            let _key = this.newKey !== '' ? replaceKey(this.newKey) : '@click'
+            let _value = this.newValue.trim() || null
+            // if key is v-for
+            if (_key === 'v-for') {
+                !~_value.indexOf('in') && (_value = `($it, $_i) in ${_value}`)
+                if (!attrObj[':key']) {
+                    const res = _value.match(/(?<=\s)[\S]+?(?=\))/)
+                    attrObj[':key'] = res[0]
+                }
+            }
+            attrObj[_key] = _value
+            const newArr = []
+            for (const key in attrObj) {
+                newArr.push({ [key]: attrObj[key] })
+            }
+            this.$emit('change', newArr)
             this.newKey = this.newValue = ''
         },
         handleOrder(i, n) {
@@ -103,7 +126,7 @@ export default {
         formatAttr(value) {
             if (typeof value === 'object') {
                 const [data] = Object.entries(value)
-                return `${data[0]}="${data[1]}"`
+                return data[1] == null ? `${data[0]}` : `${data[0]}="${data[1]}"`
             }
             return value
         }

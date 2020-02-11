@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { createCssom } from '@/utils/comput'
+import { createCssom, num2ABC } from '@/utils/comput'
 import bus from '@/utils/eventBus.js'
 import RenderCard from './RenderCard'
 import Leaf from '@openrotary/leafjs'
@@ -55,7 +55,7 @@ export default {
             // 从缓存中获取元素，插入到由引擎插入到合适的位置
             const card = this.$store.state.moveElement
             leaf.appendNode(mid, n, card, data => ({
-                class: [data._mid.slice(-5)],
+                class: [num2ABC(data._mid.slice(-5))],
                 attr: [],
                 css: [createCssom(data._mid)],
                 ...data
@@ -144,7 +144,7 @@ export default {
             // 插入数据
             leaf.appendRootNode(moveElement, data => {
                 return {
-                    class: [data._mid.slice(-5)],
+                    class: [num2ABC(data._mid.slice(-5))],
                     attr: [],
                     css: [createCssom(data._mid)],
                     ...data

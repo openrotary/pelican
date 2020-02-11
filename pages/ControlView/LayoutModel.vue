@@ -135,6 +135,7 @@ export default {
 <style lang="stylus" scoped>
 .layout-model {
     width: 400px;
+    overflow: auto;
     padding: 15px;
 
     .select {

@@ -1044,9 +1044,9 @@
     stack-trace "0.0.10"
 
 "@openrotary/leafjs@^1.0.0":
-  version "1.0.8"
-  resolved "https://registry.npmjs.org/@openrotary/leafjs/-/leafjs-1.0.8.tgz#96dc486b633f778e6b4b65256cf3d46ca8a5a08a"
-  integrity sha512-01ixmc+TO+3nhFbJBqrtzbp2NUisspjHPUHPd4o6mXqAU/XhW/qoOoj3hCJlEyA0JLZeppE0pRI6QTzkeTEOjA==
+  version "1.0.10"
+  resolved "https://registry.npmjs.org/@openrotary/leafjs/-/leafjs-1.0.10.tgz#256a238362a679b9b8b25ea09df5d43fcb61fd65"
+  integrity sha512-Bd/7xJluvYTBNx1m1aNB2cd8GFI4AIYfyh5ZHMJAibRUwlzawOxuvl0tBZZsrKchjwJfJt8V4GTE62hPO5afRg==
   dependencies:
     cuid "^2.1.8"
 

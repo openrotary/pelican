@@ -4,6 +4,10 @@ section {
     i.close {
         @click: handleClose
     }
+    i.modal {
+        ?: hasEditElement
+        @click: handleClose
+    }
     ul.attr {
         ?: hasEditElement
         li.inline {
@@ -111,7 +115,7 @@ export default {
                 data.class = []
             } else {
                 // 是html原生标签, 如果需要，给默认class
-                !data.class.length && (data.class = [data._mid.slice(-5)])
+                !data.class.length && (data.class = [num2ABC(data._mid.slice(-5))])
                 console.log(data.class)
             }
             // 将信息保存到对应的位置
@@ -122,6 +126,7 @@ export default {
             this.handleBlur()
         },
         handleUpdateAttr(data) {
+            console.log(data)
             this.dataModel.attr = data
             this.handleBlur()
         }

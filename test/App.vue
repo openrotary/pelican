@@ -1,10 +1,23 @@
 <template>
-    <section :class="['8hveh']">
-        <header :class="['d90dl']">
-            <span :class="['xrjkd']">Title</span>
-        </header>
-        <div :class="['df9a8']"></div>
-        <footer :class="['qdjhw']"></footer>
+    <section
+        :class="['qbbkc', op, $op]"
+        @click="handleClick"
+        v-else
+        v-for="($it, $_i) in list"
+        :key="index"
+    >
+        <div :class="['cbsrm']">
+            <div :class="['ehdhz']"></div>
+            <header :class="['ebmjk']"></header>
+        </div>
+        <div :class="['eoeob']" :key="$_i" v-for="($it, $_i) in list">
+            <header :class="['gfdkj']"></header>
+        </div>
+        <button :class="['zhxns']">
+            <li :class="['nulvx']"></li>
+            <span :class="['bbpoi']"></span>
+        </button>
+        <footer :class="['vpzci']"></footer>
     </section>
 </template>
 <script>
@@ -13,31 +26,29 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
- .8hveh {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-shrink: 0;
+ .qbbkc {
+	.cbsrm {
+		.ehdhz {
+		}
 
-	.d90dl {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-shrink: 0;
-
-		.title {
-			display: flex;
-			align-items: center;
-			flex-shrink: 0;
-			height: 100%;
+		.ebmjk {
 		}
 	}
 
-	.df9a8 {
-		display: flex;
+	.eoeob {
+		.gfdkj {
+		}
 	}
 
-	.qdjhw {
+	.zhxns {
+		.nulvx {
+		}
+
+		.bbpoi {
+		}
+	}
+
+	.vpzci {
 	}
 }
 </style>
