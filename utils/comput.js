@@ -7,7 +7,7 @@ const createCssom = mid => ({
     cssom: {}
 })
 
-const createCssSelect = select => ({
+const createCssSelectNode = select => ({
     select,
     isSingle: false,
     cssom: {}
@@ -30,4 +30,23 @@ const num2ABC = string =>
         .map(n => hash.get(n) || n)
         .join('')
 
-export { createCssom, createCssSelect, num2ABC }
+const cssom2List = styleObj => {
+    const byRange = []
+    const byValue = []
+    for (const key in styleObj) {
+        if (styleObj[key]) {
+            byRange.push({
+                key,
+                range: styleObj[key]
+            })
+            continue
+        }
+        byValue.push({
+            key,
+            range: null
+        })
+    }
+    return byRange.concat(byValue)
+}
+
+export { createCssom, createCssSelectNode, num2ABC, cssom2List }

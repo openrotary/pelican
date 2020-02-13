@@ -25,6 +25,14 @@ section.layout-model {
                 ~~{{ it.label }}
             }
         }
+        li.new-style {
+            input {
+                placeholder: 添加新样式，格式随意
+                v-model: newStyle
+                @keyup.enter: handleBlur
+                @blur: handleBlur
+            }
+        }
         li.normal {
             %: layoutList
             :key: $_i + 'layout'
@@ -36,13 +44,14 @@ section.layout-model {
                     ~~{{ $it.key }}
                 }
                 span.value {
-                    ?: $it.range.length
+                    ?: $it.range
                     ~~{{ cssSelect.cssom && cssSelect.cssom[$it.key] ? cssSelect.cssom[$it.key] : '' }}
                 }
                 input.input-value {
                     /
                     type: text
                     @blur: handleEditFinish
+                    @keyup.enter: handleEditFinish
                     v-model: cssSelect.cssom[$it.key]
                 }
             }
@@ -58,16 +67,17 @@ section.layout-model {
 }
 </template>
 <script>
-import { quickLayout, layoutModel, getCodeByCode } from './setModel'
+import { quickLayout, getLayoutModel, getCodeByCode } from './setModel'
+import { cssom2List } from '@/utils/comput'
 import bus from '@/utils/eventBus'
 const quickList = quickLayout()
-const layoutList = layoutModel()
 export default {
     name: 'LayoutModel',
     data: () => ({
         cssSelect: [],
         quickList,
-        layoutList
+        layoutList: [],
+        newStyle: ''
     }),
     computed: {
         hasActiveCssSelect() {
@@ -75,23 +85,30 @@ export default {
         }
     },
     methods: {
+        initLayoutList(cssSelect) {
+            const cssom = JSON.parse(JSON.stringify(cssSelect.cssom)),
+                layout = getLayoutModel(),
+                styleObj = {}
+            for (const key in cssom) {
+                styleObj[key] = layout[key] ? layout[key].range : null
+            }
+            return cssom2List(styleObj)
+        },
         handleEditFinish() {
             const element = JSON.parse(JSON.stringify(this.$store.state.editElement))
             if (!element) {
                 return
             }
             const data = this.cssSelect
-            // 过滤掉所有css值为null的属性
             for (const key in data.cssom) {
                 if (data.cssom[key] == null) {
-                    console.log(`Delete ${key}`)
-                    delete data.cssom[key]
+                    delete data.cssom[key] // 过滤掉所有css值为null的属性
                 }
             }
             const css = element.css.map(item => (item._mid === data._mid ? data : item))
             element.css = css
             this.$store.commit('setEditElement', JSON.parse(JSON.stringify(element)))
-            bus.$emit('change-css', data)
+            this.createDataLink(this.$store.state.selectCssMid)
         },
         handleClick(key, value) {
             const data = Object.assign({}, this.cssSelect)
@@ -100,7 +117,6 @@ export default {
             this.handleEditFinish()
         },
         handleQuickClick(code) {
-            console.log('code', code)
             const data = Object.assign({}, this.cssSelect)
             const _data = getCodeByCode(code)
             for (const key in _data) {
@@ -112,21 +128,39 @@ export default {
         handleDelete(key) {
             this.cssSelect.cssom[key] = null
             this.handleEditFinish()
+        },
+        handleBlur() {
+            const style = this.newStyle
+            if (!style.trim().match(/[:\s]/)) {
+                this.newStyle = ''
+                return
+            }
+            let res = style.indexOf(':')
+            let index = ~res ? res : style.indexOf(' ')
+            const key = style.slice(0, index).trim(),
+                value = style.slice(index + 1).trim()
+            this.newStyle = ''
+            this.handleClick(key, value) // 更新数据
+        },
+        createDataLink(selectCssMid) {
+            if (!selectCssMid) {
+                bus.$emit('change-css', null)
+                return
+            }
+            const element = JSON.parse(JSON.stringify(this.$store.state.editElement))
+            if (!element) {
+                return
+            }
+            const [cssSelect] = element.css.filter(item => item._mid === selectCssMid)
+            this.cssSelect = cssSelect
+            this.layoutList = this.initLayoutList(cssSelect) // 更新数据模型
+            bus.$emit('change-css', cssSelect)
         }
     },
     watch: {
         '$store.state.selectCssMid': {
             handler(value) {
-                if (!value) {
-                    return
-                }
-                const element = JSON.parse(JSON.stringify(this.$store.state.editElement))
-                if (!element) {
-                    return
-                }
-                const [cssSelect] = element.css.filter(item => item._mid === value)
-                this.cssSelect = cssSelect
-                bus.$emit('change-css', cssSelect)
+                this.createDataLink(value)
             }
         }
     }
@@ -157,6 +191,31 @@ export default {
             border: none;
             border-bottom: 1px solid rgba(85, 41, 91, 0.5);
             font-size: 16px;
+        }
+    }
+
+    .new-style {
+        font-size: 14px;
+        margin: 15px 0;
+        display: flex;
+        height: 30px;
+
+        input {
+            width: 100%;
+            height: 30px;
+            border: none;
+            font-size: 16px;
+            color: rgba(85, 41, 91, 0.9);
+            font-weight: bold;
+            padding: 0 10px;
+            border-bottom: 2px solid rgba(85, 41, 91, 0.5);
+
+            &::placeholder {
+                font-size: 16px;
+                font-weight: normal;
+                font-style: italic;
+                color: rgba(85, 41, 91, 0.7);
+            }
         }
     }
 

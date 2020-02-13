@@ -29,7 +29,7 @@ const getCodeByCode = code => {
         case 31:
             return {
                 display: 'block',
-                content: '',
+                content: `''`,
                 position: 'absolute',
                 left: 0,
                 right: 0,
@@ -40,7 +40,7 @@ const getCodeByCode = code => {
         case 32:
             return {
                 display: 'block',
-                content: '',
+                content: `''`,
                 position: 'absolute',
                 left: 0,
                 right: 0,
@@ -51,7 +51,7 @@ const getCodeByCode = code => {
         case 33:
             return {
                 display: 'block',
-                content: '',
+                content: `''`,
                 position: 'absolute',
                 left: 0,
                 top: 0,
@@ -62,7 +62,7 @@ const getCodeByCode = code => {
         case 34:
             return {
                 display: 'block',
-                content: '',
+                content: `''`,
                 position: 'absolute',
                 top: 0,
                 right: 0,
@@ -72,8 +72,17 @@ const getCodeByCode = code => {
             }
         case 41:
             return {
-                'list-style': none,
-                'font-style': normal
+                border: 'none'
+            }
+        case 42:
+            return {
+                'box-sizing': 'border-box',
+                border: '1px solid #000'
+            }
+        case 51:
+            return {
+                'list-style': 'none',
+                'font-style': 'normal'
             }
 
         default:
@@ -100,65 +109,77 @@ const quickLayout = () => [
             { code: 34, label: '右' }
         ]
     },
-    { key: '清除默认样式', range: [{ code: 41, label: 'ul、li、a、i、b元素' }] }
+    {
+        key: '边框',
+        range: [
+            { code: 41, label: '无边框' },
+            { code: 42, label: '全边框' }
+        ]
+    },
+    { key: '清除默认样式', range: [{ code: 51, label: 'ul、li、a、i、b元素' }] }
 ]
 
-const layoutModel = () => [
-    {
-        key: 'position',
+const getLayoutModel = () => ({
+    position: {
+        value: '',
         range: ['relative', 'absolute', 'fixed']
     },
-    {
-        key: 'display',
+    display: {
+        value: '',
         range: ['block', 'inline-block', 'flex', 'inline-flex', 'inline']
     },
-    {
-        key: 'align-items',
+    'align-items': {
+        value: '',
         range: ['center', 'flex-start', 'flex-end']
     },
-    {
-        key: 'justify-content',
+    'justify-content': {
+        value: '',
         range: ['center', 'space-around', 'space-between', 'flex-start', 'flex-end']
     },
-    {
-        key: 'overflow',
+    overflow: {
+        value: '',
         range: ['auto', 'hidden']
     },
-    { key: 'box-sizing', range: ['border-box'] },
-    { key: 'background-repeat', range: ['repeat', 'no-repeat'] },
-    { key: 'background-color', range: [] },
-    { key: 'background-image', range: [] },
-    { key: 'background-size', range: [] },
-    { key: 'background-position', range: [] },
-    { key: 'content', range: [] },
-    {
-        key: 'width',
-        range: []
-    },
-    {
-        key: 'height',
-        range: []
-    },
-    {
-        key: 'padding',
-        range: []
-    },
-    {
-        key: 'margin',
-        range: []
-    },
-    { key: 'left', range: [] },
-    { key: 'right', range: [] },
-    { key: 'top', range: [] },
-    { key: 'bottom', range: [] },
-    { key: 'font-size', range: [] },
-    { key: 'color', range: [] },
-    { key: 'border', range: [] },
-    { key: 'border-radius', range: [] },
-    { key: 'box-shadow', range: [] },
-    { key: 'flex-shrink', range: [] },
-    { key: 'flex', range: [] },
-    { key: 'z-index', range: [] }
-]
+    'box-sizing': { value: '', range: ['border-box'] },
+    'background-repeat': { value: '', range: ['repeat', 'no-repeat'] }
+})
 
-export { layoutModel, quickLayout, getCodeByCode }
+export { getLayoutModel, quickLayout, getCodeByCode }
+
+// { key: 'background-color', value: '', range: [] },
+// { key: 'background-image', value: '', range: [] },
+// { key: 'background-size', value: '', range: [] },
+// { key: 'background-position', value: '', range: [] },
+// { key: 'content', value: '', range: [] },
+// {
+//     key: 'width',
+//     value: '',
+//     range: []
+// },
+// {
+//     key: 'height',
+//     value: '',
+//     range: []
+// },
+// {
+//     key: 'padding',
+//     value: '',
+//     range: []
+// },
+// {
+//     key: 'margin',
+//     value: '',
+//     range: []
+// },
+// { key: 'left', value: '', range: [] },
+// { key: 'right', value: '', range: [] },
+// { key: 'top', value: '', range: [] },
+// { key: 'bottom', value: '', range: [] },
+// { key: 'font-size', value: '', range: [] },
+// { key: 'color', value: '', range: [] },
+// { key: 'border', value: '', range: [] },
+// { key: 'border-radius', value: '', range: [] },
+// { key: 'box-shadow', value: '', range: [] },
+// { key: 'flex-shrink', value: '', range: [] },
+// { key: 'flex', value: '', range: [] },
+// { key: 'z-index', value: '', range: [] }

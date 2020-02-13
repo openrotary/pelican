@@ -22,7 +22,7 @@ section.gfys {
 import Leaf from '@openrotary/leafjs'
 import CssNode from './CssNode'
 import bus from '@/utils/eventBus'
-import { createCssSelect } from '@/utils/comput'
+import { createCssSelectNode } from '@/utils/comput'
 
 let leaf = new Leaf()
 export default {
@@ -37,7 +37,7 @@ export default {
     },
     mounted() {
         bus.$on('append-css-node', (mid, n) => {
-            const data = createCssSelect('&.newSelect')
+            const data = createCssSelectNode('&.newSelect')
             leaf.appendNode(mid, n, data)
             const cssMid = leaf.getActiveMid()
             this.$store.commit('setSelectCssMid', cssMid)
@@ -72,7 +72,6 @@ export default {
                 this.setEditElemet(cssList)
             })
         },
-        handleFinishInput() {},
         setEditElemet(css) {
             const _data = this.$store.state.editElement
             if (!_data) {
@@ -96,7 +95,6 @@ export default {
                 this.leafListener()
                 this.cssList = leaf.getElementList()
                 this.cssTree = Leaf.data2tree(this.cssList)
-                console.log(this.cssList)
             }
         }
     }
