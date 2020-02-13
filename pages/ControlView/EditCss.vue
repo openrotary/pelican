@@ -37,7 +37,7 @@ export default {
     },
     mounted() {
         bus.$on('append-css-node', (mid, n) => {
-            const data = createCssSelect('.newSelect')
+            const data = createCssSelect('&.newSelect')
             leaf.appendNode(mid, n, data)
             const cssMid = leaf.getActiveMid()
             this.$store.commit('setSelectCssMid', cssMid)
@@ -47,6 +47,13 @@ export default {
         })
         bus.$on('change-css', data => {
             this.cssSelect = data
+        })
+        bus.$on('delete-css-node', mid => {
+            leaf.deleteNode(mid)
+            const activeCSSMid = this.$store.state.selectCssMid
+            if (activeCSSMid === mid) {
+                this.$store.commit('setSelectCssMid', null)
+            }
         })
         this.leafListener()
     },

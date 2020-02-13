@@ -34,10 +34,11 @@ function readDirSync(path) {
                 })
             }
         } else {
+            // 文件
             arr.push({
                 label: ele,
                 value: `${path}/${ele}`,
-                children: [],
+                children: null,
                 expand: true
             })
         }

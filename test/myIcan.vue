@@ -1,34 +1,24 @@
 <template>
-  <section :class="['tvt0e']">
-    <div :class="['hg0jk', com, you]"></div>
-    <div :class="['olpec', 'sss', 'ew', 'wde']" @click="handleCC">
-      <section :class="['3c6xe']" :disable="isDisable"></section>
-    </div>
-  </section>
+    <header :class="['jhlrp']">
+        <div :class="['gcmjg']"></div>
+        <header :class="['vbgma']"></header>
+        <div :class="['xwpbb']">
+            <button :class="['piywn']"></button>
+        </div>
+    </header>
 </template>
-<script>
-export default {
-    name: 'MyIcan'
-}
-</script>
+<script></script>
 <style lang="stylus" scoped>
-.cugb {
-    .c9plc {
-        .h7ff5 {
-        }
-    }
+ .jhlrp {
+	.gcmjg {
+	}
 
-    .q6qpd {
-        .c5yjr9 {
-        }
+	.vbgma {
+	}
 
-        .zuloesu {
-        }
-    }
-
-    .u2t86 {
-        .tgfbr {
-        }
-    }
+	.xwpbb {
+		.piywn {
+		}
+	}
 }
 </style>
