@@ -28,13 +28,10 @@
                 /
                 input {
                     v-model: newKey
-                    placeholder: @click
-                }
-                b {
-                    ~~=
+                    placeholder: key
                 }
                 input {
-                    placeholder: handleClick
+                    placeholder: value
                     @blur: handleAdd
                     v-model: newValue
                 }
@@ -142,11 +139,14 @@ export default {
 
     li {
         list-style: none;
-        height: 26px;
+        min-height: 26px;
         display: flex;
         align-items: center;
 
         &.add-li {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
             margin-top: 10px;
         }
 
@@ -195,11 +195,14 @@ export default {
 
         >input {
             flex: 1;
-            height: 28px;
+            height: 34px;
+            width: 100%;
             padding: 0 10px;
+            margin-bottom: 10px;
             font-size: 16px;
-            margin-right: 20px;
             color: #55295b;
+            border: none;
+            border-bottom: 1px solid rgba(85, 41, 91, 0.7);
 
             &::placeholder {
                 font-size: 12px;
@@ -210,18 +213,24 @@ export default {
 
         .key-value {
             display: flex;
+            flex-direction: column;
             align-items: center;
             font-size: 16px;
-            margin-right: 20px;
+            margin-bottom: 10px;
             flex: 1;
-            width: 1px;
+            width: 100%;
+            height: 60px;
 
             input {
-                height: 28px;
+                flex-shrink: 0;
+                height: 30px;
+                width: 100%;
+                display: flex;
                 padding: 0 10px;
-                width: 1px;
                 font-size: 16px;
                 color: #55295b;
+                border: none;
+                border-bottom: 1px solid rgba(85, 41, 91, 0.7);
 
                 &[placeholder] {
                     color: #55295b;
@@ -232,25 +241,12 @@ export default {
                     color: rgba(85, 41, 91, 0.3);
                     font-style: italic;
                 }
-
-                &:first-child {
-                    flex: 1;
-                }
-
-                &:last-child {
-                    flex: 2;
-                }
-            }
-
-            b {
-                display: inline-block;
-                margin: 0 4px;
             }
         }
 
         .add {
-            width: 60px;
-            height: 28px;
+            width: 100%;
+            height: 34px;
             background: #55295b;
             color: #fff;
             flex-shrink: 0;

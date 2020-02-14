@@ -229,6 +229,7 @@ export default {
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(85, 41, 91, 0.3);
         position: relative;
+        flex-shrink: 0;
         z-index: 1;
         transition: 0.3s all ease;
 

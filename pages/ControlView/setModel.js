@@ -4,23 +4,23 @@ const getCodeByCode = code => {
             return {
                 display: 'flex',
                 'align-items': 'center',
-                'justify-content': 'center',
-                'flex-shrink': 0
+                'justify-content': 'center'
             }
         case 12:
             return {
                 display: 'flex',
-                'align-items': 'center',
-                'flex-shrink': 0
+                'flex-direction': 'column',
+                'justify-content': 'space-between'
             }
         case 13:
             return {
                 display: 'flex',
-                'justify-content': 'center',
-                'flex-shrink': 0
+                'align-items': 'center',
+                'justify-content': 'space-between'
             }
         case 21:
             return {
+                'border-radius': '5px',
                 'background-image': 'url()',
                 'background-position': 'center center',
                 'background-size': '100% 100%',
@@ -77,12 +77,38 @@ const getCodeByCode = code => {
         case 42:
             return {
                 'box-sizing': 'border-box',
-                border: '1px solid #000'
+                border: '1px solid red'
             }
         case 51:
             return {
                 'list-style': 'none',
                 'font-style': 'normal'
+            }
+        case 52:
+            return {
+                overflow: 'hidden',
+                'text-overflow': 'ellipsis',
+                display: '-webkit-box',
+                '-webkit-line-clamp': 2,
+                '-webkit-box-orient': 'vertical'
+            }
+        case 53:
+            return {
+                display: 'flex',
+                'flex-direction': 'column'
+            }
+        case 54:
+            return {
+                'flex-shrink': 0
+            }
+        case 55:
+            return {
+                flex: 1
+            }
+        case 56:
+            return {
+                'font-size': '12px',
+                color: '#000'
             }
 
         default:
@@ -92,11 +118,11 @@ const getCodeByCode = code => {
 
 const quickLayout = () => [
     {
-        key: 'flex居中',
+        key: 'flex布局',
         range: [
             { code: 11, label: '完全居中' },
-            { code: 12, label: '上下居中' },
-            { code: 13, label: '左右居中' }
+            { code: 12, label: '上下靠边' },
+            { code: 13, label: '左右靠边' }
         ]
     },
     { key: '图片填充', range: [{ code: 21, label: '自适应' }] },
@@ -116,7 +142,17 @@ const quickLayout = () => [
             { code: 42, label: '全边框' }
         ]
     },
-    { key: '清除默认样式', range: [{ code: 51, label: 'ul、li、a、i、b元素' }] }
+    {
+        key: '其他常用',
+        range: [
+            { code: 51, label: '清除默认样式元素' },
+            { code: 52, label: '多行省略' },
+            { code: 53, label: 'Flex向下排列' },
+            { code: 54, label: '不被压缩' },
+            { code: 55, label: '尽量填充' },
+            { code: 56, label: '字体' }
+        ]
+    }
 ]
 
 const getLayoutModel = () => ({
@@ -126,7 +162,7 @@ const getLayoutModel = () => ({
     },
     display: {
         value: '',
-        range: ['block', 'inline-block', 'flex', 'inline-flex', 'inline']
+        range: ['block', 'inline-block', 'flex', 'inline-flex', 'box', 'inline']
     },
     'align-items': {
         value: '',
