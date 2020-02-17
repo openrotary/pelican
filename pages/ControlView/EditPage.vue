@@ -15,6 +15,7 @@ section {
                 ~~元素名
             }
             input {
+                @blur: handleUpdate
                 v-model: dataModel.tagName
             } 
         }
@@ -41,7 +42,8 @@ section {
                 ~~文本内容
             }
             input {
-                @blur: handleBlur
+                @blur: handleUpdate
+                @keyup: handleUpdate
                 v-model: dataModel.content
             } 
         }
@@ -66,7 +68,7 @@ section {
                 @change: handleUpdateAttr
             }   
         }
-        li {
+        li.block {
             span.title {
                 ~~功能模板
             }
@@ -77,6 +79,7 @@ section {
 <script>
 import bus from '@/utils/eventBus'
 import EditStack from '@/components/EditStack'
+import { num2ABC } from '@/utils/comput'
 const makeMap = string => {
     const list = string.split(',')
     return tag => list.includes(tag)
@@ -96,12 +99,12 @@ export default {
     }),
     methods: {
         handleClose() {
-            this.handleBlur()
+            this.handleUpdate()
             this.$store.commit('setEditElement', null)
             this.$store.commit('setSelectCssMid', null)
             bus.$emit('change-css', null)
         },
-        handleBlur() {
+        handleUpdate() {
             // 清空缓存中的信息
             const data = this.dataModel
             if (isSingleTag(data.tagName)) {
@@ -123,12 +126,12 @@ export default {
         },
         handleUpdateClass(data) {
             this.dataModel.class = data
-            this.handleBlur()
+            this.handleUpdate()
         },
         handleUpdateAttr(data) {
             console.log(data)
             this.dataModel.attr = data
-            this.handleBlur()
+            this.handleUpdate()
         }
     },
     computed: {
@@ -155,15 +158,15 @@ export default {
 <style lang="stylus" scoped>
 .edit-page {
     position: fixed;
-    transition: all 0.6s ease;
-    width: 400px;
+    transition: all 0.4s ease;
+    width: 500px;
     z-index: 2;
     border-radius: 10px;
     box-shadow: 0 0 10px #55295C;
     background: #fff;
     top: 100vh;
     bottom: 0;
-    right: 1150px;
+    right: 840px;
     padding: 40px 0;
     box-sizing: border-box;
 
@@ -177,6 +180,7 @@ export default {
             list-style-type: none;
 
             &.inline {
+                padding: 0 20px;
                 display: flex;
                 align-items: center;
                 height: 30px;
@@ -193,6 +197,7 @@ export default {
             }
 
             >input {
+                flex: 1;
                 display: block;
                 width: 240px;
                 height: 100%;
@@ -212,7 +217,6 @@ export default {
                 color: rgba(85, 41, 91, 0.8);
                 width: 120px;
                 height: 30px;
-                padding-left: 20px;
                 display: flex;
                 align-items: center;
                 font-size: 14px;

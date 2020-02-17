@@ -1,12 +1,3 @@
-const createCssom = mid => ({
-    _mid: mid,
-    _pid: null,
-    _index: 0,
-    isSingle: false,
-    select: `.${num2ABC(mid.slice(-5))}`,
-    cssom: {}
-})
-
 const createCssSelectNode = select => ({
     select,
     isSingle: false,
@@ -24,11 +15,21 @@ const hash = new Map()
     .set('7', 'h')
     .set('8', 'i')
     .set('9', 'j')
+
 const num2ABC = string =>
     string
         .split('')
         .map(n => hash.get(n) || n)
         .join('')
+
+const createCssom = mid => ({
+    _mid: mid,
+    _pid: null,
+    _index: 0,
+    isSingle: false,
+    select: `.${num2ABC(mid.slice(-5))}`,
+    cssom: {}
+})
 
 const cssom2List = styleObj => {
     const byRange = []

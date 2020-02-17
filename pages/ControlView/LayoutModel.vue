@@ -108,6 +108,7 @@ export default {
             const css = element.css.map(item => (item._mid === data._mid ? data : item))
             element.css = css
             this.$store.commit('setEditElement', JSON.parse(JSON.stringify(element)))
+            bus.$emit('update-element', element._mid, element)
             this.createDataLink(this.$store.state.selectCssMid)
         },
         handleClick(key, value) {

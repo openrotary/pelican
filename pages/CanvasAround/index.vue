@@ -84,8 +84,11 @@ export default {
         })
         bus.$on('update-element', (mid, element) => {
             leaf.updateElement(mid, element)
+            const editElement = this.$store.state.editElement
+            if (editElement && editElement._mid === element._mid) {
+                this.$store.commit('setEditElement', element)
+            }
             // const [el] = leaf.getElementList().filter(item => item._mid === mid)
-            // this.$store.commit('setEditElement', null)
         })
         bus.$on('init-canvas', data => {
             // 接收到画布的数据

@@ -89,6 +89,18 @@ const deleteFile = path => {
     }
 }
 
+const getJSCode = string => {
+    const startIndex = string.lastIndexOf('<script')
+    if (!~startIndex) {
+        return null
+    }
+    const endIndex = string.lastIndexOf('<style')
+    if (!~endIndex) {
+        return string.slice(startIndex)
+    }
+    return string.slice(0, endIndex).slice(startIndex)
+}
+
 const rewriteFile = (path, data) => {
     fs.writeFile(path, data, 'utf8', err => {
         err && console.log('重写.ican文件失败：', err)
@@ -97,7 +109,10 @@ const rewriteFile = (path, data) => {
     const content = fs.readFileSync(vuePath, { encoding: 'utf-8' }, err => {
         err && console.log('报错：', err)
     })
-    const jsContent = content.match(/(?<=<\/template>)[\s\S]+?(?=<style)/)
+    const jsContent = getJSCode(content)
+    if (!jsContent) {
+        console.log('提取js代码出错', content, jsContent)
+    }
     // 再写一次.vue文件
     const treeData = Leaf.data2tree(JSON.parse(data))
     // 生成html
@@ -106,14 +121,27 @@ const rewriteFile = (path, data) => {
     // const CSS = Leaf.tree2CSS(treeData).replace(/(\S+)\s{\s+}/gm, '')
     const CSS = Leaf.tree2CSS(treeData)
     const htmlCode = `<template> ${DOM} </template>`
-    const jsCode = jsContent && jsContent.length ? jsContent[0] : `<script></script>`
+    console.log('jsCode', htmlCode)
+    const jsCode = jsContent || `<script>export default {}</script>`
+    console.log('jsCode', jsCode)
     const cssCode = `<style lang="stylus" scoped> ${stylusFormat.format(CSS, {
         insertColons: true,
         insertSemicolons: true,
         insertBraces: true
     })} </style>`
     const formatConfig = { semi: false, tabWidth: 4, parser: 'vue' }
-    fs.writeFile(vuePath, prettier.format(htmlCode + jsCode + cssCode, formatConfig), 'utf8', err => {
+    let formatCode = ''
+    try {
+        formatCode =
+            prettier.format(htmlCode, formatConfig) +
+            prettier.format(jsCode, formatConfig) +
+            prettier.format(cssCode, formatConfig)
+    } catch (err) {
+        // 有可能是因为li标签嵌套了li标签
+        console.log(err)
+        return
+    }
+    fs.writeFile(vuePath, formatCode, 'utf8', err => {
         err && console.log('重写.vue文件失败：', err)
     })
 }

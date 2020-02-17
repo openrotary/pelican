@@ -1,6 +1,6 @@
 <template lang="tea">
 section.gfys {
-    div.g9rt {
+    div.grjrt {
         div.vlw7.canvas {
             CssNode {
                 %: cssTree
@@ -40,6 +40,7 @@ export default {
             const data = createCssSelectNode('&.newSelect')
             leaf.appendNode(mid, n, data)
             const cssMid = leaf.getActiveMid()
+            console.log('after', cssMid)
             this.$store.commit('setSelectCssMid', cssMid)
         })
         bus.$on('select-css-node', mid => {
@@ -85,16 +86,24 @@ export default {
     },
     watch: {
         '$store.state.editElement': {
-            handler(data) {
+            handler(data, oldData) {
                 if (!data) {
                     return
                 }
+
                 const { children, css, ..._data } = data
                 const cssList = JSON.parse(JSON.stringify(css))
                 leaf = new Leaf(cssList)
                 this.leafListener()
                 this.cssList = leaf.getElementList()
                 this.cssTree = Leaf.data2tree(this.cssList)
+                if (!oldData) {
+                    // 默认选中根css
+                    const cssMid = this.cssTree.length ? this.cssTree[0]._mid : null
+                    console.log('before', cssMid)
+                    this.$store.commit('setSelectCssMid', cssMid)
+                    return
+                }
             }
         }
     }
@@ -102,10 +111,10 @@ export default {
 </script>
 <style lang="stylus" scoped>
 .gfys {
-    width: 700px;
+    width: 400px;
     border-right: 2px solid #55295b;
 
-    .g9rt {
+    .grjrt {
         width: 100%;
         height: 100%;
         overflow: auto;
@@ -123,7 +132,6 @@ export default {
             padding: 15px;
             width: 400px;
             height: 600px;
-            border-radius: 4px;
         }
     }
 }

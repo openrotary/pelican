@@ -21,7 +21,7 @@
             input {
                 ?: mode === 1
                 placeholder: 变量或函数请以$符号开头
-                @blur: handleAdd
+                @keyup.enter: handleAdd
                 v-model: newValue
             }
             span.key-value {
@@ -32,7 +32,7 @@
                 }
                 input {
                     placeholder: value
-                    @blur: handleAdd
+                    @keyup.enter: handleAdd
                     v-model: newValue
                 }
             }

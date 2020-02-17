@@ -36,8 +36,8 @@ export default {
     box-shadow: 0 0 10px #55295C;
     background: #fff;
     display: flex;
-    // 延时半秒
-    transition: all 0.6s ease 0.5s;
+    // 延时0.1秒
+    transition: all 0.6s ease 0.1s;
 
     &.active {
         bottom: 15px;

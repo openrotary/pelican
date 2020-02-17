@@ -26,6 +26,10 @@ const getCodeByCode = code => {
                 'background-size': '100% 100%',
                 'background-repeat': 'no-repeat'
             }
+        case 21:
+            return {
+                'background-color': '#fff'
+            }
         case 31:
             return {
                 display: 'block',
@@ -110,6 +114,19 @@ const getCodeByCode = code => {
                 'font-size': '12px',
                 color: '#000'
             }
+        case 57:
+            return {
+                'background-color': '#233',
+                padding: '5px 5px',
+                'font-size': '15px',
+                color: '#fff',
+                display: 'inline-flex',
+                'align-items': 'center',
+                'justify-content': 'center',
+                width: '60px',
+                height: '30px',
+                'border-radius': '5px'
+            }
 
         default:
             break
@@ -125,7 +142,13 @@ const quickLayout = () => [
             { code: 13, label: '左右靠边' }
         ]
     },
-    { key: '图片填充', range: [{ code: 21, label: '自适应' }] },
+    {
+        key: '背景色/图',
+        range: [
+            { code: 21, label: '自适应' },
+            { code: 22, label: '背景色' }
+        ]
+    },
     {
         key: '伪类线条',
         range: [
@@ -150,7 +173,8 @@ const quickLayout = () => [
             { code: 53, label: 'Flex向下排列' },
             { code: 54, label: '不被压缩' },
             { code: 55, label: '尽量填充' },
-            { code: 56, label: '字体' }
+            { code: 56, label: '字体' },
+            { code: 57, label: '按钮' }
         ]
     }
 ]
