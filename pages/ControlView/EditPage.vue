@@ -43,7 +43,7 @@ section {
             }
             input {
                 @blur: handleUpdate
-                @keyup: handleUpdate
+                @keyup.enter: handleUpdate
                 v-model: dataModel.content
             } 
         }

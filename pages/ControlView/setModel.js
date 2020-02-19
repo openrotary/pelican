@@ -26,7 +26,7 @@ const getCodeByCode = code => {
                 'background-size': '100% 100%',
                 'background-repeat': 'no-repeat'
             }
-        case 21:
+        case 22:
             return {
                 'background-color': '#fff'
             }
@@ -82,6 +82,15 @@ const getCodeByCode = code => {
             return {
                 'box-sizing': 'border-box',
                 border: '1px solid red'
+            }
+        case 43:
+            return {
+                width: '100%',
+                height: '100%'
+            }
+        case 44:
+            return {
+                position: 'relative'
             }
         case 51:
             return {
@@ -159,15 +168,12 @@ const quickLayout = () => [
         ]
     },
     {
-        key: '边框',
-        range: [
-            { code: 41, label: '无边框' },
-            { code: 42, label: '全边框' }
-        ]
-    },
-    {
         key: '其他常用',
         range: [
+            { code: 41, label: '无边框' },
+            { code: 42, label: '全边框' },
+            { code: 43, label: '宽高' },
+            { code: 44, label: '定位' },
             { code: 51, label: '清除默认样式元素' },
             { code: 52, label: '多行省略' },
             { code: 53, label: 'Flex向下排列' },
@@ -205,41 +211,3 @@ const getLayoutModel = () => ({
 })
 
 export { getLayoutModel, quickLayout, getCodeByCode }
-
-// { key: 'background-color', value: '', range: [] },
-// { key: 'background-image', value: '', range: [] },
-// { key: 'background-size', value: '', range: [] },
-// { key: 'background-position', value: '', range: [] },
-// { key: 'content', value: '', range: [] },
-// {
-//     key: 'width',
-//     value: '',
-//     range: []
-// },
-// {
-//     key: 'height',
-//     value: '',
-//     range: []
-// },
-// {
-//     key: 'padding',
-//     value: '',
-//     range: []
-// },
-// {
-//     key: 'margin',
-//     value: '',
-//     range: []
-// },
-// { key: 'left', value: '', range: [] },
-// { key: 'right', value: '', range: [] },
-// { key: 'top', value: '', range: [] },
-// { key: 'bottom', value: '', range: [] },
-// { key: 'font-size', value: '', range: [] },
-// { key: 'color', value: '', range: [] },
-// { key: 'border', value: '', range: [] },
-// { key: 'border-radius', value: '', range: [] },
-// { key: 'box-shadow', value: '', range: [] },
-// { key: 'flex-shrink', value: '', range: [] },
-// { key: 'flex', value: '', range: [] },
-// { key: 'z-index', value: '', range: [] }
