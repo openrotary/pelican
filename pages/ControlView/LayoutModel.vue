@@ -11,20 +11,16 @@ section.layout-model {
             @blur: handleEditFinish
         }
     }
+    div.quick-layout {
+        i.icon {
+            %: quickList
+            :title: $it.label
+            @click: handleCreateCode($_i)
+            :style: {'background-image': `url(${$it.icon})` }
+        }
+    }
     ul.css-layout {
         ?: hasActiveCssSelect
-        li.quick-layout {
-            %: quickList
-            nav {
-                ~~{{ $it.key }}
-            }
-            span.range {
-                @click: handleQuickClick(it.code)
-                v-for: (it, index) in $it.range
-                :key: index + it.code
-                ~~{{ it.label }}
-            }
-        }
         li.new-style {
             input {
                 placeholder: 添加新样式，格式随意
@@ -67,10 +63,10 @@ section.layout-model {
 }
 </template>
 <script>
-import { quickLayout, getLayoutModel, getCodeByCode } from './setModel'
+import { getLayoutModel, iconLayoutList } from './setModel'
 import { cssom2List } from '@/utils/comput'
 import bus from '@/utils/eventBus'
-const quickList = quickLayout()
+const quickList = iconLayoutList()
 export default {
     name: 'LayoutModel',
     data: () => ({
@@ -117,9 +113,9 @@ export default {
             this.cssSelect = data
             this.handleEditFinish()
         },
-        handleQuickClick(code) {
+        handleCreateCode(index) {
             const data = Object.assign({}, this.cssSelect)
-            const _data = getCodeByCode(code)
+            const _data = this.quickList[index].getCode()
             for (const key in _data) {
                 data.cssom[key] = _data[key]
             }
@@ -220,17 +216,28 @@ export default {
         }
     }
 
+    .quick-layout {
+        margin: 10px 0;
+        width: 100%;
+
+        .icon {
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: 100% 100%;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(85, 41, 91, 0.2);
+            }
+        }
+    }
+
     .css-layout {
         > li {
             list-style: none;
-        }
-
-        .quick-layout {
-            margin-bottom: 10px;
-
-            nav {
-                font-size: 14px;
-            }
         }
 
         .normal {

@@ -121,9 +121,7 @@ const rewriteFile = (path, data) => {
     // const CSS = Leaf.tree2CSS(treeData).replace(/(\S+)\s{\s+}/gm, '')
     const CSS = Leaf.tree2CSS(treeData)
     const htmlCode = `<template> ${DOM} </template>`
-    console.log('jsCode', htmlCode)
     const jsCode = jsContent || `<script>export default {}</script>`
-    console.log('jsCode', jsCode)
     const cssCode = `<style lang="stylus" scoped> ${stylusFormat.format(CSS, {
         insertColons: true,
         insertSemicolons: true,
@@ -138,7 +136,7 @@ const rewriteFile = (path, data) => {
             prettier.format(cssCode, formatConfig)
     } catch (err) {
         // 有可能是因为li标签嵌套了li标签
-        console.log(err)
+        console.log('格式化代码失败，有可能是因为li标签嵌套了li标签')
         return
     }
     fs.writeFile(vuePath, formatCode, 'utf8', err => {

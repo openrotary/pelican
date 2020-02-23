@@ -1,77 +1,84 @@
 <template>
-    <section :class="['xxgft']">
-        <SHeader title="房屋验收">
-            <span :class="['xoyfz']"
-                >筛选筛选筛选筛选筛选筛选筛选筛选筛选筛选筛选筛选筛选筛选</span
-            >
-        </SHeader>
-        <li
-            :class="['jcche', { active: isActive }]"
-            :key="$_i"
-            v-for="($it, $_i) in list"
-        >
-            有氧
-        </li>
+    <section :class="['qjbyx']">
+        <div :class="['ksyaf']">
+            <span :class="['bgmej']"></span>
+        </div>
+
+        <span :class="['bgmej']"></span>
+
+        <div :class="['ksyaf']">
+            <span :class="['bgmej']"></span>
+
+            <ul :class="['mvdea']">
+                <li :class="['xwkxn']"></li>
+
+                <ul :class="['mvdea']">
+                    <li :class="['xwkxn']"></li>
+
+                    <li :class="['xwkxn']"></li>
+                </ul>
+
+                <ul :class="['mvdea']">
+                    <li :class="['xwkxn']"></li>
+
+                    <li :class="['xwkxn']"></li>
+                </ul>
+            </ul>
+        </div>
     </section>
 </template>
 <script></script>
 <style lang="stylus" scoped>
- .xxgft {
-	width: 100vw;
-	display: flex;
-	flex-direction: column;
-
-	.xoyfz {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 15px;
-		color: #fff;
-		background-color: #AE9575;
+ .qjbyx {
+	.ksyaf {
+		.bgmej {
+		}
 	}
 
-	.jcche {
-		list-style: none;
-		font-style: normal;
-		box-sizing: border-box;
-		padding: 0 15px;
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		background: #fff;
-		margin-bottom: 10px;
-		height: 90px;
-		color: green;
+	.bgmej {
+	}
 
-		.zrqyd {
-			color: #424242;
+	.ksyaf {
+		.bgmej {
+			width: 60px;
+			height: 30px;
+			position: relative;
+			flex-shrink: 0;
+			flex: 2;
 			font-size: 15px;
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
+			color: #fff;
+			list-style: none;
+			font-style: normal;
 			overflow: hidden;
-
-			&.newSelect {
-				&.newSelect {
-				}
-			}
-		}
-
-		.ahcgd {
-			font-size: 12px;
-			color: #757575;
-			display: flex;
+			text-overflow: ellipsis;
+			display: inline-flex;
+			-webkit-line-clamp: 3;
+			-webkit-box-orient: vertical;
+			background-color: #233;
+			padding: 5px 5px;
 			align-items: center;
 			justify-content: center;
-			flex-shrink: 0;
-			background-color: #F5F5F5;
 			border-radius: 5px;
-			padding: 3px 5px;
+		}
 
-			&.newSelect {
+		.mvdea {
+			.xwkxn {
 			}
 
-			&.newSelect {
+			.mvdea {
+				.xwkxn {
+				}
+
+				.xwkxn {
+				}
+			}
+
+			.mvdea {
+				.xwkxn {
+				}
+
+				.xwkxn {
+				}
 			}
 		}
 	}

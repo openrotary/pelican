@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>icon-flex-shrink</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon-flex-shrink" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M75,35 C92.0411985,72.677501 100.561798,101.010834 100.561798,120 C100.561798,138.989166 92.0411985,167.322499 75,205 L166,205 C149.523291,167.645921 141.284937,139.312588 141.284937,120 C141.284937,100.687412 149.523291,72.3540788 166,35 L75,35 Z" id="Path-6" stroke="#55295C" stroke-width="15"></path>
+        <path d="M43.6418189,49.4262122 L197.141819,190.926212" id="Path-5" stroke="#55295C" stroke-width="15" transform="translate(120.641819, 120.426212) rotate(-4.000000) translate(-120.641819, -120.426212) "></path>
+        <path d="M49.9685081,38.5063534 L203.468508,180.006353" id="Path-5" stroke="#FFFFFF" stroke-width="15" transform="translate(126.968508, 109.506353) rotate(-4.000000) translate(-126.968508, -109.506353) "></path>
+    </g>
+</svg>

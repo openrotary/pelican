@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>icon-flex-column</title>
+    <desc>Created with Sketch.</desc>
+    <g id="icon-flex-column" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path id="Path-9" d="M39.5,153 L39.5,43 L47.5,43 L47.5,153 L65.5,153 L43.5,197 L21.5,153 L39.5,153 Z" fill="#55295C" fill-rule="nonzero"></path>
+        <rect id="Rectangle" stroke="#55295C" fill="#55295C" x="78.5" y="43.5" width="118" height="17"></rect>
+        <rect id="Rectangle" stroke="#55295C" fill="#55295C" x="78.5" y="77.5" width="118" height="17"></rect>
+        <rect id="Rectangle" stroke="#55295C" fill="#55295C" x="78.5" y="111.5" width="118" height="17"></rect>
+        <rect id="Rectangle" stroke="#55295C" fill="#55295C" x="78.5" y="145.5" width="118" height="17"></rect>
+        <rect id="Rectangle" stroke="#55295C" fill="#55295C" x="78.5" y="179.5" width="118" height="17"></rect>
+    </g>
+</svg>

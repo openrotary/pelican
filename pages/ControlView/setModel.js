@@ -1,190 +1,3 @@
-const getCodeByCode = code => {
-    switch (code) {
-        case 11:
-            return {
-                display: 'flex',
-                'align-items': 'center',
-                'justify-content': 'center'
-            }
-        case 12:
-            return {
-                display: 'flex',
-                'flex-direction': 'column',
-                'justify-content': 'space-between'
-            }
-        case 13:
-            return {
-                display: 'flex',
-                'align-items': 'center',
-                'justify-content': 'space-between'
-            }
-        case 21:
-            return {
-                'border-radius': '5px',
-                'background-image': 'url()',
-                'background-position': 'center center',
-                'background-size': '100% 100%',
-                'background-repeat': 'no-repeat'
-            }
-        case 22:
-            return {
-                'background-color': '#fff'
-            }
-        case 31:
-            return {
-                display: 'block',
-                content: `''`,
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                top: 0,
-                height: '1px',
-                'background-color': '#000'
-            }
-        case 32:
-            return {
-                display: 'block',
-                content: `''`,
-                position: 'absolute',
-                left: 0,
-                right: 0,
-                bottom: 0,
-                height: '1px',
-                'background-color': '#000'
-            }
-        case 33:
-            return {
-                display: 'block',
-                content: `''`,
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: '1px',
-                'background-color': '#000'
-            }
-        case 34:
-            return {
-                display: 'block',
-                content: `''`,
-                position: 'absolute',
-                top: 0,
-                right: 0,
-                bottom: 0,
-                width: '1px',
-                'background-color': '#000'
-            }
-        case 41:
-            return {
-                border: 'none'
-            }
-        case 42:
-            return {
-                'box-sizing': 'border-box',
-                border: '1px solid red'
-            }
-        case 43:
-            return {
-                width: '100%',
-                height: '100%'
-            }
-        case 44:
-            return {
-                position: 'relative'
-            }
-        case 51:
-            return {
-                'list-style': 'none',
-                'font-style': 'normal'
-            }
-        case 52:
-            return {
-                overflow: 'hidden',
-                'text-overflow': 'ellipsis',
-                display: '-webkit-box',
-                '-webkit-line-clamp': 2,
-                '-webkit-box-orient': 'vertical'
-            }
-        case 53:
-            return {
-                display: 'flex',
-                'flex-direction': 'column'
-            }
-        case 54:
-            return {
-                'flex-shrink': 0
-            }
-        case 55:
-            return {
-                flex: 1
-            }
-        case 56:
-            return {
-                'font-size': '12px',
-                color: '#000'
-            }
-        case 57:
-            return {
-                'background-color': '#233',
-                padding: '5px 5px',
-                'font-size': '15px',
-                color: '#fff',
-                display: 'inline-flex',
-                'align-items': 'center',
-                'justify-content': 'center',
-                width: '60px',
-                height: '30px',
-                'border-radius': '5px'
-            }
-
-        default:
-            break
-    }
-}
-
-const quickLayout = () => [
-    {
-        key: 'flex布局',
-        range: [
-            { code: 11, label: '完全居中' },
-            { code: 12, label: '上下靠边' },
-            { code: 13, label: '左右靠边' }
-        ]
-    },
-    {
-        key: '背景色/图',
-        range: [
-            { code: 21, label: '自适应' },
-            { code: 22, label: '背景色' }
-        ]
-    },
-    {
-        key: '伪类线条',
-        range: [
-            { code: 31, label: '上' },
-            { code: 32, label: '下' },
-            { code: 33, label: '左' },
-            { code: 34, label: '右' }
-        ]
-    },
-    {
-        key: '其他常用',
-        range: [
-            { code: 41, label: '无边框' },
-            { code: 42, label: '全边框' },
-            { code: 43, label: '宽高' },
-            { code: 44, label: '定位' },
-            { code: 51, label: '清除默认样式元素' },
-            { code: 52, label: '多行省略' },
-            { code: 53, label: 'Flex向下排列' },
-            { code: 54, label: '不被压缩' },
-            { code: 55, label: '尽量填充' },
-            { code: 56, label: '字体' },
-            { code: 57, label: '按钮' }
-        ]
-    }
-]
-
 const getLayoutModel = () => ({
     position: {
         value: '',
@@ -192,7 +5,7 @@ const getLayoutModel = () => ({
     },
     display: {
         value: '',
-        range: ['block', 'inline-block', 'flex', 'inline-flex', 'box', 'inline']
+        range: ['block', 'inline-block', 'flex', 'inline-flex', 'box', 'inline', 'none']
     },
     'align-items': {
         value: '',
@@ -210,4 +23,203 @@ const getLayoutModel = () => ({
     'background-repeat': { value: '', range: ['repeat', 'no-repeat'] }
 })
 
-export { getLayoutModel, quickLayout, getCodeByCode }
+const iconLayoutList = () => [
+    {
+        icon: require('@/assets/icon-flex-center-1.svg'),
+        label: '完全居中',
+        getCode: () => ({
+            display: 'flex',
+            'align-items': 'center',
+            'justify-content': 'center'
+        })
+    },
+    {
+        icon: require('@/assets/icon-flex-center-2.svg'),
+        label: '上下靠边',
+        getCode: () => ({
+            display: 'flex',
+            'flex-direction': 'column',
+            'justify-content': 'space-between'
+        })
+    },
+    {
+        icon: require('@/assets/icon-flex-center-3.svg'),
+        label: '左右靠边',
+        getCode: () => ({
+            display: 'flex',
+            'align-items': 'center',
+            'justify-content': 'space-between'
+        })
+    },
+    {
+        icon: require('@/assets/icon-flex-column.svg'),
+        label: '向下排列',
+        getCode: () => ({
+            display: 'flex',
+            'flex-direction': 'column'
+        })
+    },
+    {
+        icon: require('@/assets/icon-wallpaper.svg'),
+        label: '背景图自适应',
+        getCode: () => ({
+            'border-radius': '5px',
+            'background-image': 'url()',
+            'background-position': 'center center',
+            'background-size': '100% 100%',
+            'background-repeat': 'no-repeat'
+        })
+    },
+    {
+        icon: require('@/assets/icon-bgcolor.svg'),
+        label: '背景色',
+        getCode: () => ({
+            'background-color': '#fff'
+        })
+    },
+    {
+        icon: require('@/assets/icon-top-line.svg'),
+        label: '伪元素线条-上',
+        getCode: () => ({
+            display: 'block',
+            content: `''`,
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            top: 0,
+            height: '1px',
+            'background-color': '#000'
+        })
+    },
+    {
+        icon: require('@/assets/icon-bottom-line.svg'),
+        label: '伪元素线条-下',
+        getCode: () => ({
+            display: 'block',
+            content: `''`,
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: '1px',
+            'background-color': '#000'
+        })
+    },
+    {
+        icon: require('@/assets/icon-left-line.svg'),
+        label: '伪元素线条-左',
+        getCode: () => ({
+            display: 'block',
+            content: `''`,
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: '1px',
+            'background-color': '#000'
+        })
+    },
+    {
+        icon: require('@/assets/icon-right-line.svg'),
+        label: '伪元素线条-右',
+        getCode: () => ({
+            display: 'block',
+            content: `''`,
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: '1px',
+            'background-color': '#000'
+        })
+    },
+    {
+        icon: require('@/assets/icon-border-outer.svg'),
+        label: '全边框',
+        getCode: () => ({
+            'box-sizing': 'border-box',
+            border: '1px solid red'
+        })
+    },
+    {
+        icon: require('@/assets/icon-border-clear.svg'),
+        label: '无边框',
+        getCode: () => ({
+            border: 'none'
+        })
+    },
+    {
+        icon: require('@/assets/icon-width-height.svg'),
+        label: '宽高',
+        getCode: () => ({
+            width: '100%',
+            height: '100%'
+        })
+    },
+    {
+        icon: require('@/assets/icon-position.svg'),
+        label: '相对定位',
+        getCode: () => ({
+            position: 'relative'
+        })
+    },
+    {
+        icon: require('@/assets/icon-flex-shrink.svg'),
+        label: 'flex不压缩',
+        getCode: () => ({
+            'flex-shrink': 0
+        })
+    },
+    {
+        icon: require('@/assets/icon-flex-big.svg'),
+        label: 'flex尽量填充',
+        getCode: () => ({
+            flex: 1
+        })
+    },
+    {
+        icon: require('@/assets/icon-font.svg'),
+        label: '文字',
+        getCode: () => ({
+            'font-size': '12px',
+            color: '#000'
+        })
+    },
+    {
+        icon: require('@/assets/icon-format-clear.svg'),
+        label: '清除默认样式',
+        getCode: () => ({
+            'list-style': 'none',
+            'font-style': 'normal'
+        })
+    },
+    {
+        icon: require('@/assets/icon-more-line.svg'),
+        label: '多行省略',
+        getCode: () => ({
+            overflow: 'hidden',
+            'text-overflow': 'ellipsis',
+            display: '-webkit-box',
+            '-webkit-line-clamp': 3,
+            '-webkit-box-orient': 'vertical'
+        })
+    },
+    {
+        icon: require('@/assets/icon-button.svg'),
+        label: '按钮',
+        getCode: () => ({
+            'background-color': '#233',
+            padding: '5px 5px',
+            'font-size': '15px',
+            color: '#fff',
+            display: 'inline-flex',
+            'align-items': 'center',
+            'justify-content': 'center',
+            width: '60px',
+            height: '30px',
+            'border-radius': '5px'
+        })
+    }
+]
+
+export { getLayoutModel, iconLayoutList }

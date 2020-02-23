@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="240px" height="240px" viewBox="0 0 240 240" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>flex-center-2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="flex-center-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" stroke="#55295C" stroke-width="15" x="31.5" y="31.5" width="177" height="177" rx="10"></rect>
+        <g id="Group" transform="translate(96.000000, 40.000000)" fill="#55295C">
+            <polygon id="Triangle" points="24 0 48 48 0 48"></polygon>
+            <polygon id="Triangle" transform="translate(24.000000, 137.000000) rotate(-180.000000) translate(-24.000000, -137.000000) " points="24 113 48 161 0 161"></polygon>
+        </g>
+    </g>
+</svg>

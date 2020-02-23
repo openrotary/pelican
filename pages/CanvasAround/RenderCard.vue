@@ -35,9 +35,12 @@ section {
                     ~~{{ treeData.tagName }}
                 }
                 span.icon {
-                    <!-- i.copy {
+                    i.copy {
                         @click: handleCopy(treeData)
-                    } -->
+                    }
+                    i.insert {
+                        @click: handleInsert(treeData)
+                    }
                     i.delete {
                         @click: handleDelete(treeData._mid)
                     }
@@ -124,6 +127,12 @@ export default {
         },
         handleDelete(mid) {
             bus.$emit('delete-node', mid)
+        },
+        handleCopy(data) {
+            bus.$emit('copy-tree', data._mid)
+        },
+        handleInsert(data) {
+            bus.$emit('insert-tree', data._mid)
         },
         handleEdit(mid) {
             bus.$emit('edit-element', mid)
@@ -273,6 +282,14 @@ export default {
                         background-size: auto 100%;
                         background-position: center center;
                         cursor: pointer;
+
+                        &.insert {
+                            background-image: url('../../assets/icon-insert.svg');
+                        }
+
+                        &.copy {
+                            background-image: url('../../assets/icon-copy.svg');
+                        }
 
                         &.delete {
                             background-image: url('../../assets/icon-delete.svg');

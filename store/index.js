@@ -7,7 +7,8 @@ export const state = () => ({
     activeMid: null,
     selectCssMid: null,
     fileContent: null,
-    activePath: null
+    activePath: null,
+    copyTree: null
 })
 
 export const mutations = {
@@ -34,6 +35,9 @@ export const mutations = {
     },
     setTreeType(state, value) {
         state.treeType = value
+    },
+    setCopyTree(state, value) {
+        state.copyTree = value
     }
     // changeModeCode(state, code) {
     //     state.modeCode = code

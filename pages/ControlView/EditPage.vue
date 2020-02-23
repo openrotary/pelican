@@ -159,7 +159,7 @@ export default {
 .edit-page {
     position: fixed;
     transition: all 0.4s ease;
-    width: 500px;
+    width: 600px;
     z-index: 2;
     border-radius: 10px;
     box-shadow: 0 0 10px #55295C;

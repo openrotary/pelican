@@ -90,6 +90,19 @@ export default {
             }
             // const [el] = leaf.getElementList().filter(item => item._mid === mid)
         })
+        bus.$on('copy-tree', mid => {
+            const elementList = leaf.getChildrenTree(mid)
+            this.$store.commit('setCopyTree', elementList)
+        })
+        bus.$on('insert-tree', mid => {
+            const tree = this.$store.state.copyTree
+            if (!tree) {
+                this.$vs.notify({ title: '操作错误', text: '没有拷贝数据', color: '#bb5548', position: 'top-center' })
+                return
+            }
+            leaf.addNewTree(mid, JSON.parse(JSON.stringify(tree)))
+            this.$store.commit('setActiveMid', leaf.getActiveMid())
+        })
         bus.$on('init-canvas', data => {
             // 接收到画布的数据
             leaf = new Leaf(JSON.parse(data))
