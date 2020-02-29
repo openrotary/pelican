@@ -9,22 +9,22 @@
                 i.edit {
                     @click: handleEdit($_i)
                 }
-                i.up {
-                    @click: handleOrder($_i, 1)
-                }
-                i.down {
-                    @click: handleOrder($_i, 2)
-                }
                 i.delete {
                     @click: handleOrder($_i, 0)
                 }
             }
         }
         li.add-li {
-            MyInput {
-                title: class名
-                @keyup.enter: handleAdd
-                v-model: newValue
+            div.key-value {
+                MyInput {
+                    title: Key
+                    v-model: newKey
+                }
+                MyInput {
+                    title: Value
+                    @keyup-enter: handleAdd
+                    v-model: newValue
+                }
             }
             button.add {
                 @click: handleAdd
@@ -36,8 +36,16 @@
 
 <script>
 import MyInput from './MyInput'
+
+const ins = new Map()
+    .set('%', 'v-for')
+    .set('?', 'v-if')
+    .set('/', 'v-else')
+    .set('/?', 'v-else-if')
+    .set('|', 'v-show')
+const replaceKey = value => ins.get(value) || value
 export default {
-    name: 'EditStack',
+    name: 'EditKeyValueStack',
     props: {
         list: {
             type: Array,
@@ -48,35 +56,46 @@ export default {
         MyInput
     },
     data: () => ({
+        newKey: '',
         newValue: ''
     }),
     methods: {
         handleAdd() {
-            let value = ''
             const arr = this.list.concat()
-            if (!this.newValue.trim()) {
-                return
+            const attrObj = {}
+            arr.forEach(item => {
+                const [key] = Object.keys(item)
+                const [value] = Object.values(item)
+                attrObj[key] = value
+            })
+            let _key = this.newKey !== '' ? replaceKey(this.newKey) : '@click'
+            let _value = this.newValue.trim() || null
+            // if key is v-for
+            if (_key === 'v-for') {
+                !~_value.indexOf('in') && (_value = `($it, $_i) in ${_value}`)
+                if (!attrObj[':key']) {
+                    const res = _value.match(/(?<=\s)[\S]+?(?=\))/)
+                    attrObj[':key'] = res[0]
+                }
             }
-            value = this.newValue.trim()
-            arr.push(value)
-            this.$emit('change', arr)
-            this.newValue = ''
-            return
+            attrObj[_key] = _value
+            const newArr = []
+            for (const key in attrObj) {
+                newArr.push({ [key]: attrObj[key] })
+            }
+            this.$emit('change', newArr)
+            this.newKey = this.newValue = ''
         },
         handleOrder(i, n) {
             const arr = this.list.concat()
             const [data] = arr.splice(i, 1)
-            if (n === 1) {
-                // 置顶
-                arr.unshift(data)
-            }
-            if (n === 2) {
-                arr.push(data)
-            }
             this.$emit('change', arr)
         },
         handleEdit(i) {
-            this.newValue = this.list[i]
+            const [key] = Object.keys(this.list[i])
+            const [value] = Object.values(this.list[i])
+            this.newKey = key
+            this.newValue = value
         }
     },
     filters: {
@@ -157,21 +176,50 @@ export default {
             }
         }
 
-        >input {
-            flex: 1;
-            height: 34px;
-            width: 100%;
-            padding: 0 10px;
-            margin-bottom: 10px;
+        .key-value {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             font-size: 16px;
-            color: #55295b;
-            border: none;
-            border-bottom: 1px solid rgba(85, 41, 91, 0.7);
+            margin-bottom: 10px;
+            flex: 1;
+            width: 100%;
+            height: 60px;
 
-            &::placeholder {
-                font-size: 12px;
-                color: rgba(85, 41, 91, 0.3);
-                font-style: italic;
+            .key, .value {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                margin-right: 10px;
+
+                i {
+                    color: rgba(85, 41, 91, 1);
+                    width: 56px;
+                    font-style: normal;
+                }
+            }
+
+            input {
+                flex: 1;
+                height: 30px;
+                width: 100%;
+                display: flex;
+                padding: 0 10px;
+                margin: 5px 0;
+                font-size: 16px;
+                color: #55295b;
+                border: none;
+                border-bottom: 1px solid rgba(85, 41, 91, 0.7);
+
+                &[placeholder] {
+                    color: #55295b;
+                }
+
+                &::placeholder {
+                    font-size: 12px;
+                    color: rgba(85, 41, 91, 0.3);
+                    font-style: italic;
+                }
             }
         }
 
@@ -183,7 +231,6 @@ export default {
             flex-shrink: 0;
             align-self: flex-end;
             border-radius: 4px;
-            margin-top: 10px;
         }
     }
 }

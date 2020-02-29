@@ -2,11 +2,8 @@
 section.layout-model {
     div.select {
         ?: hasActiveCssSelect
-        span {
-            ~~选择器
-        }
-        input {
-            type: text
+        MyInput {
+            title: 选择器
             v-model: cssSelect.select
             @blur: handleEditFinish
         }
@@ -66,6 +63,7 @@ section.layout-model {
 import { getLayoutModel, iconLayoutList } from './setModel'
 import { cssom2List } from '@/utils/comput'
 import bus from '@/utils/eventBus'
+import MyInput from '@/components/MyInput'
 const quickList = iconLayoutList()
 export default {
     name: 'LayoutModel',
@@ -75,6 +73,9 @@ export default {
         layoutList: [],
         newStyle: ''
     }),
+    components: {
+        MyInput
+    },
     computed: {
         hasActiveCssSelect() {
             return this.$store.state.selectCssMid
@@ -174,7 +175,7 @@ export default {
         align-items: center;
         height: 30px;
         width: 100%;
-        margin-bottom: 10px;
+        margin-bottom: 30px;
         font-size: 14px;
 
         span {

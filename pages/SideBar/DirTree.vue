@@ -70,7 +70,7 @@ export default {
 <style lang="stylus" scoped>
 .dir-tree {
     .dir-li {
-        height: 30px;
+        height: 34px;
         overflow: hidden;
 
         &.dir-open {
@@ -83,11 +83,12 @@ export default {
     }
 
     .dir {
-        height: 30px;
+        height: 34px;
         display: flex;
         align-items: center;
         cursor: pointer;
         color: #666;
+        font-size: 18px;
         user-select: none;
 
         &:hover {
@@ -112,7 +113,8 @@ export default {
     .node {
         display: flex;
         align-items: center;
-        height: 30px;
+        height: 34px;
+        font-size: 18px;
         cursor: pointer;
         user-select: none;
         color: rgba(85, 41, 91, 0.7);

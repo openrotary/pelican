@@ -6,7 +6,7 @@
 
         <span :class="['bgmej']"></span>
 
-        <div :class="['ksyaf']">
+        <div :class="['ksyaf']" @click="ewd">
             <span :class="['bgmej']"></span>
 
             <ul :class="['mvdea']">
@@ -27,7 +27,11 @@
         </div>
     </section>
 </template>
-<script></script>
+<script>
+export default {
+    name: "MyIcan"
+}
+</script>
 <style lang="stylus" scoped>
  .qjbyx {
 	.ksyaf {

@@ -11,10 +11,8 @@ section {
     ul.attr {
         ?: hasEditElement
         li.inline {
-            span.title {
-                ~~元素名
-            }
-            input {
+            MyInput {
+                title: 元素名
                 @blur: handleUpdate
                 v-model: dataModel.tagName
             } 
@@ -38,10 +36,8 @@ section {
         }
         li.inline {
             ?: !dataModel.isSingle
-            span.title {
-                ~~文本内容
-            }
-            input {
+            MyInput {
+                title: 文本内容
                 @blur: handleUpdate
                 @keyup.enter: handleUpdate
                 v-model: dataModel.content
@@ -53,7 +49,6 @@ section {
                 ~~class
             }
             EditStack {
-                :mode: 1
                 :list: dataModel.class
                 @change: handleUpdateClass
             }            
@@ -62,8 +57,7 @@ section {
             span.title {
                 ~~属性
             }
-            EditStack {
-                :mode: 2
+            EditKeyValueStack {
                 :list: dataModel.attr
                 @change: handleUpdateAttr
             }   
@@ -79,6 +73,8 @@ section {
 <script>
 import bus from '@/utils/eventBus'
 import EditStack from '@/components/EditStack'
+import MyInput from '@/components/MyInput'
+import EditKeyValueStack from '@/components/EditKeyValueStack'
 import { num2ABC } from '@/utils/comput'
 const makeMap = string => {
     const list = string.split(',')
@@ -92,7 +88,9 @@ const isHTMLTag = makeMap(
 export default {
     name: 'EditPage',
     components: {
-        EditStack
+        MyInput,
+        EditStack,
+        EditKeyValueStack
     },
     data: () => ({
         dataModel: {}
@@ -184,11 +182,11 @@ export default {
                 display: flex;
                 align-items: center;
                 height: 30px;
-                margin-bottom: 10px;
+                margin-bottom: 30px;
             }
 
             &.block {
-                border-bottom: 1px solid rgba(85, 41, 91, 0.2);
+                border-bottom: 1px solid rgba(85, 41, 91, 0.1);
                 padding: 10px 20px;
 
                 .title {
