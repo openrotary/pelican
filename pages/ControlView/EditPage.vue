@@ -46,7 +46,7 @@ section {
         li.block {
             ?: isHTMLElement
             span.title {
-                ~~class
+                ~~样式class
             }
             EditStack {
                 :list: dataModel.class
@@ -186,7 +186,7 @@ export default {
             }
 
             &.block {
-                border-bottom: 1px solid rgba(85, 41, 91, 0.1);
+                border-bottom: 1px solid #f1f1f1;
                 padding: 10px 20px;
 
                 .title {

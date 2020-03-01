@@ -144,10 +144,51 @@ const rewriteFile = (path, data) => {
     })
 }
 
+// const rewriteFileSync = (path, data) => {
+//     return new Promise((resolve, reject) => {
+//         fs.writeFileSync(path, data)
+//         const vuePath = path.replace(/\.ican/, '.vue')
+//         const content = fs.readFileSync(vuePath)
+//         const jsContent = getJSCode(content)
+//         if (!jsContent) {
+//             console.log('提取js代码出错', content, jsContent)
+//         }
+//         // 再写一次.vue文件
+//         const treeData = Leaf.data2tree(JSON.parse(data))
+//         // 生成html
+//         const DOM = Leaf.tree2DOM(treeData)
+//         // 生成css
+//         // const CSS = Leaf.tree2CSS(treeData).replace(/(\S+)\s{\s+}/gm, '')
+//         const CSS = Leaf.tree2CSS(treeData)
+//         const htmlCode = `<template> ${DOM} </template>`
+//         const jsCode = jsContent || `<script>export default {}</script>`
+//         const cssCode = `<style lang="stylus" scoped> ${stylusFormat.format(CSS, {
+//             insertColons: true,
+//             insertSemicolons: true,
+//             insertBraces: true
+//         })} </style>`
+//         const formatConfig = { semi: false, tabWidth: 4, parser: 'vue' }
+//         let formatCode = ''
+//         try {
+//             formatCode =
+//                 prettier.format(htmlCode, formatConfig) +
+//                 prettier.format(jsCode, formatConfig) +
+//                 prettier.format(cssCode, formatConfig)
+//         } catch (err) {
+//             // 有可能是因为li标签嵌套了li标签
+//             console.log('格式化代码失败，有可能是因为li标签嵌套了li标签')
+//             reject('格式化代码失败，有可能是因为li标签嵌套了li标签')
+//         }
+//         fs.writeFileSync(vuePath, formatCode)
+//         resolve()
+//     })
+// }
+
 module.exports = {
     readDirSync,
     getFileContent,
     createFile,
     rewriteFile,
+    // rewriteFileSync,
     deleteFile
 }
