@@ -111,7 +111,7 @@ const rewriteFile = (path, data) => {
     })
     const jsContent = getJSCode(content)
     if (!jsContent) {
-        console.log('提取js代码出错', content, jsContent)
+        console.log('没有提取出JS代码', content, jsContent)
     }
     // 再写一次.vue文件
     const treeData = Leaf.data2tree(JSON.parse(data))
@@ -119,7 +119,7 @@ const rewriteFile = (path, data) => {
     const DOM = Leaf.tree2DOM(treeData)
     // 生成css
     // const CSS = Leaf.tree2CSS(treeData).replace(/(\S+)\s{\s+}/gm, '')
-    const CSS = Leaf.tree2CSS(treeData).replace(/.\S+\s{\s+?}/gm, '')
+    const CSS = Leaf.tree2CSS(treeData).replace(/\.\S+\s{\s+?}/gm, '')
     const htmlCode = `<template> ${DOM} </template>`
     const jsCode = jsContent || `<script>export default {}</script>`
     const cssCode = `<style lang="stylus" scoped> ${stylusFormat.format(CSS, {
